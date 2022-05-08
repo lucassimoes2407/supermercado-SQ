@@ -173,8 +173,7 @@ RF00| 🤔 🤔 🤔 🤔 🤔 🤔 🤔
 
 ---
 
-### Desenvolvido pela equipe **DevHub ©**
-Durante o Atlântico Academy Bootcamp
+### Desenvolvido pela equipe **DevHub ©** Durante o Atlântico Academy Bootcamp
 ![Logo DevHub](./planejamento/logo-devhub.png)
 
 
