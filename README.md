@@ -38,8 +38,8 @@ RF-02| O sistema deve garantir a integridade dos dados de todos os usuários
 
 ID|Descrição|
 :---:|:---|
-RNeg-01| 
-RNeg-02| 
+RN-01| 
+RN-02| 
 
 ## 👀 Visão Geral da Aplicação
 
