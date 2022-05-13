@@ -3,29 +3,33 @@
 ## 🤔 Problemática do Projeto
 O *Supermercado SQ* necessita de um sistema de gerenciamento de alimentos e composições alimentares que auxilie seus clientes a saber quais compostos alergênicos estão contidos nos alimentos que serão comprados.
 
+## 📋 Atores do Sistema
+Esse sistema poderá ser acessado pelos *administradores do SQ*, pelos *fornecedores* e pelos *clientes*.
 
+*Adicionar diagrama de caso de uso*
 
-## 📋 Requisitos do Sistema
-Esse sistema poderá ser acessado pelos *administradores do SQ*, pelos *fornecedores* e pelos
-*clientes*. O usuário poderá cadastrar produtos industrializados fornecendo quais ingredientes tem em sua composição. Dessa forma, em outros momentos será fácil pesquisar e confirmar se um produto contém ou não determinado ingrediente utilizando essa aplicação. Podendo até ser escalado o seu uso para usuários globais, como uma espécie de comunidade.
+## 🤯 Elicitação de Requisitos
 
-* Possibilidade de cadastrar, visualizar, editar e deletar produtos *(utilize banco de dados)*;
-* O produto deve ter nome e conter seus ingredientes, *imagem(opcional)*;
-* Possibilidade de pesquisar por alimentos e visualizar os ingredientes;
-* Na página de visualização do alimento, ter a possibilidade de buscar por um determinado ingrediente (para confirmar se este ingrediente está presente ou não);
-* Possibilidade de filtrar alimentos que não tenham determinados ingredientes;
-* Possibilidade de filtrar alimentos que tenham determinados ingredientes;
-
-## 📑 Requisitos Funcionais
-
-## 🚧 Em construção 🚧
-
+### 📑 Requisitos Funcionais
 
 ID|Descrição|
-:---:|:---:|
-RF00| 🤔 🤔 🤔 🤔 🤔 🤔 🤔
-RF00| 🤔 🤔 🤔 🤔 🤔 🤔 🤔
----
+:---:|:---|
+RF-01| O sistema deve permitir o cadastro de dados pelos usuários.
+RF-02| O sistema deve permitir a visualização dos dados cadastrados
+RF-03| O sistema deve permitir a edição dos dados cadastrados
+RF-04| O sistema deve permitir a remoção dos dados cadastrados
+RF-05| O sistema deve conter dados sobre o produto, como o seu nome e ingredientes
+RF-06| O sistema deve permitir a pesquisa de produtos e seus ingredientes
+RF-07| O sistema deve permitir a pesquisa de um ingrediente que possa conter o produto em questão
+RF-08| O sistema deve permitir a busca por alimentos que não contenham certos ingredientes
+RF-09| O sistema deve permitir a busca por alimentos que contenham certos ingredientes
+
+### 📑 Requisitos Não-Funcionais
+
+ID|Descrição|
+:---:|:---|
+RF-01| A interface do sistema deve se adaptar aos diferentes dispositivos que possam acessá-lo
+RF-02| O sistema deve garantir a integridade dos dados de todos os usuários
 
 ## 👀 Visão Geral da Aplicação
 
@@ -33,7 +37,7 @@ RF00| 🤔 🤔 🤔 🤔 🤔 🤔 🤔
 
 ![Mapa do Site/Aplicativo](./planejamento/mapa-site-app.png)
 
-
+<!---
 ## 💻 Telas identificadas até o Momento
 
 ### Home
@@ -163,22 +167,36 @@ RF00| 🤔 🤔 🤔 🤔 🤔 🤔 🤔
   * Modal Detalhes Usuário
   * Deletar Cadastro
 
+-->
+
 ## 🎲 Modelagem ER
 
-## 🚧 Em construção 🚧
+### 🚧 Em construção 🚧
 
 ## 🎲 Modelagem Lógica
 
-## 🚧 Em construção 🚧
+### 🚧 Em construção 🚧
+
+## 👨🏾‍💻 Tecnologias Utilizadas
+### 🚧 Em análise 🚧
+
+## ✅ Requisitos desenvolvidos
+
+### 🚧 Em desenvolvimento 🚧
+
 
 ---
+<center>
 
-### Desenvolvido pela equipe **DevHub ©** Durante o Atlântico Academy Bootcamp
 ![Logo DevHub](./planejamento/logo-devhub-darkmode.png)
 
 | | | | |
-|:---:|:---:|:---:|:---:|
+|:---|:---|:---|:---|
 | <img  src="https://avatars.githubusercontent.com/u/86008336?v=4" width=50px/> | <a href="https://github.com/ismaelzaccah">Ismael Zaccah | <img  src="https://avatars.githubusercontent.com/u/42359787?v=4" width=50px/> | <a href="https://github.com/javelfreitas">Javel Freitas |
 | <img  src="https://avatars.githubusercontent.com/u/78852666?v=4" width=50px/> | <a href="https://github.com/Elaine-G-L">Elaine-G-L | <img  src="https://avatars.githubusercontent.com/u/56098754?v=4" width=50px/> | <a href="https://github.com/AglailsonSantiago">Aglailson Santiago |
 | <img  src="https://avatars.githubusercontent.com/u/47800237?v=4" width=50px/> | <a href="https://github.com/andreinamendes">Andreina Mendes | <img  src="https://avatars.githubusercontent.com/u/96750112?v=4" width=50px/> | <a href="https://github.com/lucassimoes2407">Lucas Simoes |
-| <img  src="https://avatars.githubusercontent.com/u/59093848?v=4" width=50px/> | <a href="https://github.com/wiwiaR">Vitória Ribeiro | <img  src="https://avatars.githubusercontent.com/u/59093848?v=4" width=50px/> | <a href="https://github.com/wiwiaR">Vitória Ribeiro |
+| <img  src="https://avatars.githubusercontent.com/u/78513841?v=4" width=50px/> | <a href="https://github.com/wiwiaR">Bruno Braga | <img  src="https://avatars.githubusercontent.com/u/59093848?v=4" width=50px/> | <a href="https://github.com/wiwiaR">Vitória Ribeiro |
+
+ **DevHub ©** Atlântico Academy Bootcamp</center>
+
+---
