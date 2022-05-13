@@ -186,7 +186,7 @@ RF-02| O sistema deve garantir a integridade dos dados de todos os usuários
 
 
 ---
-<div style="display: flex; flex-wrap: wrap justify-content: center; flex-direction: column;text-align: center;">
+<div align=center>
 
 ![Logo DevHub](./planejamento/logo-devhub-darkmode.png)
 
