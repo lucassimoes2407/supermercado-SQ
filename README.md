@@ -4,9 +4,12 @@
 O *Supermercado SQ* necessita de um sistema de gerenciamento de alimentos e composições alimentares que auxilie seus clientes a saber quais compostos alergênicos estão contidos nos alimentos que serão comprados.
 
 ## 📋 Atores do Sistema
-Esse sistema poderá ser acessado pelos *administradores do SQ*, pelos *fornecedores* e pelos *clientes*.
 
-*Adicionar diagrama de caso de uso*
+<div width=80% height=80%>
+
+![Tipos de Usuários e Permissões](./planejamento/usuarios.png)
+
+</div>
 
 ## 🤯 Elicitação de Requisitos
 
@@ -31,11 +34,20 @@ ID|Descrição|
 RF-01| A interface do sistema deve se adaptar aos diferentes dispositivos que possam acessá-lo
 RF-02| O sistema deve garantir a integridade dos dados de todos os usuários
 
+### 📑 Regras de Negócio
+
+ID|Descrição|
+:---:|:---|
+RNeg-01| 
+RNeg-02| 
+
 ## 👀 Visão Geral da Aplicação
 
-![Tipos de Usuários e Permissões](./planejamento/usuarios.png)
+<div width=80% height=80%>
 
 ![Mapa do Site/Aplicativo](./planejamento/mapa-site-app.png)
+
+</div>
 
 <!---
 ## 💻 Telas identificadas até o Momento
