@@ -186,7 +186,7 @@ RF-02| O sistema deve garantir a integridade dos dados de todos os usuários
 
 
 ---
-<center>
+<div style="display: flex; flex-wrap: wrap justify-content: center; flex-direction: column;text-align: center;">
 
 ![Logo DevHub](./planejamento/logo-devhub-darkmode.png)
 
@@ -197,6 +197,7 @@ RF-02| O sistema deve garantir a integridade dos dados de todos os usuários
 | <img  src="https://avatars.githubusercontent.com/u/47800237?v=4" width=50px/> | <a href="https://github.com/andreinamendes">Andreina Mendes | <img  src="https://avatars.githubusercontent.com/u/96750112?v=4" width=50px/> | <a href="https://github.com/lucassimoes2407">Lucas Simoes |
 | <img  src="https://avatars.githubusercontent.com/u/78513841?v=4" width=50px/> | <a href="https://github.com/wiwiaR">Bruno Braga | <img  src="https://avatars.githubusercontent.com/u/59093848?v=4" width=50px/> | <a href="https://github.com/wiwiaR">Vitória Ribeiro |
 
- **DevHub ©** Atlântico Academy Bootcamp</center>
+ **DevHub ©** Atlântico Academy Bootcamp
+ </div>
 
 ---
