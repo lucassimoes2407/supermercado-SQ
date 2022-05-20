@@ -10,7 +10,7 @@
 * [Visão Geral da Aplicação](#visao-aplicacao)
 * [Modelagem Conceitual - ER](#modelagem-conceitual)
 * [Modelagem Lógica](#modelagem-logica)
-* [Requisitos desenvolvidos](#requisitos-desenvolvidos)
+* [Habilidades desenvolvidas](#habilidades-desenvolvidas)
 * [Em desenvolvimento](#em-desenvolvimento)
 * [Equipe DevHub](#equipe-devhub)
 
@@ -196,7 +196,7 @@ RN-02|
 ## <a id="modelagem-logica"></a> 🎲 Modelagem Lógica
 ![Modelo Lógico](./planejamento/modelo-logico.png)
 
-## <a id="requisitos-desenvolvidos"></a> ✅ Requisitos desenvolvidos
+## <a id="habilidades-desenvolvidas"></a> ✅ Habilidades desenvolvidas
 
 ### <a id="em-desenvolvimento"></a> 🚧 Em desenvolvimento 🚧
 
