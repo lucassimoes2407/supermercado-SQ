@@ -7,7 +7,7 @@ O *Supermercado SQ* necessita de um sistema de gerenciamento de alimentos e comp
 
 <div width=50% height=50%>
 
-![Tipos de Usuários e Permissões](./planejamento/usuarios.png)
+![Tipos de Usuários e Permissões](./planejamento/atores-sistema.png)
 
 </div>
 
@@ -42,12 +42,7 @@ RN-01|
 RN-02| 
 
 ## 👀 Visão Geral da Aplicação
-
-<div width=80% height=80%>
-
-![Mapa do Site/Aplicativo](./planejamento/mapa-site-app.png)
-
-</div>
+![Diagrama de Caso de Uso](./planejamento/diagrama-caso-uso.png)
 
 <!---
 ## 💻 Telas identificadas até o Momento
@@ -181,16 +176,10 @@ RN-02|
 
 -->
 
-## 🎲 Modelagem ER
-
-### 🚧 Em construção 🚧
-
+## 🎲 Modelagem Conceitual - ER
+![Modelo Conceitual - ER](./planejamento/modelo-conceitual.png)
 ## 🎲 Modelagem Lógica
-
-### 🚧 Em construção 🚧
-
-## 👨🏾‍💻 Tecnologias Utilizadas
-### 🚧 Em análise 🚧
+![Modelo Lógico](./planejamento/modelo-logico.png)
 
 ## ✅ Requisitos desenvolvidos
 
@@ -198,6 +187,7 @@ RN-02|
 
 
 ---
+<!-- Tabela com Integrantes do Grupo -->
 <div align=center>
 
 ![Logo DevHub](./planejamento/logo-devhub-darkmode.png)
