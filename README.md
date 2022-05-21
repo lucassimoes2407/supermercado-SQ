@@ -1,19 +1,34 @@
 # Projeto - 🛒*Supermercado SQ* 
 
-## 🤔 Problemática do Projeto
+## Sumário
+* [Problemática do Projeto](#problematica)
+* [Atores do Sistema](#atores)
+* [Elicitação de Requisitos](#elicitacao)
+* [Requisitos Funcionais](#requisitos-funcionais)
+* [Requisitos Não-Funcionais](#requisitos-nao-funcionais)
+* [Regras de Negócio](#regras-negocio)
+* [Visão Geral da Aplicação](#visao-aplicacao)
+* [Modelagem Conceitual - ER](#modelagem-conceitual)
+* [Modelagem Lógica](#modelagem-logica)
+* [Requisitos desenvolvidos](#requisitos-desenvolvidos)
+* [Em desenvolvimento](#em-desenvolvimento)
+* [Equipe DevHub](#equipe-devhub)
+
+
+## <a id="problematica"></a> 🤔 Problemática do Projeto
 O *Supermercado SQ* necessita de um sistema de gerenciamento de alimentos e composições alimentares que auxilie seus clientes a saber quais compostos alergênicos estão contidos nos alimentos que serão comprados.
 
-## 📋 Atores do Sistema
+## <a id="atores"></a> 📋 Atores do Sistema
 
 <div width=50% height=50%>
 
-![Tipos de Usuários e Permissões](./planejamento/usuarios.png)
+![Tipos de Usuários e Permissões](./planejamento/atores-sistema.png)
 
 </div>
 
-## 🤯 Elicitação de Requisitos
+## <a id="elicitacao"></a> 🤯 Elicitação de Requisitos
 
-### 📑 Requisitos Funcionais
+### <a id="requisitos-funcionais"></a> 📑 Requisitos Funcionais
 
 ID|Descrição|
 :---:|:---|
@@ -27,27 +42,22 @@ RF-07| O sistema deve permitir a pesquisa de um ingrediente que possa conter o p
 RF-08| O sistema deve permitir a busca por alimentos que não contenham certos ingredientes
 RF-09| O sistema deve permitir a busca por alimentos que contenham certos ingredientes
 
-### 📑 Requisitos Não-Funcionais
+### <a id="requisitos-nao-funcionais"></a> 📑 Requisitos Não-Funcionais
 
 ID|Descrição|
 :---:|:---|
 RF-01| A interface do sistema deve se adaptar aos diferentes dispositivos que possam acessá-lo
 RF-02| O sistema deve garantir a integridade dos dados de todos os usuários
 
-### 📑 Regras de Negócio
+### <a id="regras-negocio"></a> 📑 Regras de Negócio
 
 ID|Descrição|
 :---:|:---|
 RN-01| 
 RN-02| 
 
-## 👀 Visão Geral da Aplicação
-
-<div width=80% height=80%>
-
-![Mapa do Site/Aplicativo](./planejamento/mapa-site-app.png)
-
-</div>
+## <a id="visao-aplicacao"></a> 👀 Visão Geral da Aplicação
+![Diagrama de Caso de Uso](./planejamento/diagrama-caso-uso.png)
 
 <!---
 ## 💻 Telas identificadas até o Momento
@@ -181,24 +191,20 @@ RN-02|
 
 -->
 
-## 🎲 Modelagem ER
+## <a id="modelagem-conceitual"></a> 🎲 Modelagem Conceitual - ER
+![Modelo Conceitual - ER](./planejamento/modelo-conceitual.png)
+## <a id="modelagem-logica"></a> 🎲 Modelagem Lógica
+![Modelo Lógico](./planejamento/modelo-logico.png)
 
-### 🚧 Em construção 🚧
+## <a id="requisitos-desenvolvidos"></a> ✅ Requisitos desenvolvidos
 
-## 🎲 Modelagem Lógica
-
-### 🚧 Em construção 🚧
-
-## 👨🏾‍💻 Tecnologias Utilizadas
-### 🚧 Em análise 🚧
-
-## ✅ Requisitos desenvolvidos
-
-### 🚧 Em desenvolvimento 🚧
+### <a id="em-desenvolvimento"></a> 🚧 Em desenvolvimento 🚧
 
 
 ---
+<!-- Tabela com Integrantes do Grupo -->
 <div align=center>
+<a id="equipe-devhub"></a>
 
 ![Logo DevHub](./planejamento/logo-devhub-darkmode.png)
 
