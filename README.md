@@ -198,7 +198,8 @@ RN-02|
 
 ## Optamos por usar o PostgreSQL e em nossa abordagem criamos as seguintes tabelas:
 ---
-### **USUARIO** que armazenará informações de Usuários (Clientes, Fornecedores e Administradores) onde as colunas:
+### USUARIO 
+que armazenará informações de Usuários (Clientes, Fornecedores e Administradores) onde as colunas:
 |Coluna|Função|
 |:---:|:---|
 **USERNAME** | será um um apelido definido pelo usuário durante o cadastro e será exibido nas interações do dele com o sistema;
@@ -211,13 +212,15 @@ RN-02|
 **COD_PERFIL_ACESSO** | será chave estrangeira da tabela PERFIL_ACESSSO onde serão guardados os tipos de usuários;
 **COD_USUARIO** | será um número auto incrementado usado para identificar os usuários;  
 
-### **PERFIL_ACESSO** que armazenará os tipos de Usuários do sistema para gerenciamento de permissões e telas, terá as seguintes colunas:
+### PERFIL_ACESSO
+que armazenará os tipos de Usuários do sistema para gerenciamento de permissões e telas, terá as seguintes colunas:
 |Coluna|Função|
 |:---:|:---|
 **DESCRICAO** | terá o nome do perfil de acesso;
 **COD_PERFIL_ACESSO** | armazenará um número que será usado na tipagem de cada Usuário;
 
-### **PRODUTO** que armazenará a lista de produtos cadastrados e associará com as restrições da tabela RESTRICAO, tem as seguintes colunas:
+### PRODUTO
+armazenará a lista de produtos cadastrados e associará com as restrições da tabela RESTRICAO, tem as seguintes colunas:
 |Coluna|Função|
 |:---:|:---|
 **NOME** | armazenará o nome do produto para consulta/exibição;
@@ -228,13 +231,15 @@ RN-02|
 **COD_USUARIO** | armazenará o código relacionado ao usuário cadastrou este produto;
 **COD_PRODUTO** | armazenará um número auto incremental que será usado no controle/associação com tabela RESTRICAO
 
-### **RESTRICAO** que armazenará a lista de restrições alimentares cadastradas no sistema com seguintes colunas 
+### RESTRICAO
+que armazenará a lista de restrições alimentares cadastradas no sistema com seguintes colunas 
 |Coluna|Função|
 |:---:|:---|
 **NOME_RESTRICAO** | armazenará o nome da restrição ex: glútem, lactose;
 **COD_RESTRICAO** | armazenará um número auto incremental que será usado na consulta/associação com tabela PRODUTO;
 
-### **PRODUTO_RESTRICAO** é uma tabela gerada do relacionamento (N;N) entre PRODUTO e RESTRICAO e será usada para relacionar uma ou várias restrições a um ou vários produtos;
+### PRODUTO_RESTRICAO
+é uma tabela gerada do relacionamento (N;N) entre PRODUTO e RESTRICAO e será usada para relacionar uma ou várias restrições a um ou vários produtos;
 |Coluna|Função|
 |:---:|:---|
 **COD_PRODUTO** | é uma foreign key de PRODUTO;
