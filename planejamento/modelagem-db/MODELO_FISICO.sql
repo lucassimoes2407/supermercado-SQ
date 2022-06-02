@@ -1,23 +1,13 @@
 CREATE DATABASE supermercado_sq;
 
-
 \c supermercado_sq
-
-
-CREATE TABLE IF NOT EXISTS perfil_acesso (
-    descricao VARCHAR(64) NOT NULL UNIQUE,
-    cod_perfil_acesso SERIAL PRIMARY KEY
-);
 
 CREATE TABLE IF NOT EXISTS usuario (
     username VARCHAR(64) NOT NULL UNIQUE,
     email VARCHAR(64) NOT NULL UNIQUE,
     senha VARCHAR(64) NOT NULL,
     ativo BOOLEAN NOT NULL,
-    nome VARCHAR(128) NOT NULL,
-    documento VARCHAR(32) UNIQUE,
-    telefone VARCHAR(32),
-    cod_perfil_acesso INT NOT NULL REFERENCES perfil_acesso(cod_perfil_acesso),    
+    acesso CHAR(1) NOT NULL,    
     cod_usuario SERIAL PRIMARY KEY
 );
 
@@ -38,5 +28,10 @@ CREATE TABLE IF NOT EXISTS restricao (
 
 CREATE TABLE IF NOT EXISTS produto_restricao (
     cod_produto INT NOT NULL REFERENCES produto(cod_produto),
+    cod_restricao INT NOT NULL REFERENCES restricao(cod_restricao)
+);
+
+CREATE TABLE IF NOT EXISTS usuario_restricao (
+    cod_usuario INT NOT NULL REFERENCES usuario(cod_usuario),
     cod_restricao INT NOT NULL REFERENCES restricao(cod_restricao)
 );

@@ -1,21 +1,15 @@
-insert into perfil_acesso 
-(descricao)
-values
-('USUARIO'),
-('ADMINISTRADOR'),
-('FORNECEDOR');
 
 insert into usuario 
-(username, email, senha, ativo, nome, documento, telefone, cod_perfil_acesso)
+(username, email, senha, ativo, acesso)
 values
-('claudinho', 'claudinho@gmail.com', 'RfeR32', true, 'Claudio', '85993', '00000000000', 1),
-('heliosgod', 'heliosgod13@gmail.com', 'qewInfR33', true, 'Helio', '8599284719', '11111111111', 2),
-('msnAragao', 'msn_aragao@gmail.com', 'pJ9GF4jD', true, 'Marcelo', '8899472859', '22222222222', 3),
-('leite_ju', 'juliana_leite@hotmail.com', '@@dI8Y66', false, 'Juliana', '7892742823', '2009837812', 1),
-('mouse.http', 'mouse_felix@hotmail.com', 'E87Jf7n2', true, 'Marcelo', '899917462763', '0000000000', 1),
-('jonas_marinho', 'marinho_jonas@hotmail.com', '23JOK9fr&', true, 'Jonas Marinho', '85994726471', '11111111111', 1),
-('flavinha123', 'flaviasouza@gmail.com', '09PloI25!d', false, 'Flavia de Souza', '85992648163', '22222222222', 1),
-('dudanunes', 'duda_nunes12@hotmail.com', 'SwoiN8V6', true, 'Eduarda Nunes', '909928173', '33333333333', 1);
+('claudinho', 'claudinho@gmail.com', 'RfeR32', true, '1'),
+('heliosgod', 'heliosgod13@gmail.com', 'qewInfR33', true, '2'),
+('msnAragao', 'msn_aragao@gmail.com', 'pJ9GF4jD', true, '3'),
+('leite_ju', 'juliana_leite@hotmail.com', '@@dI8Y66', false, '1'),
+('mouse.http', 'mouse_felix@hotmail.com', 'E87Jf7n2', true, '1'),
+('jonas_marinho', 'marinho_jonas@hotmail.com', '23JOK9fr&', true, '1'),
+('flavinha123', 'flaviasouza@gmail.com', '09PloI25!d', false, '1'),
+('dudanunes', 'duda_nunes12@hotmail.com', 'SwoiN8V6', true, '1');
 
 insert into restricao 
 (nome_restricao)
@@ -55,3 +49,17 @@ insert into produto_restricao values
 (3, 4),
 (3, 6),
 (4, 3);
+
+insert into usuario_restricao values
+(1, 3),
+(2, 5),
+(2, 3),
+(2, 4),
+(3, 5),
+(3, 11),
+(4, 12),
+(5, 13),
+(6, 11),
+(7, 4),
+(7, 6),
+(8, 3);
