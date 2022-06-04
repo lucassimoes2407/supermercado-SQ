@@ -4,15 +4,21 @@ const database = new Pool({
     user: process.env.USER,
     password: process.env.PASSWORD,
     database: process.env.DATABASE,
+    port: process.env.BDPORT,
     host: process.env.HOST,
-    port: process.env.PORT
+    ssl: {
+        rejectUnauthorized: false
+    }    
 });
 
 async function databaseQuery(query){
     if(!query){return } //TODO Error handling
-    const client = database.connect();
-    (await client).query(query);
-    (await client).release()
+    
+    const client = await database.connect();
+    const res = await client.query(query);
+    
+    await client.release()
+    return res;
 }
 
 module.exports = {
