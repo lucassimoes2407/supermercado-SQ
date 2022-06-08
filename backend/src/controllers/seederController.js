@@ -11,9 +11,9 @@ async function deleteTables(){
 
 async function resetDatabase(req, res, next){
     try{
-        var sql = fs.readFileSync('seeds/seed.sql').toString();
+        // var sql = fs.readFileSync('seeds/seed.sql').toString();
         // await deleteTables()
-        res.status(200).send({seeedFile: sql});
+        // res.status(200).send({seeedFile: sql});
     }catch(e){
         console.log(e.message);
         res.status(400).send({message: e.message});
