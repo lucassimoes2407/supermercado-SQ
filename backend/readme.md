@@ -1,5 +1,7 @@
 # COMO COMEÇAR A USAR
-Na pasta backend, rode os seguintes comandos:
+
+Na pasta backend, crie um arquivo .env e defina as variáveis de ambiente como exemplificado no arquivo .env-sample.
+Feito isso, rode os seguintes comandos:
 `npm i`
 em seguida é só iniciar com:
 `npm start`
