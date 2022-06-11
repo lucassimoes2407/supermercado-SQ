@@ -5,7 +5,7 @@ const restrictionRouter = express.Router();
 
 restrictionRouter.post('/', restrictionController.postRestriction);
 restrictionRouter.get('/', restrictionController.getAllRestriction);
-restrictionRouter.delete('/', () => {}); //TODO
+restrictionRouter.delete('/:cod_restricao', restrictionController.deleteRestriction);
 restrictionRouter.patch('/', () => {}); //TODO
 restrictionRouter.put('/', () => {}); //TODO
 

@@ -28,7 +28,30 @@ let getAllRestriction = async () => {
     }
 }
 
+let deleteRestriction = async (cod_restricao) => {
+    try {
+        if(!cod_restricao) throw { 
+            message: "Código de restrição inválido", 
+            status: 400
+        }
+
+        let deleteResponse = await databaseQuery(`DELETE FROM restricao WHERE cod_restricao=${cod_restricao}`);
+        if(deleteResponse.rowCount < 1) throw {
+            message: "Restrição não encontrada",
+            status: 400
+        } 
+
+        console.log(deleteResponse);
+
+        return {message: "Restrição deletada", status: 200}
+
+    }catch(e){
+        throw e;
+    }
+}
+
 module.exports = {
     postRestriction,
-    getAllRestriction
+    getAllRestriction,
+    deleteRestriction
 }

@@ -5,9 +5,9 @@ const postRestriction = async (req, res, next) => {
 
     const response = await restrictionService.postRestriction(nome_restricao);
     const {message} = response;
-    res.status(response.status || 200).json({nome_restricao, message});
-    
+    res.status(response.status || 200).json({nome_restricao, message}); 
 }
+
 const getAllRestriction = async (req, res, next) => {
     try{
         const response = await restrictionService.getAllRestriction();
@@ -25,7 +25,29 @@ const getAllRestriction = async (req, res, next) => {
     
 }
 
+const deleteRestriction = async (req, res, next) => {
+    try{
+        const { cod_restricao } = req.params
+        
+        if(!cod_restricao) throw {
+            message: "Código de restrição inválido",
+            status: 400
+        }
+
+        const response = await restrictionService.deleteRestriction(cod_restricao)
+    
+        res.status(response.status || 200).json(response);
+
+    }catch(e){
+        res.status(e.status || 400).json({
+            message: e.message || "Não foi possível deletar a restrição"
+        })
+    }
+    
+}
+
 module.exports = {
     postRestriction,
-    getAllRestriction
+    getAllRestriction,
+    deleteRestriction
 }
