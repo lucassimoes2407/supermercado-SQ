@@ -2,29 +2,32 @@ const { databaseQuery } = require("../config/db");
 
 let postRestriction = async (nome_restricao = null) => {
     try {
-        if(!nome_restricao) throw {message: "Nome para restrição não fornecido", status: 400};
+        if(!nome_restricao) throw {
+            message: "Nome para restrição não fornecido",
+            status: 400
+        };
         
         let restrictionExists = await databaseQuery(`SELECT cod_restricao FROM restricao WHERE nome_restricao='${nome_restricao}'`);
-        if(!!restrictionExists.rows.length) throw {message: "Restrição já existe", status: 400};
+        if(!!restrictionExists.rows.length) throw {
+            message: "Restrição já existe", 
+            status: 400
+        };
 
-        let response = await databaseQuery(`INSERT INTO restricao VALUES ('${nome_restricao}')`);
+        await databaseQuery(`INSERT INTO restricao VALUES ('${nome_restricao}')`);
 
-        return {message: "Restrição criada", status: 201}
-
+        return {message: `Restrição '${nome_restricao}' criada`, status: 201}
     }catch(e){
-        return e;
+        throw e;
     }
 }
 
 let getAllRestriction = async () => {
     try {
         let restrictionList = await databaseQuery(`SELECT * FROM restricao`);
-        if(!restrictionList?.rows?.length) throw {message: restrictionList, status: 400};
 
         return {restrictions: restrictionList.rows, status: 200}
-
     }catch(e){
-        return e;
+        throw e;
     }
 }
 
@@ -39,12 +42,9 @@ let deleteRestriction = async (cod_restricao) => {
         if(deleteResponse.rowCount < 1) throw {
             message: "Restrição não encontrada",
             status: 400
-        } 
+        }
 
-        console.log(deleteResponse);
-
-        return {message: "Restrição deletada", status: 200}
-
+        return {message: `Restrição ${cod_restricao} deletada`, status: 200}
     }catch(e){
         throw e;
     }

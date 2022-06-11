@@ -12,15 +12,15 @@ const database = new Pool({
 });
 
 async function databaseQuery(query){
-    if(!query){return } //TODO Error handling
+    if(!query){ throw {message: "Query não válida", status: 400}}
     try{
         const client = await database.connect();
         const res = await client.query(query);
         
-        await client.release()
+        await client.release();
         return res;
     }catch(e){
-        return e
+        throw e;
     }
 }
 
