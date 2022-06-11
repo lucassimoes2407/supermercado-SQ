@@ -9,6 +9,7 @@ var cors = require('cors')
 var indexRouter = require('./src/routes/index');
 var usersRouter = require('./src/routes/users');
 const seedRouter = require('./src/routes/seed');
+const restrictionRouter = require('./src/routes/restriction');
 
 var app = express();
 
@@ -26,6 +27,7 @@ app.use(cors());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/seed', seedRouter);
+app.use('/restriction', restrictionRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

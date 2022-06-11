@@ -13,12 +13,15 @@ const database = new Pool({
 
 async function databaseQuery(query){
     if(!query){return } //TODO Error handling
-    
-    const client = await database.connect();
-    const res = await client.query(query);
-    
-    await client.release()
-    return res;
+    try{
+        const client = await database.connect();
+        const res = await client.query(query);
+        
+        await client.release()
+        return res;
+    }catch(e){
+        return e
+    }
 }
 
 module.exports = {
