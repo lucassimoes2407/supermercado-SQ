@@ -16,6 +16,19 @@ let postRestriction = async (nome_restricao = null) => {
     }
 }
 
+let getAllRestriction = async () => {
+    try {
+        let restrictionList = await databaseQuery(`SELECT * FROM restricao`);
+        if(!restrictionList?.rows?.length) throw {message: restrictionList, status: 400};
+
+        return {restrictions: restrictionList.rows, status: 200}
+
+    }catch(e){
+        return e;
+    }
+}
+
 module.exports = {
-    postRestriction
+    postRestriction,
+    getAllRestriction
 }
