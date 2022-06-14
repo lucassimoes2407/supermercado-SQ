@@ -1,7 +1,7 @@
 const { databaseQuery } = require("../config/db");
 
 // TESTADO E APROVADO
-let getAllProdutos = async () => {
+let getAllProducts = async () => {
     try {
         return await databaseQuery("SELECT * FROM produto");
     } catch (error) {
@@ -9,9 +9,9 @@ let getAllProdutos = async () => {
     }
 };
 
-let getByCodProduto = async ( cod_produto ) => {
+let getByProductCode = async ( productCode ) => {
     try {
-        return await databaseQuery(`SELECT * FROM produto WHERE cod_produto = ${cod_produto}`);
+        return await databaseQuery(`SELECT * FROM produto WHERE cod_produto = ${productCode}`);
     } catch (error) {
         throw error;
     }
@@ -69,6 +69,6 @@ let deleteProdutoByCodProduto = async ( cod_produto ) => {
 
 
 module.exports = {
-    getAllProdutos,
-    getByCodProduto
+    getAllProducts,
+    getByProductCode
 };
