@@ -34,7 +34,7 @@ let createProduto = async ( nome, marca, ingredientes, img_produto, img_tabela_n
             SET nome = ${nome}, 
                 marca = ${marca}, 
                 ingredientes = ${ingredientes}, 
-                 ${img_produto}, ${img_tabela_nutricional}, ${cod_usuario})`);
+                 ${img_produto}, ${img_tabela_nutricional}, ${cod_usuario}`);
     } 
     catch (error) {
         throw error;
