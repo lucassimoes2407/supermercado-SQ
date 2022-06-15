@@ -51,8 +51,4 @@ async function logPromisse(promise){
   })
 }
 
-app.listen(process.env.PORT, () => {
-  console.log("Sistema rodando...")  
-});
-
 module.exports = app;
