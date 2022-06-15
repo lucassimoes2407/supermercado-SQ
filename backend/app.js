@@ -45,10 +45,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-async function logPromisse(promise){
-  Promise.resolve(promise).then((result) => {
-    console.log(result.rows);
-  })
-}
-
 module.exports = app;
