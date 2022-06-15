@@ -19,6 +19,27 @@ let getByProductCode = async ( productCode ) => {
 
 
 // EM DESENVOLVIMENTO
+let createProduto = async ( nome, marca = null, ingredientes, img_produto = null, img_tabela_nutricional = null, cod_usuario ) => {
+    try {
+        console.log("Ok");
+
+        return await databaseQuery(
+           `INSERT INTO produto 
+            VALUES(
+                '${nome}', 
+                '${marca}', 
+                '${ingredientes}', 
+                '${img_produto}',
+                '${img_tabela_nutricional}',
+                ${cod_usuario} )`
+            );
+    } 
+    catch (error) {
+        throw error;
+    }
+};
+
+
 let getByNomeMarcaAndIngredientes = async (nome, marca, ingredientes) => {
     try {
         return await databaseQuery(`SELECT * FROM produto WHERE nome = ${nome} AND ingredientes = ${ingredientes} AND marca = ${marca}`);
@@ -27,19 +48,6 @@ let getByNomeMarcaAndIngredientes = async (nome, marca, ingredientes) => {
     }    
 };
 
-let createProduto = async ( nome, marca, ingredientes, img_produto, img_tabela_nutricional, cod_usuario ) => {
-    try {
-        return await databaseQuery(
-           `INSERT INTO produto 
-            SET nome = ${nome}, 
-                marca = ${marca}, 
-                ingredientes = ${ingredientes}, 
-                 ${img_produto}, ${img_tabela_nutricional}, ${cod_usuario})`);
-    } 
-    catch (error) {
-        throw error;
-    }
-};
 
 let updateProduto = async ( cod_produto, nome, marca, ingredientes, img_produto, img_tabela_nutricional, cod_usuario ) => {
     try {
@@ -70,5 +78,6 @@ let deleteProdutoByCodProduto = async ( cod_produto ) => {
 
 module.exports = {
     getAllProducts,
-    getByProductCode
+    getByProductCode,
+    createProduto
 };
