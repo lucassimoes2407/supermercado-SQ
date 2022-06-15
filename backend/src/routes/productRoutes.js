@@ -7,6 +7,6 @@ router.get('/', productController.getAllProducts);
 router.get('/:productCode', productController.getProductByProductCode);
 
 // Posts
-router.post('/teste/', productController.postProduto);
+router.post('/', productController.postProduto);
 
 module.exports = router;
