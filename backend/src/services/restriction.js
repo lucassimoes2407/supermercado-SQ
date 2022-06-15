@@ -31,10 +31,40 @@ let getAllRestriction = async () => {
     }
 }
 
-let deleteRestriction = async (cod_restricao) => {
+let getRestrictionByCod = async (cod_restricao = null) => {
+    try {
+        if(!cod_restricao) throw {
+            message: "Código de restrição não fornecido",
+            status: 400
+        }
+        let restrictionByCod = await databaseQuery(`SELECT nome_restricao FROM restricao WHERE cod_restricao='${cod_restricao}'`);
+
+        return {restrictions: restrictionByCod.rows, status: 200}
+    }catch(e){
+        throw e;
+    }
+}
+
+let getCodRestrictionByName = async (nome_restricao = null) => {
+    try {
+        if(!nome_restricao) throw {
+            message: "Nome da restrição não fornecido",
+            status: 400
+        }
+        nome_restricao = nome_restricao.toUpperCase();
+
+        let codRestrictionByName = await databaseQuery(`SELECT cod_restricao FROM restricao WHERE nome_restricao='${nome_restricao}'`);
+
+        return {restrictions: codRestrictionByName.rows, status: 200}
+    }catch(e){
+        throw e;
+    }
+}
+
+let deleteRestriction = async (cod_restricao = null) => {
     try {
         if(!cod_restricao) throw { 
-            message: "Código de restrição inválido", 
+            message: "Código de restrição não fornecido", 
             status: 400
         }
 
@@ -50,8 +80,29 @@ let deleteRestriction = async (cod_restricao) => {
     }
 }
 
+let putRestriction = async (cod_restricao, nome_restricao) => {
+    try {
+        if(!cod_restricao) throw {
+            message: "Código de restrição não fornecido",
+            status: 400
+        }
+        
+        nome_restricao = nome_restricao.toUpperCase()
+
+        await databaseQuery(`UPDATE restricao SET nome_restricao = '${nome_restricao}' WHERE cod_restricao = ${cod_restricao}`);
+        
+        return {message: `Restrição cod: ${cod_restricao} alterada para ${nome_restricao}`, status: 200};
+
+    }catch(e){
+        throw e;
+    }
+}
+
 module.exports = {
     postRestriction,
     getAllRestriction,
-    deleteRestriction
+    getRestrictionByCod,
+    getCodRestrictionByName,
+    deleteRestriction,
+    putRestriction
 }
