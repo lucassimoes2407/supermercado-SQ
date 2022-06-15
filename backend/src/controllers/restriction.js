@@ -31,6 +31,34 @@ const getAllRestriction = async (req, res, next) => {
     }
 }
 
+const getRestrictionByCod = async (req, res, next) => {
+    try{
+        const { cod_restricao } = req.params
+        const response = await restrictionService.getRestrictionByCod(cod_restricao);
+        const {restrictions, status} = response;
+    
+        res.status(status || 200).json(restrictions);
+    }catch(e){
+        res.status(e.status || 400).json({
+            message: e.message || "Não foi possível pegar a restrição"
+        })
+    }
+}
+
+const getCodRestrictionByName = async (req, res, next) => {
+    try{
+        const { nome_restricao } = req.body
+        const response = await restrictionService.getCodRestrictionByName(nome_restricao);
+        const {restrictions, status} = response;
+    
+        res.status(status || 200).json(restrictions);
+    }catch(e){
+        res.status(e.status || 400).json({
+            message: e.message || "Não foi possível pegar a restrição"
+        })
+    }
+}
+
 const deleteRestriction = async (req, res, next) => {
     try{
         const { cod_restricao } = req.params
@@ -50,8 +78,35 @@ const deleteRestriction = async (req, res, next) => {
     }
 }
 
+const putRestriction = async (req, res, next) => {
+    try{
+        const { cod_restricao } = req.params;
+        const { nome_restricao } = req.body;
+
+        if (!cod_restricao) throw {
+            message: "Código de restrição inválido",
+            status: 400
+        }
+        if (!nome_restricao) throw {
+            message: "Nome de restrição inválido",
+            status: 400
+        }
+
+        const response = await restrictionService.putRestriction(cod_restricao, nome_restricao.toUpperCase());
+        res.status(response.status || 200).json(response);
+    
+    }catch(e){
+        res.status(e.status || 400).json({
+            message: e.message || "Não foi possível alterar a restrição"
+        })
+    }
+}
+
 module.exports = {
     postRestriction,
     getAllRestriction,
-    deleteRestriction
+    getRestrictionByCod,
+    getCodRestrictionByName,
+    deleteRestriction,
+    putRestriction
 }
