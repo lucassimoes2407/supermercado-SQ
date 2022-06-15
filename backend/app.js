@@ -8,7 +8,7 @@ var cors = require('cors')
 
 const indexRouter = require('./src/routes/index');
 const usersRouter = require('./src/routes/users');
-const produtoRouter = require('./src/routes/produtoRoutes');
+const productRouter = require('./src/routes/productRoutes');
 
 var app = express();
 
@@ -25,7 +25,7 @@ app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/produtos', produtoRouter);
+app.use('/products', productRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -48,9 +48,5 @@ async function logPromisse(promise){
     console.log(result.rows);
   })
 }
-
-app.listen(process.env.PORT, () => {
-  console.log("Sistema rodando...")  
-});
 
 module.exports = app;
