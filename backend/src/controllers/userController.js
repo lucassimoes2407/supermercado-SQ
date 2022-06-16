@@ -87,7 +87,7 @@ const setUserActive = async (req, res, next) => {
         res.status(400).json("Usuário não encontrado!!");
     }else if(user.rows[0].ativo == false){
         try{
-            await userModel.setUserInactive(req.params.id);
+            await userModel.setUserActive(req.params.id);
             res.status(200).json(`Usuário: ${user.rows[0].username}, definido como ativo!!`);
         }catch(error){
             res.status(400).json(error.message);
