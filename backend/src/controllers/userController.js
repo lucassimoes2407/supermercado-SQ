@@ -38,30 +38,18 @@ const createUser = async (req, res, next) => {
     }
 }
 
-const deleteAllUsers = async (req, res, next) => {
-    try{
-        await userModel.deleteAllUsers();
-        res.status(200).json("Usuários deletados com sucesso!");
-    }catch(error){
-        res.status(400).json(error.message);
-    }
-}
+const updateUserStatus = async (req, res, next) => {
+    let idUser = await userModel.getUserByUserId(req.params.id);
 
-const deleteUserByUserName = async (req, res, next) => {
-    try{
-        await userModel.deleteUserByUserName(req.params.username);
-        res.status(200).json("Usuário deletado com sucesso!");
-    }catch(error){
-        res.status(400).json(error.message);
-    }
-}
-
-const deleteUserByUserId = async (req, res, next) => {
-    try{
-        await userModel.deleteUserByUserId(req.params.id);
-        res.status(200).json("Usuário deletado com sucesso!");
-    }catch(error){
-        res.status(400).json(error.message);
+    if(idUser.rows.length == 0){
+        res.status(400).json("Usuário não encontrado!");
+    }else{
+        try{
+            await userModel.updateUserStatus(req.params.id);
+            res.status(200).json(`Usuário Nº: ${idUser.rows[0].cod_usuario}, definido como inativo.`);
+        }catch(error){
+            res.status(400).json(error.message);
+        }
     }
 }
 
@@ -70,7 +58,5 @@ module.exports = {
     getUserByUserName,
     getUserByUserId,
     createUser,
-    deleteAllUsers,
-    deleteUserByUserName,
-    deleteUserByUserId
+    updateUserStatus
 };

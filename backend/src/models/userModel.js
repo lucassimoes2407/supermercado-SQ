@@ -8,17 +8,17 @@ const getAllUsers = async () => {
     }
 };
 
-const getUserByUserName = async (UserName) => {
+const getUserByUserId = async (UserId) => {
     try {
-        return await databaseQuery(`SELECT * FROM usuario WHERE username = '${UserName}'`);
+        return await databaseQuery(`SELECT * FROM usuario WHERE cod_usuario = '${UserId}'`);
     } catch (error) {
         throw error;
     }
 };
 
-const getUserByUserId = async (UserId) => {
+const getUserByUserName = async (UserName) => {
     try {
-        return await databaseQuery(`SELECT * FROM usuario WHERE cod_usuario = '${UserId}'`);
+        return await databaseQuery(`SELECT * FROM usuario WHERE username = '${UserName}'`);
     } catch (error) {
         throw error;
     }
@@ -34,25 +34,9 @@ const createUser = async (data) => {
     }
 }
 
-const deleteAllUsers = async () => {
+const updateUserStatus = async (userId) => {
     try{
-        return await databaseQuery(`DELETE * FROM usuario`);
-    }catch(error){
-        throw error;
-    }
-}
-
-const deleteUserByUserName = async (userName) => {
-    try{
-        return await databaseQuery(`DELETE FROM usuario WHERE username = '${userName}'`);
-    }catch(error){
-        throw error;
-    }
-}
-
-const deleteUserByUserId = async (userId) => {
-    try{
-        return await databaseQuery(`DELETE FROM usuario WHERE cod_usuario = '${userId}'`);
+        return await databaseQuery(`UPDATE ativo FROM usuario VALUES false WHERE cod_usuario = ${userId}`);
     }catch(error){
         throw error;
     }
@@ -63,7 +47,5 @@ module.exports = {
     getUserByUserName,
     getUserByUserId,
     createUser,
-    deleteAllUsers,
-    deleteUserByUserName,
-    deleteUserByUserId
+    updateUserStatus
 };
