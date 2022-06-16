@@ -9,4 +9,10 @@ router.get('/:productCode', productController.getProductByProductCode);
 // Posts
 router.post('/', productController.postProduto);
 
+// Puts
+router.put('/', productController.putProduto);
+
+// Deletes
+router.delete('/:productCode', productController.deleteProductByProductCode);
+
 module.exports = router;

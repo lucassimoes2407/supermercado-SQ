@@ -1,45 +1,81 @@
 const productModel = require('../models/ProductModel');
 
+
+// GETS
 const getAllProducts = async (req, res, next) => {
     try {
         let product = await productModel.getAllProducts();
         res.status(200).json( product.rows );
     } catch (error) {
-        res.status(400).json( error.message );
+        console.error(error.message);
     }
 };
 
 const getProductByProductCode = async (req, res, next) => {
     try {
-        let product = await produtoModel.getByCodProduto( req.params.productCode );
+        let product = await productModel
+            .getByProductCode( req.params.productCode );
         res.status(200).json( product.rows )
     } catch (error) {
-        res.status(400).json( error.message );
+        console.error(error.message);
     }
 };
 
+
+// CREATE
 const postProduto = async (req, res, next) => {
     try {
-        let { nome, marca = null, ingredientes, img_produto = null, img_tabela_nutricional = null, cod_usuario } = req.body;
-        console.log("Ok");
-        if ( nome == null || nome == "" )
-            res.send(400).send( "Nome do produto é inválido!" );
-        else if ( ingredientes == null || ingredientes == "" )
-            res.send(400).json( "Ingredientes do produto inválido!" );
-        else if ( cod_usuario == null )
-            res.send(400).json( "Usuario inválido!" );
-            console.log("Ok");
-
-        await productModel.createProduto( nome, marca, ingredientes, img_produto, img_tabela_nutricional, cod_usuario );
-        res.code(200).send("OK");
-    } catch (error) {
+        if ( req.body.nome == null || req.body.nome.trim() === "" )
+            return res.status(400).json( "Nome do produto é inválido!" );
+        else if ( req.body.ingredientes == null || req.body.ingredientes.trim() === "" )
+            return res.status(400).json( "Ingredientes do produto inválido!" );
+        else if ( req.body.cod_usuario == null || req.body.cod_usuario < 0 )
+            return  res.status(400).json( "Usuario inválido!" );
         
+        await productModel.createProduto( req.body );
+
+        return res.status(200).send("Produto criado com sucesso!");
+    } catch (error) {
+        console.error(error.message);        
     }
 };
+
+
+// UPDATE
+const putProduto = async ( req, res, next ) => {
+    try {
+        const productExists = await getProductByProductCode(req.params.cod_usuario);
+        if(!productExists) 
+            return res.status(400).send("Produto não existe!");
+       
+        await productModel.updateProduto( req.body );
+        return res.status(200).send("Produto atualizado com sucesso!");
+    } catch (error) {
+        console.error(error.message);
+    }
+};
+
+
+// DELETE
+const deleteProductByProductCode = async (req, res, next) => {
+    try{
+        const productExists = await getProductByProductCode(req.params.cod_usuario);
+        if(!productExists) 
+            return res.status(400).send("Produto não existe!");
+            
+        await productModel.deleteProductByCodProduct(req.params.productCode);
+        res.status(200).json("Produto deletado com sucesso!");
+    }catch(error){
+        res.status(400).json(error.message);
+    }
+}
+
 
 module.exports = {
     getAllProducts,
     getProductByProductCode,
-    postProduto
+    postProduto,
+    putProduto,
+    deleteProductByProductCode
 };
 

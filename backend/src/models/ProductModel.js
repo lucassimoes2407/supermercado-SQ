@@ -1,9 +1,10 @@
 const { databaseQuery } = require("../config/db");
 
-// TESTADO E APROVADO
+// GETS
 let getAllProducts = async () => {
     try {
-        return await databaseQuery("SELECT * FROM produto");
+        return await databaseQuery(`
+            SELECT * FROM produto`);
     } catch (error) {
         throw error;
     }
@@ -11,27 +12,27 @@ let getAllProducts = async () => {
 
 let getByProductCode = async ( productCode ) => {
     try {
-        return await databaseQuery(`SELECT * FROM produto WHERE cod_produto = ${productCode}`);
+        return await databaseQuery(`
+            SELECT * FROM produto 
+            WHERE cod_produto = ${productCode}`);
     } catch (error) {
         throw error;
     }
 };
 
 
-// EM DESENVOLVIMENTO
-let createProduto = async ( nome, marca = null, ingredientes, img_produto = null, img_tabela_nutricional = null, cod_usuario ) => {
+// CREATES
+let createProduto = async ( { nome, marca = null, ingredientes, img_produto = null, img_tabela_nutricional = null, cod_usuario } ) => {
     try {
-        console.log("Ok");
-
         return await databaseQuery(
            `INSERT INTO produto 
             VALUES(
-                '${nome}', 
-                '${marca}', 
-                '${ingredientes}', 
-                '${img_produto}',
-                '${img_tabela_nutricional}',
-                ${cod_usuario} )`
+               '${nome}', 
+               '${marca}', 
+               '${ingredientes}', 
+               '${img_produto}',
+               '${img_tabela_nutricional}',
+               ${cod_usuario} )`
             );
     } 
     catch (error) {
@@ -40,44 +41,42 @@ let createProduto = async ( nome, marca = null, ingredientes, img_produto = null
 };
 
 
-let getByNomeMarcaAndIngredientes = async (nome, marca, ingredientes) => {
+// UPDATES
+let updateProduto = async ( { cod_produto, nome, marca, ingredientes, img_produto, img_tabela_nutricional, cod_usuario } ) => {
     try {
-        return await databaseQuery(`SELECT * FROM produto WHERE nome = ${nome} AND ingredientes = ${ingredientes} AND marca = ${marca}`);
-    } catch (error) {
-        throw error;        
-    }    
-};
-
-
-let updateProduto = async ( cod_produto, nome, marca, ingredientes, img_produto, img_tabela_nutricional, cod_usuario ) => {
-    try {
-        return await databaseQuery(`UPDATE produto VALUES (${nome}, ${marca}, ${ingredientes}, ${img_produto}, ${img_tabela_nutricional}, ${cod_usuario})`);
-    } catch (error) {
-        throw error;
-    }
-};
-
-let getProdutoByCodProduto = async ( cod_produto ) => {
-    try {
-        return await databaseQuery(`SELECT * FROM produto WHERE cod_produto = ${cod_produto}`);      
+        return await databaseQuery(`
+            UPDATE produto 
+            SET
+                nome = '${nome}', 
+                marca = '${marca}', 
+                ingredientes = '${ingredientes}', 
+                img_produto = '${img_produto}', 
+                img_tabela_nutricional = '${img_tabela_nutricional}', 
+                cod_usuario = ${cod_usuario}
+            WHERE cod_produto = ${cod_produto}`);
     } catch (error) {
         throw error;
     }
 };
 
-let deleteProdutoByCodProduto = async ( cod_produto ) => {
-    try {
-        return await databaseQuery(`DELETE FROM produto WHERE cod_produto = ${cod_produto}`);
-    } catch (error) {
+
+// DELETES
+const deleteProductByCodProduct = async (codProduct) => {
+    try{
+        return await databaseQuery(`
+            DELETE FROM produto 
+            WHERE cod_produto = '${codProduct}'`);
+    }catch(error){
         throw error;
     }
-};
-
+}
 
 
 
 module.exports = {
     getAllProducts,
     getByProductCode,
-    createProduto
+    createProduto,
+    updateProduto,
+    deleteProductByCodProduct
 };
