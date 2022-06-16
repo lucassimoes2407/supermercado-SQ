@@ -8,44 +8,100 @@ const getAllUsers = async () => {
     }
 };
 
-const getUserByUserId = async (UserId) => {
+const getUserByUserId = async (userId) => {
     try {
-        return await databaseQuery(`SELECT * FROM usuario WHERE cod_usuario = '${UserId}'`);
+        return await databaseQuery(`SELECT * FROM usuario WHERE cod_usuario = '${userId}'`);
     } catch (error) {
         throw error;
     }
 };
 
-const getUserByUserName = async (UserName) => {
+const getUserByUserName = async (userName) => {
     try {
-        return await databaseQuery(`SELECT * FROM usuario WHERE username = '${UserName}'`);
+        return await databaseQuery(`SELECT * FROM usuario WHERE username = '${userName}'`);
     } catch (error) {
         throw error;
     }
 };
 
-const createUser = async (data) => {
-    const {username, email, pass} = data.body;
+const getUserByEmail = async (email) => {
+    try {
+        return await databaseQuery(`SELECT * FROM usuario WHERE email = '${email}'`);
+    } catch (error) {
+        throw error;
+    }
+};
+
+const getUsersActive = async () => {
+    try {
+        return await databaseQuery('SELECT * FROM usuario WHERE ativo = true ORDER BY cod_usuario');
+    } catch (error) {
+        throw error;
+    }
+}
+
+const getUsersInactive = async () => {
+    try {
+        return await databaseQuery('SELECT * FROM usuario WHERE ativo = false ORDER BY cod_usuario');
+    } catch (error) {
+        throw error;
+    }
+}
+
+const createUser = async (req) => {
+    const {username, email, pass, typeUser} = req.body;
 
     try{
-        return await databaseQuery(`INSERT INTO usuario (username, email, senha, ativo, acesso) VALUES ('${username}', '${email}', '${pass}', true, 1)`);
+        return await databaseQuery(`INSERT INTO usuario (username, email, senha, ativo, acesso) VALUES ('${username}', '${email}', '${pass}', true, '${typeUser}')`);
     }catch(error){
         throw error;
     }
 }
 
-const updateUserStatus = async (userId) => {
+const setUserInactive = async (userId) => {
     try{
-        return await databaseQuery(`UPDATE ativo FROM usuario VALUES false WHERE cod_usuario = ${userId}`);
+        return await databaseQuery(`UPDATE usuario SET ativo=false WHERE cod_usuario = ${userId}`);
     }catch(error){
         throw error;
     }
 }
+
+const setUserActive = async (userId) => {
+    try{
+        return await databaseQuery(`UPDATE usuario SET ativo = true WHERE cod_usuario = ${userId}`);
+    }catch(error){
+        throw error;
+    }
+}
+
+const updateAccessUser = async (newAccess, userId) => {
+    try {
+        return await databaseQuery(`UPDATE usuario SET acesso = '${newAccess}' WHERE cod_usuario = '${userId}'`);
+    } catch (error) {
+        throw error;
+    }
+}
+
+const updateUser = async (userId, req) => {
+    try {
+        const {username, email, pass} = req.body;
+        
+        return await databaseQuery(`UPDATE usuario SET username = '${username}', email = '${email}', senha = '${pass}' WHERE cod_usuario = '${userId}'`);
+    } catch (error) {
+        throw error;
+    }
+};
 
 module.exports = {
     getAllUsers,
     getUserByUserName,
     getUserByUserId,
+    getUserByEmail,
+    getUsersActive,
+    getUsersInactive,
     createUser,
-    updateUserStatus
+    setUserInactive,
+    setUserActive,
+    updateAccessUser,
+    updateUser
 };
