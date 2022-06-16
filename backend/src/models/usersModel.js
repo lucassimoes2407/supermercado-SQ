@@ -27,12 +27,13 @@ const createUser = async (data) => {
 }
 
 
-let updateUser = async (UserId, data) => {
+let updateUser = async (UserId, req) => {
     try {
-        if(getUserByUserId(UserId) != null){
-            const {username, email, pass} = data.body;
-            return await databaseQuery(`UPDATE usuario SET username = '${username}', email = '${email}', senha = '${pass}' WHERE cod_usuario = '${UserId}'`);
-        }
+        const username = req.body.username;
+        const email = req.body.email;
+        const pass = req.body.senha;
+        
+        return await databaseQuery(`UPDATE usuario SET username = '${username}', email = '${email}', senha = '${pass}' WHERE cod_usuario = '${UserId}'`);
     } catch (error) {
         throw error;
     }

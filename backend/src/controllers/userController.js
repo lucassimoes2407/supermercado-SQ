@@ -68,8 +68,14 @@ const deleteUserByUserId = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
     try {
-        await userModel.updateUser(req.params.id, req);
-        res.status(200).json("Usuário atualizado com sucesso!");
+        const userExists = await userModel.getUserByUserId(req.params.id);
+        if(!userExists){
+            return res.status(400).send("Esse usuário não existe!");
+        }
+        else{
+            await userModel.updateUser(req.params.id, req);
+            return res.status(200).json("Usuário atualizado com sucesso!");
+        }   
     } catch (error) {
         res.status(400).json(error.message);
     }
