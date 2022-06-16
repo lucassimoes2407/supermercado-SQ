@@ -6,9 +6,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors')
 
-var indexRouter = require('./src/routes/index');
-var usersRouter = require('./src/routes/users');
-const seedRouter = require('./src/routes/seed');
+const indexRouter = require('./src/routes/index');
+const usersRouter = require('./src/routes/users');
+const productRouter = require('./src/routes/productRoutes');
 
 var app = express();
 
@@ -25,7 +25,7 @@ app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/seed', seedRouter);
+app.use('/products', productRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -48,9 +48,5 @@ async function logPromisse(promise){
     console.log(result.rows);
   })
 }
-
-app.listen(process.env.PORT, () => {
-  console.log("Sistema rodando...")  
-});
 
 module.exports = app;
