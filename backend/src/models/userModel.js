@@ -76,7 +76,7 @@ const setUserActive = async (userId) => {
 
 const updateAccessUser = async (newAccess, userId) => {
     try {
-        return await databaseQuery(`UPDATE usuario SET acesso = '${newAccess}' WHERE cod_usuario = '${userId}'`);
+        return await databaseQuery(`UPDATE usuario SET acesso = '${newAccess}' WHERE cod_usuario = ${userId}`);
     } catch (error) {
         throw error;
     }
