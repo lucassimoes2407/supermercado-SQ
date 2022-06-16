@@ -34,6 +34,10 @@ const getAllRestriction = async (req, res, next) => {
 const getRestrictionByCod = async (req, res, next) => {
     try{
         const { cod_restricao } = req.params
+        if(isNaN(+cod_restricao)) throw {
+            message: `Código da restrição recebido não é número`
+        }
+        
         const response = await restrictionService.getRestrictionByCod(cod_restricao);
         const {restrictions, status} = response;
     
