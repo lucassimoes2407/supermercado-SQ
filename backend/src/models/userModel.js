@@ -74,13 +74,13 @@ const setUserActive = async (userId) => {
     }
 }
 
-const updateAccessUser = async (newAccess, userId) => {
-    try {
-        return await databaseQuery(`UPDATE usuario SET acesso = ${newAccess} WHERE cod_usuario = ${userId}`);
-    } catch (error) {
-        throw error;
-    }
-}
+// const updateAccessUser = async (newAccess, user) => {
+//     try {
+//         return await databaseQuery(`UPDATE usuario SET username = '${user.username}', email = '${user.email}', senha = '${user.senha}', acesso = ${newAccess} WHERE cod_usuario = ${user.cod_usuario}`);
+//     } catch (error) {
+//         throw error;
+//     }
+// }
 
 const updateUser = async (userId, req) => {
     try {
@@ -118,7 +118,7 @@ module.exports = {
     createUser,
     setUserActive,
     setUserInactive,
-    updateAccessUser,
+    //updateAccessUser,
     updateUser,
     deleteUserByUserName,
     deleteUserByUserId

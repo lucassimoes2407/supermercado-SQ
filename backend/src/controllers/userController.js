@@ -46,12 +46,15 @@ const getUsersInactive = async (req, res, next) => {
 }
 
 const createUser = async (req, res, next) => {
-    let user = await userModel.getUserByUserName(req.body.username);
-    let user2 = await userModel.getUserByEmail(req.body.email);
+    let userId = await userModel.getUserByUserId(req.body.id);
+    let userUsername = await userModel.getUserByUserName(req.body.username);
+    let userEmail = await userModel.getUserByEmail(req.body.email);
 
-    if(user.rows.length > 0){
+    if(userId.rows.length > 0){
+        res.status(400).json("Este usuário já existe!!");
+    }else if(userUsername.rows.length > 0){
         res.status(400).json("Este nome de usuário já está sendo utilizado!!");
-    }else if(user2.rows.length > 0){
+    }else if(userEmail.rows.length > 0){
         res.status(400).json("Este e-mail já está sendo utilizado!!");
     }else{
         try{
@@ -86,23 +89,23 @@ const setUserActiveAttribute = async (req, res, next) => {
     }
 }
 
-const updateAccessUser = async (req, res, next) => {
-    let user = await userModel.getUserByUserId(req.params.id);
-    let newAccess = req.body;
+// const updateAccessUser = async (req, res, next) => {
+//     let user = await userModel.getUserByUserId(req.params.id);
+//     let newAccess = req.body;
 
-    if(user.rows.length == 0){
-        res.status(400).json("Usuário não encontrado!!");
-    }else if(user.rows[0].acesso == newAccess){
-        return res.status(400).json(`O acesso do usuário: ${user.rows[0].username}, já está definido como ${newAccess}!!`);
-    }else{
-        try {
-            await userModel.updateAccessUser(newAccess, user.rows[0].cod_usuario);
-            res.status(200).json(`Acesso do usuário: ${user.rows[0].username} modificado para ${newAccess}!!`);
-        } catch (error) {
-            res.status(400).json(error.message);
-        }
-    }
-}
+//     if(user.rows.length == 0){
+//         res.status(400).json("Usuário não encontrado!!");
+//     }else if(user.rows[0].acesso == newAccess){
+//         return res.status(400).json(`O acesso do usuário: ${user.rows[0].username}, já está definido como ${newAccess}!!`);
+//     }else{
+//         try {
+//             await userModel.updateAccessUser(newAccess, user.body);
+//             res.status(200).json(`Acesso do usuário: ${user.rows[0].username} modificado para ${newAccess}!!`);
+//         } catch (error) {
+//             res.status(400).json(error.message);
+//         }
+//     }
+// }
 
 const updateUser = async (req, res, next) => {
     let userExists = await userModel.getUserByUserId(req.params.id);
@@ -163,7 +166,7 @@ module.exports = {
     getUsersInactive,
     createUser,
     setUserActiveAttribute,
-    updateAccessUser,
+    //updateAccessUser,
     updateUser,
     deleteUserByUserName,
     deleteUserByUserId

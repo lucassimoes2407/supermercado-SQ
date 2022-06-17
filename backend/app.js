@@ -8,7 +8,8 @@ var logger = require('morgan');
 var cors = require('cors');
 
 var indexRouter = require('./src/routes/index');
-var userRouters = require('./src/routes/userRouters');
+const usersRouter = require('./src/routes/userRouters');
+const productRouter = require('./src/routes/productRoutes');
 
 var app = express();
 
@@ -24,7 +25,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 app.use('/', indexRouter);
-app.use('/users', userRouters);
+app.use('/users', usersRouter);
+app.use('/products', productRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -47,9 +49,5 @@ async function logPromisse(promise){
     console.log(result.rows);
   })
 }
-
-app.listen(process.env.PORT, () => {
-  console.log("Sistema rodando...");
-});
 
 module.exports = app;
