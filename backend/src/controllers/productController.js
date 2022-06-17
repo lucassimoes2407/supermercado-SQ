@@ -23,7 +23,7 @@ const getProductByProductCode = async (req, res, next) => {
 
 
 // CREATE
-const postProduto = async (req, res, next) => {
+const postProduct = async (req, res, next) => {
     try {
         if ( req.body.nome == null || req.body.nome.trim() === "" )
             return res.status(400).json( "Nome do produto é inválido!" );
@@ -32,7 +32,7 @@ const postProduto = async (req, res, next) => {
         else if ( req.body.cod_usuario == null || req.body.cod_usuario < 0 )
             return  res.status(400).json( "Usuario inválido!" );
         
-        await productModel.createProduto( req.body );
+        await productModel.createProduct( req.body );
 
         return res.status(200).send("Produto criado com sucesso!");
     } catch (error) {
@@ -42,13 +42,13 @@ const postProduto = async (req, res, next) => {
 
 
 // UPDATE
-const putProduto = async ( req, res, next ) => {
+const putProduct = async ( req, res, next ) => {
     try {
         const productExists = await getProductByProductCode(req.params.cod_usuario);
         if(!productExists) 
             return res.status(400).send("Produto não existe!");
        
-        await productModel.updateProduto( req.body );
+        await productModel.updateProduct( req.body );
         return res.status(200).send("Produto atualizado com sucesso!");
     } catch (error) {
         console.error(error.message);
@@ -74,8 +74,8 @@ const deleteProductByProductCode = async (req, res, next) => {
 module.exports = {
     getAllProducts,
     getProductByProductCode,
-    postProduto,
-    putProduto,
+    postProduct,
+    putProduct,
     deleteProductByProductCode
 };
 

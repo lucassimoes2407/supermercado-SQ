@@ -22,7 +22,7 @@ let getByProductCode = async ( productCode ) => {
 
 
 // CREATES
-let createProduto = async ( { nome, marca = null, ingredientes, img_produto = null, img_tabela_nutricional = null, cod_usuario } ) => {
+let createProduct = async ( { nome, marca = null, ingredientes, img_produto = null, img_tabela_nutricional = null, cod_usuario } ) => {
     try {
         return await databaseQuery(
            `INSERT INTO produto 
@@ -42,7 +42,7 @@ let createProduto = async ( { nome, marca = null, ingredientes, img_produto = nu
 
 
 // UPDATES
-let updateProduto = async ( { cod_produto, nome, marca, ingredientes, img_produto, img_tabela_nutricional, cod_usuario } ) => {
+let updateProduct = async ( { cod_produto, nome, marca, ingredientes, img_produto, img_tabela_nutricional, cod_usuario } ) => {
     try {
         return await databaseQuery(`
             UPDATE produto 
@@ -76,7 +76,7 @@ const deleteProductByCodProduct = async (codProduct) => {
 module.exports = {
     getAllProducts,
     getByProductCode,
-    createProduto,
-    updateProduto,
+    createProduct,
+    updateProduct,
     deleteProductByCodProduct
 };

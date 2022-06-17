@@ -7,10 +7,10 @@ router.get('/', productController.getAllProducts);
 router.get('/:productCode', productController.getProductByProductCode);
 
 // Posts
-router.post('/', productController.postProduto);
+router.post('/', productController.postProduct);
 
 // Puts
-router.put('/', productController.putProduto);
+router.put('/', productController.putProduct);
 
 // Deletes
 router.delete('/:productCode', productController.deleteProductByProductCode);
