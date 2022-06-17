@@ -1,11 +1,11 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
-    "title": "REST API",
-    "description": ""
+    "version": "0.5.1",
+    "title": "Supermercado SQ - Devhub API Documentation",
+    "description": "Devhub's API documentation for SupermercadoSQ, developed during Atlantico Academy Bootcamp"
   },
-  "host": "localhost:3000",
+  "host": "localhost:3001",
   "basePath": "/",
   "schemes": [
     "http"
@@ -23,16 +23,21 @@
         "tags": [
           "Restrição"
         ],
-        "description": "",
+        "summary": "Cria uma restrição",
+        "description": "Cria uma restrição com base no nome",
+        "operationId": "postRestriction",
         "parameters": [
           {
-            "name": "body",
+            "name": "nome_restricao",
             "in": "body",
+            "description": "Nome de uma restrição",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "nome_restricao": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "string"
                 }
               }
             }
@@ -43,7 +48,7 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Solicitação Inválida"
           }
         }
       },
@@ -58,7 +63,7 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Solicitação Inválida"
           }
         }
       }
@@ -82,7 +87,7 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Solicitação Inválida"
           }
         }
       }
@@ -99,7 +104,7 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Solicitação Inválida"
           }
         }
       }
@@ -123,7 +128,7 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Solicitação Inválida"
           }
         }
       },
@@ -157,7 +162,7 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Solicitação Inválida"
           }
         }
       }
@@ -199,7 +204,7 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Solicitação Inválida"
           }
         }
       },
@@ -211,7 +216,7 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Solicitação Inválida"
           }
         }
       }
@@ -248,7 +253,7 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Solicitação Inválida"
           }
         }
       }

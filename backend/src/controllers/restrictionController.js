@@ -1,7 +1,18 @@
 const restrictionModel = require("../models/restrictionModel");
 
 const postRestriction = async (req, res, next) => {
-    // #swagger.tags = ['Restrição']
+    /* 
+        #swagger.tags = ['Restrição'] // Define a que grupo de endpoints pertence
+        #swagger.summary = 'Cria uma restrição' // Resumo da responsabilidade do endpoint
+        #swagger.operationId = 'postRestriction' // Identificador único do endpoint
+        #swagger.description = 'Cria uma restrição com base no nome' // Descrição do endpoint
+        #swagger.parameters['nome_restricao'] = { // Atributos que o endpoint recebe
+               in: 'body', // local de onde é adquirido, params, query, ou body
+               description: 'Nome de uma restrição',
+               required: true,
+               schema: { nome_restricao: 'string' },
+        }
+    */
     try{
         let {nome_restricao = null} = req.body;
         if(!nome_restricao) throw {
