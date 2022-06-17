@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS usuario (
     email VARCHAR(64) NOT NULL UNIQUE,
     senha VARCHAR(64) NOT NULL,
     ativo BOOLEAN NOT NULL,
-    acesso VARCHAR(20) NOT NULL,    
+    acesso SMALLINT NOT NULL,    
     cod_usuario SERIAL PRIMARY KEY
 );
 
