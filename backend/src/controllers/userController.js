@@ -129,7 +129,7 @@ const updateUser = async (req, res, next) => {
     }else{
         try {
             await userModel.updateUser(req.params.id, req);
-            return res.status(200).json("Usuário atualizado com sucesso!");
+            res.status(200).json("Usuário atualizado com sucesso!");
         } catch (error) {
             res.status(400).json(error.message);
         }
