@@ -68,7 +68,6 @@ const setUserActiveAttribute = async (req, res, next) => {
 
     if(user.rows.length == 0){
         res.status(400).json("Usuário não encontrado!!");
-        
     }else if(user.rows[0].ativo == true){
         try{
             await userModel.setUserInactive(req.params.id);
@@ -90,7 +89,7 @@ const setUserActiveAttribute = async (req, res, next) => {
 const updateAccessUser = async (req, res, next) => {
     let user = await userModel.getUserByUserId(req.params.id);
     let newAccess = req.body;
-    console.log(typeof(user.rows[0].acesso))
+
     if(user.rows.length == 0){
         res.status(400).json("Usuário não encontrado!!");
     }else if(user.rows[0].acesso == newAccess){
@@ -126,6 +125,36 @@ const updateUser = async (req, res, next) => {
     }
 }
 
+const deleteUserByUserName = async (req, res, next) => {
+    let user = await userModel.getUserByUserName(req.params.username);
+
+    if(user.rows.length == 0){
+        res.status(400).json("Usuário não encontrado!!");
+    }else{
+        try {
+            await userModel.deleteUserByUserName(req.params.username);
+            res.status(200).json(`Usuário: ${user.rows[0].username}, deletado com sucesso!!`);
+        } catch (error) {
+            res.status(400).json(error.message);
+        }
+    }
+}
+
+const deleteUserByUserId = async (req, res, next) => {
+    let user = await userModel.getUserByUserId(req.params.id);
+
+    if(user.rows.length == 0){
+        res.status(400).json("Usuário não encontrado!!");
+    }else{
+        try {
+            await userModel.deleteUserByUserId(req.params.id);
+            res.status(200).json(`Usuário: ${user.rows[0].cod_usuario}, deletado com sucesso!!`);
+        } catch (error) {
+            res.status(400).json(error.message);
+        }
+    }
+}
+
 module.exports = {
     getAllUsers,
     getUserByUserName,
@@ -135,5 +164,7 @@ module.exports = {
     createUser,
     setUserActiveAttribute,
     updateAccessUser,
-    updateUser
+    updateUser,
+    deleteUserByUserName,
+    deleteUserByUserId
 };

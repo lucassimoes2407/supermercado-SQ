@@ -65,6 +65,7 @@ const setUserInactive = async (userId) => {
         throw error;
     }
 }
+
 const setUserActive = async (userId) => {
     try{
         return await databaseQuery(`UPDATE usuario SET ativo=true WHERE cod_usuario = ${userId}`);
@@ -72,9 +73,10 @@ const setUserActive = async (userId) => {
         throw error;
     }
 }
+
 const updateAccessUser = async (newAccess, userId) => {
     try {
-        return await databaseQuery(`UPDATE usuario SET acesso = '${newAccess}' WHERE cod_usuario = ${userId}`);
+        return await databaseQuery(`UPDATE usuario SET acesso = ${newAccess} WHERE cod_usuario = ${userId}`);
     } catch (error) {
         throw error;
     }
@@ -85,6 +87,22 @@ const updateUser = async (userId, req) => {
         const {username, email, pass} = req.body;
         
         return await databaseQuery(`UPDATE usuario SET username = '${username}', email = '${email}', senha = '${pass}' WHERE cod_usuario = '${userId}'`);
+    } catch (error) {
+        throw error;
+    }
+};
+
+const deleteUserByUserName = async (username) => {
+    try {
+        return await databaseQuery(`DELETE FROM usuario WHERE username = '${username}'`);
+    } catch (error) {
+        throw error;
+    }
+};
+
+const deleteUserByUserId = async (userId) => {
+    try {
+        return await databaseQuery(`DELETE FROM usuario WHERE cod_usuario = ${userId}`);
     } catch (error) {
         throw error;
     }
@@ -101,5 +119,7 @@ module.exports = {
     setUserActive,
     setUserInactive,
     updateAccessUser,
-    updateUser
+    updateUser,
+    deleteUserByUserName,
+    deleteUserByUserId
 };

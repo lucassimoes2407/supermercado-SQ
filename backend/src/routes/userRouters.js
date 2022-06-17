@@ -11,5 +11,7 @@ router.post('/createUser', userController.createUser);
 router.put('/setUserActiveAttribute/:id', userController.setUserActiveAttribute);
 router.put('/updateAccessUser/:id', userController.updateAccessUser);
 router.put('/updateUser/:id', userController.updateUser);
+router.delete('/deleteUserByUserName/:username', userController.deleteUserByUserName);
+router.delete('/deleteUserByUserId/:id', userController.deleteUserByUserId);
 
 module.exports = router;
