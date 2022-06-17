@@ -1,6 +1,7 @@
 const restrictionModel = require("../models/restrictionModel");
 
 const postRestriction = async (req, res, next) => {
+    // #swagger.tags = ['Restrição']
     try{
         let {nome_restricao = null} = req.body;
         if(!nome_restricao) throw {
@@ -24,6 +25,7 @@ const postRestriction = async (req, res, next) => {
 }
 
 const getAllRestriction = async (req, res, next) => {
+    // #swagger.tags = ['Restrição']
     try{
         const response = await restrictionModel.getAllRestriction();
         const {restrictions, status} = response;
@@ -37,6 +39,7 @@ const getAllRestriction = async (req, res, next) => {
 }
 
 const getRestrictionByCod = async (req, res, next) => {
+    // #swagger.tags = ['Restrição']
     try{
         const { cod_restricao = null} = req.params;
         if(isNaN(+cod_restricao)) throw {
@@ -55,6 +58,7 @@ const getRestrictionByCod = async (req, res, next) => {
 }
 
 const getCodRestrictionByName = async (req, res, next) => {
+    // #swagger.tags = ['Restrição']
     try{
         const { nome_restricao = null} = req.body;
         if(!nome_restricao) throw {
@@ -74,6 +78,7 @@ const getCodRestrictionByName = async (req, res, next) => {
 }
 
 const deleteRestriction = async (req, res, next) => {
+    // #swagger.tags = ['Restrição']
     try{
         const { cod_restricao = null } = req.params
         if(isNaN(+cod_restricao)) throw {
@@ -98,6 +103,7 @@ const deleteRestriction = async (req, res, next) => {
 }
 
 const putRestriction = async (req, res, next) => {
+    // #swagger.tags = ['Restrição']
     try{
         const { cod_restricao } = req.params;
         const { nome_restricao } = req.body;

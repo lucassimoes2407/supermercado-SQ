@@ -4,7 +4,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var cors = require('cors')
+var cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('./swagger_output.json');
 
 const indexRouter = require('./src/routes/index');
 const restrictionRouter = require('./src/routes/restrictionRoutes');
@@ -22,6 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use('/', indexRouter);
 app.use('/restriction', restrictionRouter);
