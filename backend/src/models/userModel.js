@@ -65,15 +65,13 @@ const setUserInactive = async (userId) => {
         throw error;
     }
 }
-
 const setUserActive = async (userId) => {
     try{
-        return await databaseQuery(`UPDATE usuario SET ativo = true WHERE cod_usuario = ${userId}`);
+        return await databaseQuery(`UPDATE usuario SET ativo=true WHERE cod_usuario = ${userId}`);
     }catch(error){
         throw error;
     }
 }
-
 const updateAccessUser = async (newAccess, userId) => {
     try {
         return await databaseQuery(`UPDATE usuario SET acesso = '${newAccess}' WHERE cod_usuario = ${userId}`);
@@ -100,8 +98,8 @@ module.exports = {
     getUsersActive,
     getUsersInactive,
     createUser,
-    setUserInactive,
     setUserActive,
+    setUserInactive,
     updateAccessUser,
     updateUser
 };

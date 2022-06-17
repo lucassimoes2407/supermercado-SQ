@@ -5,7 +5,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var cors = require('cors')
+var cors = require('cors');
 
 var indexRouter = require('./src/routes/index');
 var userRouters = require('./src/routes/userRouters');
@@ -49,7 +49,7 @@ async function logPromisse(promise){
 }
 
 app.listen(process.env.PORT, () => {
-  console.log("Sistema rodando...")  
+  console.log("Sistema rodando...");
 });
 
 module.exports = app;
