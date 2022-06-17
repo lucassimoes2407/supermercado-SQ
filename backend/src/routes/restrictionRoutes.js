@@ -1,5 +1,5 @@
 const express = require('express');
-const restrictionController = require('../controllers/restriction');
+const restrictionController = require('../controllers/restrictionController');
 
 const restrictionRouter = express.Router();
 

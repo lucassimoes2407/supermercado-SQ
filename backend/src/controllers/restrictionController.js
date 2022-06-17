@@ -1,4 +1,4 @@
-const restrictionService = require("../services/restriction");
+const restrictionModel = require("../models/restrictionModel");
 
 const postRestriction = async (req, res, next) => {
     try{
@@ -7,8 +7,13 @@ const postRestriction = async (req, res, next) => {
             message: "Nome inválido para restrição",
             status: 400
         }
+
+        const restrictionExists = await restrictionModel.getCodRestrictionByName(nome_restricao);
+        if(restrictionExists.restrictions.length < 1) throw {
+            message: "Restrição já existe"
+        }
         
-        const response = await restrictionService.postRestriction(nome_restricao);
+        const response = await restrictionModel.postRestriction(nome_restricao);
         const {message} = response;
         res.status(response.status || 200).json({nome_restricao, message}); 
     }catch(e){
@@ -20,7 +25,7 @@ const postRestriction = async (req, res, next) => {
 
 const getAllRestriction = async (req, res, next) => {
     try{
-        const response = await restrictionService.getAllRestriction();
+        const response = await restrictionModel.getAllRestriction();
         const {restrictions, status} = response;
     
         res.status(status || 200).json(restrictions);
@@ -33,12 +38,12 @@ const getAllRestriction = async (req, res, next) => {
 
 const getRestrictionByCod = async (req, res, next) => {
     try{
-        const { cod_restricao } = req.params
+        const { cod_restricao = null} = req.params;
         if(isNaN(+cod_restricao)) throw {
             message: `Código da restrição recebido não é número`
         }
         
-        const response = await restrictionService.getRestrictionByCod(cod_restricao);
+        const response = await restrictionModel.getRestrictionByCod(cod_restricao);
         const {restrictions, status} = response;
     
         res.status(status || 200).json(restrictions);
@@ -51,8 +56,13 @@ const getRestrictionByCod = async (req, res, next) => {
 
 const getCodRestrictionByName = async (req, res, next) => {
     try{
-        const { nome_restricao } = req.body
-        const response = await restrictionService.getCodRestrictionByName(nome_restricao);
+        const { nome_restricao = null} = req.body;
+        if(!nome_restricao) throw {
+            message: "Nome de restrição válido não fornecido",
+            status: 400
+        }
+
+        const response = await restrictionModel.getCodRestrictionByName(nome_restricao);
         const {restrictions, status} = response;
     
         res.status(status || 200).json(restrictions);
@@ -65,20 +75,25 @@ const getCodRestrictionByName = async (req, res, next) => {
 
 const deleteRestriction = async (req, res, next) => {
     try{
-        const { cod_restricao } = req.params
-        
-        if(!cod_restricao) throw {
+        const { cod_restricao = null } = req.params
+        if(isNaN(+cod_restricao)) throw {
             message: "Código de restrição inválido",
             status: 400
         }
 
-        const response = await restrictionService.deleteRestriction(cod_restricao)
+        let { restrictions } = await restrictionModel.getRestrictionByCod(cod_restricao);
+        if(restrictions.length === 0) throw {
+            message: "Restrição não encontrada",
+            status: 400
+        }
+
+        const response = await restrictionModel.deleteRestriction(cod_restricao);
     
         res.status(response.status || 200).json(response);
     }catch(e){
         res.status(e.status || 400).json({
             message: e.message || "Não foi possível deletar a restrição"
-        })
+        });
     }
 }
 
@@ -87,7 +102,7 @@ const putRestriction = async (req, res, next) => {
         const { cod_restricao } = req.params;
         const { nome_restricao } = req.body;
 
-        if (!cod_restricao) throw {
+        if (isNaN(+cod_restricao)) throw {
             message: "Código de restrição inválido",
             status: 400
         }
@@ -96,7 +111,7 @@ const putRestriction = async (req, res, next) => {
             status: 400
         }
 
-        const response = await restrictionService.putRestriction(cod_restricao, nome_restricao.toUpperCase());
+        const response = await restrictionModel.putRestriction(cod_restricao, nome_restricao.toUpperCase());
         res.status(response.status || 200).json(response);
     
     }catch(e){
