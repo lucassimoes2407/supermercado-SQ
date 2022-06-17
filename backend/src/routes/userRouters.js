@@ -8,8 +8,7 @@ router.get('/findByUserId/:id', userController.getUserByUserId);
 router.get('/findUsersActive', userController.getUsersActive);
 router.get('/findUsersInactive', userController.getUsersInactive);
 router.post('/createUser', userController.createUser);
-router.put('/setUserInactive/:id', userController.setUserInactive);
-router.put('/setUserActive/:id', userController.setUserActive);
+router.put('/setUserActiveAttribute/:id', userController.setUserActiveAttribute);
 router.put('/updateAccessUser/:id', userController.updateAccessUser);
 router.put('/updateUser/:id', userController.updateUser);
 

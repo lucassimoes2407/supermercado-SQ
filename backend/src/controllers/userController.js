@@ -63,11 +63,12 @@ const createUser = async (req, res, next) => {
     }
 }
 
-const setUserInactive = async (req, res, next) => {
+const setUserActiveAttribute = async (req, res, next) => {
     let user = await userModel.getUserByUserId(req.params.id);
 
     if(user.rows.length == 0){
         res.status(400).json("Usuário não encontrado!!");
+        
     }else if(user.rows[0].ativo == true){
         try{
             await userModel.setUserInactive(req.params.id);
@@ -75,32 +76,21 @@ const setUserInactive = async (req, res, next) => {
         }catch(error){
             res.status(400).json(error.message);
         }
-    }else{
-        res.status(400).json(`Usuário: ${user.rows[0].username}, já está definido como inativo!!`);
     }
-}
-
-const setUserActive = async (req, res, next) => {
-    let user = await userModel.getUserByUserId(req.params.id);
-
-    if(user.rows.length == 0){
-        res.status(400).json("Usuário não encontrado!!");
-    }else if(user.rows[0].ativo == false){
+    else {
         try{
             await userModel.setUserActive(req.params.id);
-            res.status(200).json(`Usuário: ${user.rows[0].username}, definido como ativo!!`);
+            res.status(200).json(`Usuário: ${user.rows[0].username} foi definido como ativo!!`);
         }catch(error){
             res.status(400).json(error.message);
         }
-    }else{
-        res.status(400).json(`Usuário: ${user.rows[0].username}, já está definido como ativo!!`);
     }
 }
 
 const updateAccessUser = async (req, res, next) => {
     let user = await userModel.getUserByUserId(req.params.id);
     let newAccess = req.body;
-
+    console.log(typeof(user.rows[0].acesso))
     if(user.rows.length == 0){
         res.status(400).json("Usuário não encontrado!!");
     }else if(user.rows[0].acesso == newAccess){
@@ -143,8 +133,7 @@ module.exports = {
     getUsersActive,
     getUsersInactive,
     createUser,
-    setUserInactive,
-    setUserActive,
+    setUserActiveAttribute,
     updateAccessUser,
     updateUser
 };
