@@ -2,14 +2,14 @@
 insert into usuario 
 (username, email, senha, ativo, acesso)
 values
-('claudinho', 'claudinho@gmail.com', 'RfeR32', true, '1'),
-('heliosgod', 'heliosgod13@gmail.com', 'qewInfR33', true, '2'),
-('msnAragao', 'msn_aragao@gmail.com', 'pJ9GF4jD', true, '3'),
-('leite_ju', 'juliana_leite@hotmail.com', '@@dI8Y66', false, '1'),
-('mouse.http', 'mouse_felix@hotmail.com', 'E87Jf7n2', true, '1'),
-('jonas_marinho', 'marinho_jonas@hotmail.com', '23JOK9fr&', true, '1'),
-('flavinha123', 'flaviasouza@gmail.com', '09PloI25!d', false, '1'),
-('dudanunes', 'duda_nunes12@hotmail.com', 'SwoiN8V6', true, '1');
+('claudinho', 'claudinho@gmail.com', 'RfeR32', true, 'CLIENTE'),
+('heliosgod', 'heliosgod13@gmail.com', 'qewInfR33', true, 'ADMIN'),
+('msnAragao', 'msn_aragao@gmail.com', 'pJ9GF4jD', true, 'FORNECEDOR'),
+('leite_ju', 'juliana_leite@hotmail.com', '@@dI8Y66', false, 'CLIENTE'),
+('mouse.http', 'mouse_felix@hotmail.com', 'E87Jf7n2', true, 'CLIENTE'),
+('jonas_marinho', 'marinho_jonas@hotmail.com', '23JOK9fr&', true, 'CLIENTE'),
+('flavinha123', 'flaviasouza@gmail.com', '09PloI25!d', false, 'CLIENTE'),
+('dudanunes', 'duda_nunes12@hotmail.com', 'SwoiN8V6', true, 'CLIENTE');
 
 insert into restricao 
 (nome_restricao)
