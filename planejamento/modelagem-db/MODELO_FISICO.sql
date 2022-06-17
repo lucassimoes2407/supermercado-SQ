@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS produto (
     ingredientes TEXT NOT NULL,
     img_produto VARCHAR(64),
     img_tabela_nutricional VARCHAR(64),
-    cod_usuario INT NOT NULL REFERENCES usuario(cod_usuario),
+    cod_usuario INT NOT NULL REFERENCES usuario(cod_usuario) ON DELETE CASCADE,
     cod_produto SERIAL PRIMARY KEY
 );
 
@@ -27,11 +27,11 @@ CREATE TABLE IF NOT EXISTS restricao (
 );
 
 CREATE TABLE IF NOT EXISTS produto_restricao (
-    cod_produto INT NOT NULL REFERENCES produto(cod_produto),
-    cod_restricao INT NOT NULL REFERENCES restricao(cod_restricao)
+    cod_produto INT NOT NULL REFERENCES produto(cod_produto) ON DELETE CASCADE,
+    cod_restricao INT NOT NULL REFERENCES restricao(cod_restricao) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS usuario_restricao (
-    cod_usuario INT NOT NULL REFERENCES usuario(cod_usuario),
-    cod_restricao INT NOT NULL REFERENCES restricao(cod_restricao)
+    cod_usuario INT NOT NULL REFERENCES usuario(cod_usuario) ON DELETE CASCADE,
+    cod_restricao INT NOT NULL REFERENCES restricao(cod_restricao) ON DELETE CASCADE
 );
