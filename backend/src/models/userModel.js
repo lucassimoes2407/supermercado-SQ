@@ -74,14 +74,6 @@ const setUserActive = async (userId) => {
     }
 }
 
-// const updateAccessUser = async (newAccess, user) => {
-//     try {
-//         return await databaseQuery(`UPDATE usuario SET username = '${user.username}', email = '${user.email}', senha = '${user.senha}', acesso = ${newAccess} WHERE cod_usuario = ${user.cod_usuario}`);
-//     } catch (error) {
-//         throw error;
-//     }
-// }
-
 const updateUser = async (userId, req) => {
     try {
         const {username, email, pass} = req.body;
@@ -118,7 +110,6 @@ module.exports = {
     createUser,
     setUserActive,
     setUserInactive,
-    //updateAccessUser,
     updateUser,
     deleteUserByUserName,
     deleteUserByUserId

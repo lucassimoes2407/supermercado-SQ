@@ -14,7 +14,6 @@ router.post('/createUser', userController.createUser);
 
 //userUpdates
 router.put('/setUserActiveAttribute/:id', userController.setUserActiveAttribute);
-//router.put('/updateAccessUser/:id', userController.updateAccessUser);
 router.put('/updateUser/:id', userController.updateUser);
 
 //userDeletes
