@@ -7,6 +7,11 @@ const postRestriction = async (req, res, next) => {
             message: "Nome inválido para restrição",
             status: 400
         }
+
+        const restrictionExists = await restrictionModel.getCodRestrictionByName(nome_restricao);
+        if(restrictionExists.restrictions.length < 1) throw {
+            message: "Restrição já existe"
+        }
         
         const response = await restrictionModel.postRestriction(nome_restricao);
         const {message} = response;
@@ -84,15 +89,15 @@ const getCodRestrictionByName = async (req, res, next) => {
         }
     */
     try{
-        const { nome_restricao } = req.body
-        const response = await restrictionModel.getCodRestrictionByName(nome_restricao);
-        const {restrictions, status} = response;
-        
-        if(!isNaN(nome_restricao)) throw {
-            message: "Nome de restrição fornecido é inválido ou não está cadastrado",
+        const { nome_restricao = null} = req.body;
+        if(!nome_restricao) throw {
+            message: "Nome de restrição válido não fornecido",
             status: 400
         }
 
+        const response = await restrictionModel.getCodRestrictionByName(nome_restricao);
+        const {restrictions, status} = response;
+    
         res.status(status || 200).json(restrictions);
     }catch(e){
         res.status(e.status || 400).json({
@@ -122,13 +127,18 @@ const deleteRestriction = async (req, res, next) => {
             status: 400
         }
 
-        const response = await restrictionModel.deleteRestriction(cod_restricao)
-    
+        let { restrictions } = await restrictionModel.getRestrictionByCod(cod_restricao);
+        if(restrictions.length === 0) throw {
+            message: "Restrição não encontrada",
+            status: 400
+        }
+
+        const response = await restrictionModel.deleteRestriction(cod_restricao);
         res.status(response.status || 200).json(response);
     }catch(e){
         res.status(e.status || 400).json({
             message: e.message || "Não foi possível deletar a restrição"
-        })
+        });
     }
 }
 

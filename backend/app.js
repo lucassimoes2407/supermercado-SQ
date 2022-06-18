@@ -1,12 +1,14 @@
 require('dotenv').config();
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var cors = require('cors')
+var cors = require('cors');
 
 const indexRouter = require('./src/routes/index');
+const userRouter = require('./src/routes/userRoutes');
 const productRouter = require('./src/routes/productRoutes');
 const restrictionRouter = require('./src/routes/restrictionRoutes');
 const userRestrictionRouter = require('./src/routes/userRestrictionRoutes');
@@ -26,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/users', userRouter)
 app.use('/products', productRouter);
 app.use('/restriction', restrictionRouter);
 app.use('/user-restriction', userRestrictionRouter);
@@ -47,11 +49,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-async function logPromisse(promise){
-  Promise.resolve(promise).then((result) => {
-    console.log(result.rows);
-  })
-}
 
 module.exports = app;

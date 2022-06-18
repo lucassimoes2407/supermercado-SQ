@@ -16,7 +16,6 @@ CREATE TABLE IF NOT EXISTS produto (
     marca VARCHAR(64),
     ingredientes TEXT NOT NULL,
     img_produto VARCHAR(64),
-    img_tabela_nutricional VARCHAR(64),
     cod_usuario INT NOT NULL REFERENCES usuario(cod_usuario) ON DELETE CASCADE,
     cod_produto SERIAL PRIMARY KEY
 );
