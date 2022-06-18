@@ -1,4 +1,4 @@
-const productModel = require('../models/ProductModel');
+const productModel = require('../models/productModel');
 
 
 // GETS
@@ -55,8 +55,8 @@ const postProduct = async (req, res, next) => {
 // UPDATE
 const putProduct = async ( req, res, next ) => {
     try {
-        const product = await productModel.getByProductCode(req.body.cod_usuario);
-        if(product.rows.length <= 0) 
+        const product = await productModel.getByProductCode(req.body.cod_produto);
+        if(product.rowCount <= 0) 
             return res.status(400).json("Produto não existe!");
        
         await productModel.updateProduct( req.body );
@@ -72,7 +72,7 @@ const putProduct = async ( req, res, next ) => {
 const deleteProductByProductCode = async (req, res, next) => {
     try{
         const product = await productModel.getByProductCode(req.params.productCode);
-        if(product.rows.length >= 0) 
+        if(product.rowCount <= 0) 
             return res.status(400).json("Produto não existe!");
             
         await productModel.deleteProductByCodProduct(req.params.productCode);
