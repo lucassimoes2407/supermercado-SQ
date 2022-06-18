@@ -8,7 +8,7 @@ const getAllProducts = async (req, res, next) => {
         res.status(200).json( product.rows );
     } catch (error) {
         console.error(error.message);
-        res.send(400).send(error.message);
+        res.send(400).json(error.message);
     }
 };
 
@@ -19,7 +19,7 @@ const getProductByProductCode = async (req, res, next) => {
         res.status(200).json( product.rows )
     } catch (error) {
         console.error(error.message);
-        res.send(400).send(error.message);
+        res.send(400).json(error.message);
     }
 };
 
@@ -47,7 +47,7 @@ const postProduct = async (req, res, next) => {
         return res.status(200).send("Produto criado com sucesso!");
     } catch (error) {
         console.error(error.message);
-        res.send(400).send(error.message);        
+        res.send(400).json(error.message);        
     }
 };
 
@@ -55,15 +55,15 @@ const postProduct = async (req, res, next) => {
 // UPDATE
 const putProduct = async ( req, res, next ) => {
     try {
-        const productExists = await getProductByProductCode(req.params.cod_usuario);
-        if(!productExists) 
-            return res.status(400).send("Produto não existe!");
+        const product = await productModel.getByProductCode(req.body.cod_usuario);
+        if(product.rows.length <= 0) 
+            return res.status(400).json("Produto não existe!");
        
         await productModel.updateProduct( req.body );
         return res.status(200).send("Produto atualizado com sucesso!");
     } catch (error) {
         console.error(error.message);
-        res.send(400).send(error.message);
+        res.send(400).json(error.message);
     }
 };
 
@@ -71,9 +71,9 @@ const putProduct = async ( req, res, next ) => {
 // DELETE
 const deleteProductByProductCode = async (req, res, next) => {
     try{
-        const productExists = await getProductByProductCode(req.params.cod_usuario);
-        if(!productExists) 
-            return res.status(400).send("Produto não existe!");
+        const product = await productModel.getByProductCode(req.params.productCode);
+        if(product.rows.length >= 0) 
+            return res.status(400).json("Produto não existe!");
             
         await productModel.deleteProductByCodProduct(req.params.productCode);
         res.status(200).json("Produto deletado com sucesso!");
