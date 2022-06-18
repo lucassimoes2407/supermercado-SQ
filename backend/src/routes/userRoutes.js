@@ -4,7 +4,7 @@ const router = express.Router();
 
 //userGets
 router.get('/', userController.getAllUsers);
-router.get('/:username', userController.getUserByUserName);
+router.get('/username/:username', userController.getUserByUserName);
 router.get('/id/:id', userController.getUserByUserId);
 router.get('/findUsersActive', userController.getUsersActive);
 router.get('/findUsersInactive', userController.getUsersInactive);
