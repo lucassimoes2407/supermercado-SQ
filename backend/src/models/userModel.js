@@ -10,7 +10,7 @@ const getAllUsers = async () => {
 
 const getUserByUserId = async (userId) => {
     try {
-        return await databaseQuery(`SELECT * FROM usuario WHERE cod_usuario = '${userId}'`);
+        return await databaseQuery(`SELECT * FROM usuario WHERE cod_usuario = ${userId}`);
     } catch (error) {
         throw error;
     }

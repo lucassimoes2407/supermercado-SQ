@@ -4,8 +4,8 @@ const router = express.Router();
 
 //userGets
 router.get('/', userController.getAllUsers);
-router.get('/:username', userController.getUserByUserName);
-router.get('/:id', userController.getUserByUserId);
+router.get('/username/:username', userController.getUserByUserName);
+router.get('/id/:id', userController.getUserByUserId);
 router.get('/findUsersActive', userController.getUsersActive);
 router.get('/findUsersInactive', userController.getUsersInactive);
 
@@ -18,6 +18,6 @@ router.put('/:id', userController.updateUser);
 
 //userDeletes
 router.delete('/:username', userController.deleteUserByUserName);
-router.delete('/:id', userController.deleteUserByUserId);
+router.delete('/id/:id', userController.deleteUserByUserId);
 
 module.exports = router;
