@@ -7,7 +7,6 @@ var logger = require('morgan');
 var cors = require('cors')
 
 const indexRouter = require('./src/routes/index');
-const usersRouter = require('./src/routes/');
 const productRouter = require('./src/routes/productRoutes');
 const restrictionRouter = require('./src/routes/restrictionRoutes');
 const userRestrictionRouter = require('./src/routes/userRestrictionRoutes');
