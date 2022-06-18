@@ -1,24 +1,33 @@
 # Como começar a usar
 Primeiro de tudo, certifique-se que na sua máquina você tem instalado as seguintes ferramentas:
-Git: [Guia de Instalação do Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-Node: [Link para Download](https://nodejs.org/en/download/)
+
+- Git: [Guia de Instalação do Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- Node: [Link para Download](https://nodejs.org/en/download/)
+- Insomnia: [Link para Download](https://insomnia.rest/download)
 
 No terminal, clone o repositório do GitHub utilizando o seguinte comando:
-`git clone https://github.com/lucassimoes2407/supermercado-SQ.git`
-
+```
+git clone https://github.com/lucassimoes2407/supermercado-SQ.git
+```
 Depois rode os seguintes comandos:
-`cd supermercado-SQ`
-`cd backend`
-
+```
+cd supermercado-SQ
+cd backend
+```
 A partir daí, crie um arquivo chamado .env, e popule ele seguindo o modelo existente no arquivo já existente chamado .env-sample.
 
-Então, execute os comandos a seguir:
+Então, execute o comando a seguir para instalar as dependências necessárias do NPM:
+```
+npm i 
+```
+Enfim para iniciar o servidor e começar a usar execute :
+```
+nodemon start 
+```
+Caso precise reiniciar ou parar o serviço pressione `Ctrl + C` no Terminal.
 
-Para instalar as dependências necessárias do NPM
-`npm i` 
+Para testar as requisições abra o Insomnia e clique no menu `Application > Preferences`, vá até a guia `Data` e clique em `Import Data`, depois em `From File` e escolha o arquivo [Testes HTTP - Insomnia.json](./Testes%20HTTP%20-%20Insomnia.json) localizado dentro da pasta `/supermercado-SQ/backend`, na dashboard do Insomnia escolha o projeto que foi importado e vá até a guia `DEBUG`, as requisições estão nomeadas e organizadas em pastas ao lado esquerdo com os Nomes das tabelas que as Respondem.
 
-Para iniciar o programa.
-`nodemon start` 
 
 ***
 
@@ -43,21 +52,22 @@ ID|Descrição|
 :---:|:---|
 RNeg-01| O sistema deve garantir que os dados username e email, de usuário, devem ser únicos 
 RNeg-02| O sistema deve garantir que um usuário não seja apagado e sim deixado como inativo
-RNeg-03| O sistema deve garantir que ao atualziar os dados de um usuário as regras RNeg-01 e RNeg-02, sejam mantidas
+RNeg-03| O sistema deve garantir que ao atualizar os dados de um usuário as regras RNeg-01 e RNeg-02, sejam mantidas
 
 #### Endpoints
 | Rota                              | Método | Função                                                       |
 |-----------------------------------|--------|--------------------------------------------------------------|
 | /users/                           | GET    | Lista todos os usuários                                      |
-| /users/:username                  | GET    | Lista um usuário a partir do username                        |
-| /users/:id                        | GET    | Lista um usuário a partir do id                              |
+| /users/username/:username         | GET    | Lista um usuário a partir do username                        |
+| /users/id/:id                     | GET    | Lista um usuário a partir do id                              |
 | /users/findUsersActive            | GET    | Lista todos os usuários definidos como ativos                |
 | /users/findUsersInactive          | GET    | Lista todos os usuários definidos como inativos              |
 | /users/                           | POST   | Cria um usuário                                              |
 | /users/setUserActiveAttribute/:id | PUT    | Muda um usuário para ativo ou inativo a partir de um id      |
-| /users/:id                        | PUT    | Atualiza um usuário a partir do id                           |
+| /users/:id                        | PUT    | Atualiza um usuário a partir do id   
+A seguir uma breve explicação sobre o sistema.                        |
 | /users/:username                  | DELETE | Deleta um usuário a partir do username                       |
-| /users/:id                        | DELETE | Deleta um usuário a partir do id   
+| /users/id/:id                     | DELETE | Deleta um usuário a partir do id   
 
 ***
 
@@ -116,8 +126,6 @@ RNeg-04| O sistema deve permitir a edição dos dados cadastrados
 #### EndPoints
 | Rota                              | Método | Função                                                       |
 |-----------------------------------|--------|--------------------------------------------------------------|
-| /restriction/:cod_restricao       | PUT    | Atualiza uma restrição a partir do id                        |
-| /restriction/:cod_restricao       | DELETE | Deleta uma restriçãoa partir do id                           |
 | /user-restriction/:cod_usuario    | GET    | Pega todas as restrições de um usuário                       |
 | /user-restriction/:cod_usuario    | POST   | Adicionar uma restrição de um usuário                        |
 | /user-restriction/:cod_usuario    | DELETE | Deleta uma restrição de um usuário                           |

@@ -1,3 +1,5 @@
+### [👉 Clique aqui para saber como começar a usar 👈](./backend/readme.md)
+---
 # Projeto - 🛒*Supermercado SQ* 
 
 ## Sumário
