@@ -49,12 +49,6 @@ ID|Descrição|
 RF-01| A interface do sistema deve se adaptar aos diferentes dispositivos que possam acessá-lo
 RF-02| O sistema deve garantir a integridade dos dados de todos os usuários
 
-### <a id="regras-negocio"></a> 📑 Regras de Negócio
-
-ID|Descrição|
-:---:|:---|
-RN-01| 
-RN-02| 
 
 ## <a id="visao-aplicacao"></a> 👀 Visão Geral da Aplicação
 ![Diagrama de Caso de Uso](./planejamento/diagrama-caso-uso.png)
@@ -275,9 +269,9 @@ organização assíncrona via Discord.
 | | | | |
 |:---|:---|:---|:---|
 | <img  src="https://avatars.githubusercontent.com/u/86008336?v=4" width=50px/> | <a href="https://github.com/ismaelzaccah">Ismael Zaccah | <img  src="https://avatars.githubusercontent.com/u/42359787?v=4" width=50px/> | <a href="https://github.com/javelfreitas">Javel Freitas |
-| <img  src="https://avatars.githubusercontent.com/u/78852666?v=4" width=50px/> | <a href="https://github.com/Elaine-G-L">Elaine-G-L | <img  src="https://avatars.githubusercontent.com/u/56098754?v=4" width=50px/> | <a href="https://github.com/AglailsonSantiago">Aglailson Santiago |
+| <img  src="https://avatars.githubusercontent.com/u/59093848?v=4" width=50px/> | <a href="https://github.com/wiwiaR">Vitória Ribeiro | <img  src="https://avatars.githubusercontent.com/u/56098754?v=4" width=50px/> | <a href="https://github.com/AglailsonSantiago">Aglailson Santiago |
 | <img  src="https://avatars.githubusercontent.com/u/47800237?v=4" width=50px/> | <a href="https://github.com/andreinamendes">Andreina Mendes | <img  src="https://avatars.githubusercontent.com/u/96750112?v=4" width=50px/> | <a href="https://github.com/lucassimoes2407">Lucas Simoes |
-| <img  src="https://avatars.githubusercontent.com/u/78513841?v=4" width=50px/> | <a href="https://github.com/BrunoSTB">Bruno Braga | <img  src="https://avatars.githubusercontent.com/u/59093848?v=4" width=50px/> | <a href="https://github.com/wiwiaR">Vitória Ribeiro |
+| <img  src="https://avatars.githubusercontent.com/u/78513841?v=4" width=50px/> | <a href="https://github.com/BrunoSTB">Bruno Braga |
 
  **DevHub ©** Atlântico Academy Bootcamp
  </div>
