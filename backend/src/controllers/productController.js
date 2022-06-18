@@ -8,6 +8,7 @@ const getAllProducts = async (req, res, next) => {
         res.status(200).json( product.rows );
     } catch (error) {
         console.error(error.message);
+        res.send(400).json(error.message);
     }
 };
 
@@ -18,12 +19,13 @@ const getProductByProductCode = async (req, res, next) => {
         res.status(200).json( product.rows )
     } catch (error) {
         console.error(error.message);
+        res.send(400).json(error.message);
     }
 };
 
 
 // CREATE
-const postProduto = async (req, res, next) => {
+const postProduct = async (req, res, next) => {
     try {
         if ( req.body.nome == null || req.body.nome.trim() === "" )
             return res.status(400).json( "Nome do produto é inválido!" );
@@ -32,26 +34,36 @@ const postProduto = async (req, res, next) => {
         else if ( req.body.cod_usuario == null || req.body.cod_usuario < 0 )
             return  res.status(400).json( "Usuario inválido!" );
         
-        await productModel.createProduto( req.body );
+        if ( req.files && req.files.length > 0 )
+        {
+            for( let i = 0; i < req.files.length; i++ )
+                req.body.img_produto += req.files[i].filename + ",";
+
+            req.body.img_produto = req.body.img_produto.slice(0, -1);
+        }
+        
+        await productModel.createProduct( req.body );
 
         return res.status(200).send("Produto criado com sucesso!");
     } catch (error) {
-        console.error(error.message);        
+        console.error(error.message);
+        res.send(400).json(error.message);        
     }
 };
 
 
 // UPDATE
-const putProduto = async ( req, res, next ) => {
+const putProduct = async ( req, res, next ) => {
     try {
-        const productExists = await getProductByProductCode(req.params.cod_usuario);
-        if(!productExists) 
-            return res.status(400).send("Produto não existe!");
+        const product = await productModel.getByProductCode(req.body.cod_usuario);
+        if(product.rows.length <= 0) 
+            return res.status(400).json("Produto não existe!");
        
-        await productModel.updateProduto( req.body );
+        await productModel.updateProduct( req.body );
         return res.status(200).send("Produto atualizado com sucesso!");
     } catch (error) {
         console.error(error.message);
+        res.send(400).json(error.message);
     }
 };
 
@@ -59,13 +71,14 @@ const putProduto = async ( req, res, next ) => {
 // DELETE
 const deleteProductByProductCode = async (req, res, next) => {
     try{
-        const productExists = await getProductByProductCode(req.params.cod_usuario);
-        if(!productExists) 
-            return res.status(400).send("Produto não existe!");
+        const product = await productModel.getByProductCode(req.params.productCode);
+        if(product.rows.length >= 0) 
+            return res.status(400).json("Produto não existe!");
             
         await productModel.deleteProductByCodProduct(req.params.productCode);
         res.status(200).json("Produto deletado com sucesso!");
     }catch(error){
+        console.error(error.message);
         res.status(400).json(error.message);
     }
 }
@@ -74,8 +87,8 @@ const deleteProductByProductCode = async (req, res, next) => {
 module.exports = {
     getAllProducts,
     getProductByProductCode,
-    postProduto,
-    putProduto,
+    postProduct,
+    putProduct,
     deleteProductByProductCode
 };
 
