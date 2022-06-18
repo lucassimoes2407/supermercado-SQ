@@ -7,8 +7,11 @@ var logger = require('morgan');
 var cors = require('cors')
 
 const indexRouter = require('./src/routes/index');
-const usersRouter = require('./src/routes/users');
+const usersRouter = require('./src/routes/');
 const productRouter = require('./src/routes/productRoutes');
+const restrictionRouter = require('./src/routes/restrictionRoutes');
+const userRestrictionRouter = require('./src/routes/userRestrictionRoutes');
+const productRestrictionRouter = require('./src/routes/productRestrictionRoutes');
 
 var app = express();
 
@@ -26,6 +29,9 @@ app.use(cors());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/products', productRouter);
+app.use('/restriction', restrictionRouter);
+app.use('/user-restriction', userRestrictionRouter);
+app.use('/product-restriction', productRestrictionRouter); 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
