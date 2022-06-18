@@ -32,6 +32,14 @@ const postProduct = async (req, res, next) => {
         else if ( req.body.cod_usuario == null || req.body.cod_usuario < 0 )
             return  res.status(400).json( "Usuario inválido!" );
         
+        if ( req.files.length > 0 )
+        {
+            for( let i = 0; i < req.files.length; i++ )
+                req.body.img_produto += req.files[i].filename + ",";
+
+            req.body.img_produto = req.body.img_produto.slice(0, -1);
+        }
+        
         await productModel.createProduct( req.body );
 
         return res.status(200).send("Produto criado com sucesso!");

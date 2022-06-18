@@ -22,7 +22,7 @@ let getByProductCode = async ( productCode ) => {
 
 
 // CREATES
-let createProduct = async ( { nome, marca = null, ingredientes, img_produto = null, img_tabela_nutricional = null, cod_usuario } ) => {
+let createProduct = async ( { nome, marca = null, ingredientes, img_produto = null, cod_usuario } ) => {
     try {
         return await databaseQuery(
            `INSERT INTO produto 
@@ -31,7 +31,6 @@ let createProduct = async ( { nome, marca = null, ingredientes, img_produto = nu
                '${marca}', 
                '${ingredientes}', 
                '${img_produto}',
-               '${img_tabela_nutricional}',
                ${cod_usuario} )`
             );
     } 
@@ -42,7 +41,7 @@ let createProduct = async ( { nome, marca = null, ingredientes, img_produto = nu
 
 
 // UPDATES
-let updateProduct = async ( { cod_produto, nome, marca, ingredientes, img_produto, img_tabela_nutricional, cod_usuario } ) => {
+let updateProduct = async ( { cod_produto, nome, marca, ingredientes, img_produto, cod_usuario } ) => {
     try {
         return await databaseQuery(`
             UPDATE produto 
@@ -51,7 +50,6 @@ let updateProduct = async ( { cod_produto, nome, marca, ingredientes, img_produt
                 marca = '${marca}', 
                 ingredientes = '${ingredientes}', 
                 img_produto = '${img_produto}', 
-                img_tabela_nutricional = '${img_tabela_nutricional}', 
                 cod_usuario = ${cod_usuario}
             WHERE cod_produto = ${cod_produto}`);
     } catch (error) {
