@@ -24,6 +24,13 @@ const postRestriction = async (req, res, next) => {
 }
 
 const getAllRestriction = async (req, res, next) => {
+    // #swagger.tags = ['Restrição']
+    /* 
+        #swagger.tags = ['Restrição'] // Define a que grupo de endpoints pertence
+        #swagger.summary = 'Pega lista de restrições' // Resumo da responsabilidade do endpoint
+        #swagger.operationId = 'getAllRestriction' // Identificador único do endpoint
+        #swagger.description = 'Obtem uma lista com as restrições cadastradas' // Descrição do endpoint
+    */
     try{
         const response = await restrictionModel.getAllRestriction();
         const {restrictions, status} = response;
@@ -37,10 +44,23 @@ const getAllRestriction = async (req, res, next) => {
 }
 
 const getRestrictionByCod = async (req, res, next) => {
+    // #swagger.tags = ['Restrição']
+    /* 
+        #swagger.tags = ['Restrição'] // Define a que grupo de endpoints pertence
+        #swagger.summary = 'Pega uma restrição pelo codigo' // Resumo da responsabilidade do endpoint
+        #swagger.operationId = 'getRestrictionByCod' // Identificador único do endpoint
+        #swagger.description = 'Pega uma restrição a partir do codigo' // Descrição do endpoint
+        #swagger.parameters['cod_restricao'] = { // Atributos que o endpoint recebe
+               in: 'params', // local de onde é adquirido, params, query, ou body
+               description: 'Codigo de uma restrição',
+               required: true,
+        }
+    */
     try{
-        const { cod_restricao = null} = req.params;
+        const { cod_restricao } = req.params
         if(isNaN(+cod_restricao)) throw {
-            message: `Código da restrição recebido não é número`
+            message: `Código da restrição recebido não é número`,
+            status: 400
         }
         
         const response = await restrictionModel.getRestrictionByCod(cod_restricao);
@@ -55,6 +75,19 @@ const getRestrictionByCod = async (req, res, next) => {
 }
 
 const getCodRestrictionByName = async (req, res, next) => {
+    // #swagger.tags = ['Restrição']
+    /* 
+        #swagger.tags = ['Restrição'] // Define a que grupo de endpoints pertence
+        #swagger.summary = 'Pega o nome da restrição pelo codigo' // Resumo da responsabilidade do endpoint
+        #swagger.operationId = 'getCodRestrictionByName' // Identificador único do endpoint
+        #swagger.description = 'Consulta o codigo de uma restrição apartir do nome' // Descrição do endpoint
+        #swagger.parameters['nome_restricao'] = { // Atributos que o endpoint recebe
+               in: 'body', // local de onde é adquirido, params, query, ou body
+               description: 'Nome de uma restrição',
+               required: true,
+               schema: { nome_restricao: 'string' },
+        }
+    */
     try{
         const { nome_restricao = null} = req.body;
         if(!nome_restricao) throw {
@@ -74,9 +107,22 @@ const getCodRestrictionByName = async (req, res, next) => {
 }
 
 const deleteRestriction = async (req, res, next) => {
+    // #swagger.tags = ['Restrição']
+    /* 
+        #swagger.tags = ['Restrição'] // Define a que grupo de endpoints pertence
+        #swagger.summary = 'Deleta uma restrição' // Resumo da responsabilidade do endpoint
+        #swagger.operationId = 'deleteRestriction' // Identificador único do endpoint
+        #swagger.description = 'Deleta uma restrição com base no codigo' // Descrição do endpoint
+        #swagger.parameters['cod_restricao'] = { // Atributos que o endpoint recebe
+               in: 'params', // local de onde é adquirido, params, query, ou body
+               description: 'Codigo de uma restrição',
+               required: true,
+        }
+    */
     try{
-        const { cod_restricao = null } = req.params
-        if(isNaN(+cod_restricao)) throw {
+        const { cod_restricao } = req.params
+        
+        if(!cod_restricao) throw {
             message: "Código de restrição inválido",
             status: 400
         }
@@ -88,7 +134,6 @@ const deleteRestriction = async (req, res, next) => {
         }
 
         const response = await restrictionModel.deleteRestriction(cod_restricao);
-    
         res.status(response.status || 200).json(response);
     }catch(e){
         res.status(e.status || 400).json({
@@ -98,11 +143,23 @@ const deleteRestriction = async (req, res, next) => {
 }
 
 const putRestriction = async (req, res, next) => {
+    // #swagger.tags = ['Restrição']
+    /* 
+        #swagger.tags = ['Restrição'] // Define a que grupo de endpoints pertence
+        #swagger.summary = 'Atualiza uma restrição' // Resumo da responsabilidade do endpoint
+        #swagger.operationId = 'putRestriction' // Identificador único do endpoint
+        #swagger.description = 'Atualiza o nome de uma restrição com base no codigo da mesma' // Descrição do endpoint
+        #swagger.parameters['cod_resticao'] = { // Atributos que o endpoint recebe
+               in: 'params', // local de onde é adquirido, params, query, ou body
+               description: 'Código de uma restrição',
+               required: true,
+        }
+    */
     try{
         const { cod_restricao } = req.params;
         const { nome_restricao } = req.body;
 
-        if (isNaN(+cod_restricao)) throw {
+        if (!cod_restricao) throw {
             message: "Código de restrição inválido",
             status: 400
         }

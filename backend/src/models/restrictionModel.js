@@ -32,6 +32,7 @@ let getRestrictionByCod = async (cod_restricao = null) => {
 
 let getCodRestrictionByName = async (nome_restricao = null) => {
     try {
+
         nome_restricao = nome_restricao.toUpperCase();
 
         let codRestrictionByName = await databaseQuery(`SELECT cod_restricao FROM restricao WHERE nome_restricao='${nome_restricao}'`);
