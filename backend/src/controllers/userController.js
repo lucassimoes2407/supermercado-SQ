@@ -7,43 +7,35 @@ const getAllUsers = async (req, res, next) => {
     } catch (error) {
         res.status(400).json(error.message);
     }
-};
+}
 
 const getUserByUserName = async (req, res, next) => {
     try {
-        if(typeof req.params.username == 'string'){
-            let user = await userModel.getUserByUserName(req.params.username);
-        
-            if(user.rows.length == 0){
-                res.status(400).json(`Não existe um usuário com o username ${req.params.username}!!`);
-            }else{
-                res.status(200).json(user.rows);
-            }
+        let user = await userModel.getUserByUserName(req.params.username);
+    
+        if(user.rows.length == 0){
+            res.status(400).json(`Não existe um usuário com o username ${req.params.username}!!`);
         }else{
-            res.status(400).json("Username Inválido!!");
+            res.status(200).json(user.rows);
         }
     } catch (error) {
         res.status(400).json(error.message);
     }
-};
+}
 
 const getUserByUserId = async (req, res, next) => {
     try {
-        if(typeof req.params.id == 'number'){
-            let user = await userModel.getUserByUserId(req.params.id);
-        
-            if(user.rows.length == 0){
-                res.status(400).json(`Não existe um usuário com o username ${req.params.id}!!`);
-            }else{
-                res.status(200).json(user.rows);
-            }
+        let user = await userModel.getUserByUserId(req.params.id);
+    
+        if(user.rows.length == 0){
+            res.status(400).json(`Não existe um usuário com o username ${req.params.id}!!`);
         }else{
-            res.status(400).json(`Id Inválido!!`);
+            res.status(200).json(user.rows);
         }
     } catch (error) {
         res.status(400).json(error.message);
     }
-};
+}
 
 const getUsersActive = async (req, res, next) => {
     try {
@@ -65,22 +57,16 @@ const getUsersInactive = async (req, res, next) => {
 
 const createUser = async (req, res, next) => {
     try{
-        if(typeof req.body.username == 'string' && typeof req.body.email == 'string'){
-            let userUsername = await userModel.getUserByUserName(req.body.username);
-            let userEmail = await userModel.getUserByEmail(req.body.email);
+        let userUsername = await userModel.getUserByUserName(req.body.username);
+        let userEmail = await userModel.getUserByEmail(req.body.email);
 
-            if(userUsername.rows.length > 0){
-                res.status(400).json("Este nome de usuário já está sendo utilizado!!");
-            }else if(userEmail.rows.length > 0){
-                res.status(400).json("Este e-mail já está sendo utilizado!!");
-            }else{
-                await userModel.createUser(req);
-                res.status(200).json("Usuário inserido com sucesso!!");
-            }
-        }else if(typeof req.body.username != 'string'){
-            res.status(200).json("Username inválido!!");
-        }else if(typeof req.body.email != 'string'){
-            res.status(200).json("Email inválido!!");
+        if(userUsername.rows.length > 0){
+            res.status(400).json("Este nome de usuário já está sendo utilizado!!");
+        }else if(userEmail.rows.length > 0){
+            res.status(400).json("Este e-mail já está sendo utilizado!!");
+        }else{
+            await userModel.createUser(req);
+            res.status(200).json("Usuário inserido com sucesso!!");
         }
     }catch(error){
         res.status(400).json(error.message);
@@ -89,20 +75,16 @@ const createUser = async (req, res, next) => {
 
 const setUserActiveAttribute = async (req, res, next) => {
     try{
-        if(typeof req.params.id == 'number'){
-            let user = await userModel.getUserByUserId(req.params.id);
+        let user = await userModel.getUserByUserId(req.params.id);
 
-            if(user.rows.length == 0){
-                res.status(400).json("Usuário não encontrado!!");
-            }else if(user.rows[0].ativo == true){
-                await userModel.setUserInactive(req.params.id);
-                res.status(200).json(`Usuário: ${user.rows[0].username} foi definido como inativo!!`);
-            }else {
-                await userModel.setUserActive(req.params.id);
-                res.status(200).json(`Usuário: ${user.rows[0].username} foi definido como ativo!!`);
-            }
-        }else{
-            res.status(400).json(`Id Inválido!!`);
+        if(user.rows.length == 0){
+            res.status(400).json("Usuário não encontrado!!");
+        }else if(user.rows[0].ativo == true){
+            await userModel.setUserInactive(req.params.id);
+            res.status(200).json(`Usuário: ${user.rows[0].username} foi definido como inativo!!`);
+        }else {
+            await userModel.setUserActive(req.params.id);
+            res.status(200).json(`Usuário: ${user.rows[0].username} foi definido como ativo!!`);
         }
     }catch(error){
         res.status(400).json(error.message);
@@ -111,30 +93,22 @@ const setUserActiveAttribute = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
     try {
-        if(typeof req.body.username == 'string' && typeof req.body.email == 'string' && typeof req.params.id == 'number'){
-            let userById = await userModel.getUserByUserId(req.params.id);
-            let userByUsername = await userModel.getUserByUserName(req.body.username);
-            let userByEmail = await userModel.getUserByEmail(req.body.email);
+        let userById = await userModel.getUserByUserId(req.params.id);
+        let userByUsername = await userModel.getUserByUserName(req.body.username);
+        let userByEmail = await userModel.getUserByEmail(req.body.email);
 
-            let usernameNotUnique = (userByUsername.rows[0].username != userById.rows[0].username);
-            let emailNotUnique = (userByEmail.rows[0].email != userById.rows[0].email);
+        let usernameNotUnique = (userByUsername.rows[0].username != userById.rows[0].username);
+        let emailNotUnique = (userByEmail.rows[0].email != userById.rows[0].email);
 
-            if(userById.rows.length == 0){
-                res.status(400).json("Usuário não encontrado!!");
-            }else if(userByUsername.rows.length > 0 && usernameNotUnique){
-                res.status(400).json("Este nome de usuário já está sendo utilizado!!");
-            }else if(userByEmail.rows.length > 0 && emailNotUnique){
-                res.status(400).json("Este e-mail já está sendo utilizado!!");
-            }else{
-                await userModel.updateUser(req.params.id, req);
-                res.status(200).json("Usuário atualizado com sucesso!");
-            }
-        }else if(typeof req.body.username != 'string'){
-            res.status(200).json("Username inválido!!");
-        }else if(typeof req.body.email != 'string'){
-            res.status(200).json("Email inválido!!");
+        if(userById.rows.length == 0){
+            res.status(400).json("Usuário não encontrado!!");
+        }else if(userByUsername.rows.length > 0 && usernameNotUnique){
+            res.status(400).json("Este nome de usuário já está sendo utilizado!!");
+        }else if(userByEmail.rows.length > 0 && emailNotUnique){
+            res.status(400).json("Este e-mail já está sendo utilizado!!");
         }else{
-            res.status(200).json("Id inválido!!");
+            await userModel.updateUser(req.params.id, req);
+            res.status(200).json("Usuário atualizado com sucesso!");
         }
     } catch (error) {
         res.status(400).json(error.message);
@@ -143,17 +117,13 @@ const updateUser = async (req, res, next) => {
 
 const deleteUserByUserName = async (req, res, next) => {
     try {
-        if(typeof req.params.username == 'string'){
-            let user = await userModel.getUserByUserName(req.params.username);
+        let user = await userModel.getUserByUserName(req.params.username);
 
-            if(user.rows.length == 0){
-                res.status(400).json("Usuário não encontrado!!");
-            }else{
-                await userModel.deleteUserByUserName(req.params.username);
-                res.status(200).json(`Usuário: ${user.rows[0].username}, deletado com sucesso!!`);
-            }
+        if(user.rows.length == 0){
+            res.status(400).json("Usuário não encontrado!!");
         }else{
-            res.status(400).json("Username Inválido!!");
+            await userModel.deleteUserByUserName(req.params.username);
+            res.status(200).json(`Usuário: ${user.rows[0].username}, deletado com sucesso!!`);
         }
     } catch (error) {
         res.status(400).json(error.message);
@@ -162,17 +132,13 @@ const deleteUserByUserName = async (req, res, next) => {
 
 const deleteUserByUserId = async (req, res, next) => {
     try {
-        if(typeof req.params.id == 'number'){
-            let user = await userModel.getUserByUserId(req.params.id);
+        let user = await userModel.getUserByUserId(req.params.id);
 
-            if(user.rows.length == 0){
-                res.status(400).json("Usuário não encontrado!!");
-            }else{
-                await userModel.deleteUserByUserId(req.params.id);
-                res.status(200).json(`Usuário: ${user.rows[0].cod_usuario}, deletado com sucesso!!`);
-            }
+        if(user.rows.length == 0){
+            res.status(400).json("Usuário não encontrado!!");
         }else{
-            res.status(400).json(`Id Inválido!!`);
+            await userModel.deleteUserByUserId(req.params.id);
+            res.status(200).json(`Usuário: ${user.rows[0].cod_usuario}, deletado com sucesso!!`);
         }
     } catch (error) {
         res.status(400).json(error.message);
