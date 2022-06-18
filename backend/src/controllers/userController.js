@@ -14,7 +14,7 @@ const getUserByUserName = async (req, res, next) => {
         let user = await userModel.getUserByUserName(req.params.username);
     
         if(user.rows.length == 0){
-            res.status(400).json(`Não existe um usuário com o id ${req.params.username}!!`);
+            res.status(400).json(`Não existe um usuário com o username ${req.params.username}!!`);
         }else{
             res.status(200).json(user.rows);
         }
