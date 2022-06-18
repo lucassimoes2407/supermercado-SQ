@@ -1,5 +1,17 @@
 const userRestrictionModel = require('../models/userRestrictionModel');
 
+function verifyCodUser(cod_usuario){
+    if(!cod_usuario) throw {
+        message: "cod_usuario não fornecido",
+        status: 400
+    }
+}
+function verifyCodRestriction(cod_restricao){
+    if(!cod_restricao) throw {
+    message: "cod_restricao não fornecido",
+    status: 400
+}}
+
 const getUserRestriction = async (req, res, next)=>{
     // #swagger.tags = ['Restrição']
     /* 
@@ -13,17 +25,19 @@ const getUserRestriction = async (req, res, next)=>{
                required: true,
         }
     */
-       try{
-        const { cod_usuario } = req.params;
+    try{
+    const { cod_usuario } = req.params;
 
-        if(isNaN(+cod_usuario)) throw {
-            message: `Código do usuario recebido não é número`
-        }
+    if(isNaN(+cod_usuario)) throw {
+        message: `Código do usuario recebido não é número`
+    }
+    
+    verifyCodUser(cod_usuario);
 
-        const response = await userRestrictionModel.getUserRestriction(cod_usuario);
-        const { restrictions, status } = response;
+    const response = await userRestrictionModel.getUserRestriction(cod_usuario);
+    const { restrictions, status } = response;
 
-        res.status(status || 200).json(restrictions);
+    res.status(status || 200).json(restrictions);
 
     }catch(e){
         res.status(e.status || 400).json({
@@ -59,6 +73,10 @@ const postUserRestriction = async (req, res, next)=>{
         if(isNaN(+cod_restricao)) throw {
             message: 'Código da restrição recebido não é número'
         }
+
+        verifyCodUser(cod_usuario);
+        verifyCodRestriction(cod_restricao);
+
 
         const response = await userRestrictionModel.postUserRestriction(cod_usuario, cod_restricao);
         const { message, status } = response;
@@ -97,6 +115,9 @@ const deleteUserRestriction = async (req, res, next)=>{
             message: 'Código da restrição recebido não é número'
         }
         
+        verifyCodUser(cod_usuario);
+        verifyCodRestriction(cod_restricao);
+
         const response = await userRestrictionModel.deleteUserRestriction(cod_usuario, cod_restricao);
         const { message, status } = response;
 

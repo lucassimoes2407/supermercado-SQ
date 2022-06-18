@@ -1,5 +1,17 @@
 const productRestrictionModel = require('../models/productRestrictionModel');
 
+function verifyCodProduct(cod_produto){
+    if(!cod_produto) throw {
+        message: "cod_produto não fornecido",
+        status: 400
+    }
+}
+function verifyCodRestriction(cod_restricao){
+    if(!cod_restricao) throw {
+    message: "cod_restricao não fornecido",
+    status: 400
+}}
+
 const getProductRestriction = async (req, res, next)=>{
     // #swagger.tags = ['Restrição']
     /* 
@@ -15,10 +27,12 @@ const getProductRestriction = async (req, res, next)=>{
     */
     try{
         const { cod_produto } = req.params;
-
+    
         if(isNaN(+cod_produto)) throw {
             message: `Código do produto recebido não é número`
         }
+        
+        verifyCodProduct(cod_produto);
 
         const response = await productRestrictionModel.getProductRestriction(cod_produto);
         const { restrictions, status } = response;
@@ -60,6 +74,9 @@ const postProductRestriction = async (req, res, next)=>{
             message: 'Código da restrição recebido não é número'
         }
 
+        verifyCodProduct(cod_produto);
+        verifyCodRestriction(cod_restricao);
+
         const response = await productRestrictionModel.postProductRestriction(cod_produto, cod_restricao);
         const { message, status } = response;
 
@@ -96,6 +113,9 @@ const deleteProductRestriction = async (req, res, next)=>{
         if(isNaN(+cod_restricao)) throw {
             message: 'Código da restrição recebido não é número'
         }
+
+        verifyCodProduct(cod_produto);
+        verifyCodRestriction(cod_restricao);
         
         const response = await productRestrictionModel.deleteProductRestriction(cod_produto, cod_restricao);
         const { message, status } = response;
