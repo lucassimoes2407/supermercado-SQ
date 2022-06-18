@@ -1,7 +1,19 @@
 const userRestrictionModel = require('../models/userRestrictionModel');
 
 const getUserRestriction = async (req, res, next)=>{
-    try{
+    // #swagger.tags = ['Restrição']
+    /* 
+        #swagger.tags = ['Usuario-Restrição'] // Define a que grupo de endpoints pertence
+        #swagger.summary = 'Obtem Restrições de um Usuario' // Resumo da responsabilidade do endpoint
+        #swagger.operationId = 'getUserRestriction' // Identificador único do endpoint
+        #swagger.description = 'Obtem uma lista de restrições alimentares com base no Codigo do Usuario' // Descrição do endpoint
+        #swagger.parameters['cod_usuario'] = { // Atributos que o endpoint recebe
+               in: 'params', // local de onde é adquirido, params, query, ou body
+               description: 'Código de um usuario',
+               required: true,
+        }
+    */
+       try{
         const { cod_usuario } = req.params;
 
         if(isNaN(+cod_usuario)) throw {
@@ -21,6 +33,19 @@ const getUserRestriction = async (req, res, next)=>{
 }
 
 const postUserRestriction = async (req, res, next)=>{
+    // #swagger.tags = ['Restrição']
+    /* 
+        #swagger.tags = ['Usuario-Restrição'] // Define a que grupo de endpoints pertence
+        #swagger.summary = 'Associa uma restrição a um usuario' // Resumo da responsabilidade do endpoint
+        #swagger.operationId = 'postUserRestriction' // Identificador único do endpoint
+        #swagger.description = 'Associa uma restrição alimentar a um usuario recebendo o codigo da restrição e o codigo do usuario' // Descrição do endpoint
+        #swagger.parameters['cod_usuario'] = { // Atributos que o endpoint recebe
+               in: 'params', 'body', // local de onde é adquirido, params, query, ou body
+               description: 'Código de um usuario e codigo de uma restrição',
+               required: true,
+               schema: { cod_restricao: 'integer' },
+        }
+    */
     try{
         const { cod_usuario } = req.params;
         const { cod_restricao } = req.body;
@@ -45,6 +70,19 @@ const postUserRestriction = async (req, res, next)=>{
 }
 
 const deleteUserRestriction = async (req, res, next)=>{
+    // #swagger.tags = ['Restrição']
+    /* 
+        #swagger.tags = ['Usuario-Restrição'] // Define a que grupo de endpoints pertence
+        #swagger.summary = 'Desassocia uma restrição de um usuario' // Resumo da responsabilidade do endpoint
+        #swagger.operationId = 'deleteUserRestriction' // Identificador único do endpoint
+        #swagger.description = 'Desassocia uma restrição alimentar de um usuario recebendo o codigo restrição e o codigo do usuario' // Descrição do endpoint
+        #swagger.parameters['cod_usuario'] = { // Atributos que o endpoint recebe
+               in: 'params', 'body', // local de onde é adquirido, params, query, ou body
+               description: 'Código de um usuario e codigo de uma restrição',
+               required: true,
+               schema: { cod_restricao: 'integer' },
+        }
+    */
     try{
         const { cod_usuario } = req.params;
         const { cod_restricao } = req.body;

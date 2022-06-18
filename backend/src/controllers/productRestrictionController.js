@@ -1,6 +1,18 @@
 const productRestrictionModel = require('../models/productRestrictionModel');
 
 const getProductRestriction = async (req, res, next)=>{
+    // #swagger.tags = ['Restrição']
+    /* 
+        #swagger.tags = ['Produto-Restrição'] // Define a que grupo de endpoints pertence
+        #swagger.summary = 'Obtem Restrições de um Produto' // Resumo da responsabilidade do endpoint
+        #swagger.operationId = 'getProductRestriction' // Identificador único do endpoint
+        #swagger.description = 'Obtem uma lista de restrições alimentares com base no Codigo do Produto' // Descrição do endpoint
+        #swagger.parameters['cod_produto'] = { // Atributos que o endpoint recebe
+               in: 'params', // local de onde é adquirido, params, query, ou body
+               description: 'Código de um produto',
+               required: true,
+        }
+    */
     try{
         const { cod_produto } = req.params;
 
@@ -21,6 +33,19 @@ const getProductRestriction = async (req, res, next)=>{
 }
 
 const postProductRestriction = async (req, res, next)=>{
+    // #swagger.tags = ['Restrição']
+    /* 
+        #swagger.tags = ['Produto-Restrição'] // Define a que grupo de endpoints pertence
+        #swagger.summary = 'Associa uma restrição a um produto' // Resumo da responsabilidade do endpoint
+        #swagger.operationId = 'postProductRestriction' // Identificador único do endpoint
+        #swagger.description = 'Associa uma restrição alimentar a um produto recebendo o codigo da restrição e o codigo do produto' // Descrição do endpoint
+        #swagger.parameters['cod_produto'] = { // Atributos que o endpoint recebe
+               in: 'params', 'body', // local de onde é adquirido, params, query, ou body
+               description: 'Código de um produto e codigo de uma restrição',
+               required: true,
+               schema: { cod_restricao: 'integer' },
+        }
+    */
     try{
         const { cod_produto } = req.params;
         const { cod_restricao } = req.body;
@@ -45,6 +70,19 @@ const postProductRestriction = async (req, res, next)=>{
 }
 
 const deleteProductRestriction = async (req, res, next)=>{
+    // #swagger.tags = ['Restrição']
+    /* 
+        #swagger.tags = ['Produto-Restrição'] // Define a que grupo de endpoints pertence
+        #swagger.summary = 'Desassocia uma restrição de um produto' // Resumo da responsabilidade do endpoint
+        #swagger.operationId = 'deleteProductRestriction' // Identificador único do endpoint
+        #swagger.description = 'Desassocia uma restrição alimentar de um produto recebendo o codigo da restrição e o codigo do produto' // Descrição do endpoint
+        #swagger.parameters['cod_produto'] = { // Atributos que o endpoint recebe
+               in: 'params', 'body', // local de onde é adquirido, params, query, ou body
+               description: 'Código de um produto e codigo de uma restrição',
+               required: true,
+               schema: { cod_restricao: 'integer' },
+        }
+    */
     try{
         const { cod_produto } = req.params;
         const { cod_restricao } = req.body;
