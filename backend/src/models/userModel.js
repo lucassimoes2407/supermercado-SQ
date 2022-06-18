@@ -12,7 +12,6 @@ const getUserByUserId = async (userId) => {
     try {
         return await databaseQuery(`SELECT * FROM usuario WHERE cod_usuario = ${userId}`);
     } catch (error) {
-        console.log("hello");
         throw error;
     }
 };
