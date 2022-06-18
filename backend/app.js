@@ -8,6 +8,7 @@ var logger = require('morgan');
 var cors = require('cors');
 
 const indexRouter = require('./src/routes/index');
+const restrictionRouter = require('./src/routes/restrictionRoutes');
 const userRouter = require('./src/routes/userRoutes');
 const productRouter = require('./src/routes/productRoutes');
 
@@ -25,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 app.use('/', indexRouter);
+app.use('/restriction', restrictionRouter);
 app.use('/users', userRouter)
 app.use('/products', productRouter);
 
@@ -43,11 +45,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-async function logPromisse(promise){
-  Promise.resolve(promise).then((result) => {
-    console.log(result.rows);
-  })
-}
 
 module.exports = app;
