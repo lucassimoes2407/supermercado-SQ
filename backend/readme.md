@@ -62,12 +62,14 @@ RNeg-03| O sistema deve garantir que ao atualziar os dados de um usuário as reg
 ***
 
 ## Produtos
+
 #### Regras de negócio
 | Id      | Descrição                                                                  |
 |---------|----------------------------------------------------------------------------|
 | RNeg-01 | Deve ser registrado quem criou qual produto.                               |
 | RNeg-02 | Os campos 'Nome' e 'Ingredientes' devem, obrigatoriamente, conter valores. |
 | RNeg-03 | Um usuário pode cadastrar até 06 imagens por produto.                      |
+
 
 #### EndPoints
 | Rota                              | Método | Função                                                       |
@@ -81,6 +83,7 @@ RNeg-03| O sistema deve garantir que ao atualziar os dados de um usuário as reg
 ***
 
 ## Restrições
+
 #### Regras de negócio
 ID|Descrição|
 :---:|:---|
@@ -88,6 +91,7 @@ RNeg-01| O sistema deve permitir o cadastro de dados pelos usuários
 RNeg-02| O sistema deve permitir a visualização dos dados cadastrados
 RNeg-03| O sistema deve permitir a remoção dos dados cadastrados
 RNeg-04| O sistema deve permitir a edição dos dados cadastrados
+
 #### EndPoints
 | Rota                              | Método | Função                                                       |
 |-----------------------------------|--------|--------------------------------------------------------------|
@@ -101,12 +105,14 @@ RNeg-04| O sistema deve permitir a edição dos dados cadastrados
 ***
 
 ## Usuários X Restrições
+
 #### Regras de negócio
 | Id      | Descrição                                                                    |
 |---------|------------------------------------------------------------------------------|
 | RNeg-01 | Cada entrada na tabela deve conter apenas um cod_usuario e um cod_restricao. |
 | RNeg-02 | Podem haver diversas entradas para o mesmo usuário, variando as restrições.  |
 | RNeg-03 | Podem haver diversas entradas para uma mesma restrição, variando os usuários.  |
+
 #### EndPoints
 | Rota                              | Método | Função                                                       |
 |-----------------------------------|--------|--------------------------------------------------------------|
@@ -119,12 +125,14 @@ RNeg-04| O sistema deve permitir a edição dos dados cadastrados
 ***
 
 ## Produtos X Restrições
+
 #### Regras de negócio
 | Id      | Descrição                                                                    |
 |---------|------------------------------------------------------------------------------|
 | RNeg-01 | Cada entrada na tabela deve conter apenas um cod_produto e um cod_restricao. |
 | RNeg-02 | Podem haver diversas entradas para o mesmo produto, variando as restrições.  |
 | RNeg-03 | Pordem haver diversas entradas para a mesma restrição, variando os produtos. |
+
 #### EndPoints
 | Rota                              | Método | Função                                                       |
 |-----------------------------------|--------|--------------------------------------------------------------|
