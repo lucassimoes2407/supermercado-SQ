@@ -12,10 +12,10 @@ const getAllUsers = async (req, res, next) => {
 const getUserByUserName = async (req, res, next) => {
     try {
         let user = await userModel.getUserByUserName(req.params.username);
-    
-        if(user.rows.length == 0){
+
+        if (user.rows.length == 0) {
             res.status(400).json(`Não existe um usuário com o username ${req.params.username}!!`);
-        }else{
+        } else {
             res.status(200).json(user.rows);
         }
     } catch (error) {
@@ -26,9 +26,9 @@ const getUserByUserName = async (req, res, next) => {
 const getUserByUserId = async (req, res, next) => {
     try {
         let user = await userModel.getUserByUserId(req.params.id);
-        if(user.rows.length == 0){
+        if (user.rows.length == 0) {
             res.status(400).json(`Não existe um usuário com o id ${req.params.id}!!`);
-        }else{
+        } else {
             res.status(200).json(user.rows);
         }
     } catch (error) {
@@ -55,37 +55,37 @@ const getUsersInactive = async (req, res, next) => {
 }
 
 const createUser = async (req, res, next) => {
-    try{
+    try {
         let userUsername = await userModel.getUserByUserName(req.body.username);
         let userEmail = await userModel.getUserByEmail(req.body.email);
 
-        if(userUsername.rows.length > 0){
+        if (userUsername.rows.length > 0) {
             res.status(400).json("Este nome de usuário já está sendo utilizado!!");
-        }else if(userEmail.rows.length > 0){
+        } else if (userEmail.rows.length > 0) {
             res.status(400).json("Este e-mail já está sendo utilizado!!");
-        }else{
+        } else {
             await userModel.createUser(req);
             res.status(200).json("Usuário inserido com sucesso!!");
         }
-    }catch(error){
+    } catch (error) {
         res.status(400).json(error.message);
     }
 }
 
 const setUserActiveAttribute = async (req, res, next) => {
-    try{
+    try {
         let user = await userModel.getUserByUserId(req.params.id);
 
-        if(user.rows.length == 0){
+        if (user.rows.length == 0) {
             res.status(400).json("Usuário não encontrado!!");
-        }else if(user.rows[0].ativo == true){
+        } else if (user.rows[0].ativo == true) {
             await userModel.setUserInactive(req.params.id);
             res.status(200).json(`Usuário: ${user.rows[0].username} foi definido como inativo!!`);
-        }else {
+        } else {
             await userModel.setUserActive(req.params.id);
             res.status(200).json(`Usuário: ${user.rows[0].username} foi definido como ativo!!`);
         }
-    }catch(error){
+    } catch (error) {
         res.status(400).json(error.message);
     }
 }
@@ -96,16 +96,13 @@ const updateUser = async (req, res, next) => {
         let userByUsername = await userModel.getUserByUserName(req.body.username);
         let userByEmail = await userModel.getUserByEmail(req.body.email);
 
-        let usernameNotUnique = (userByUsername.rows[0].username != userById.rows[0].username);
-        let emailNotUnique = (userByEmail.rows[0].email != userById.rows[0].email);
-
-        if(userById.rows.length == 0){
+        if (userById.rows.length == 0) {
             res.status(400).json("Usuário não encontrado!!");
-        }else if(userByUsername.rows.length > 0 && usernameNotUnique){
+        } else if (userByUsername.rows.length > 0 && (userByUsername.rows[0].username != userById.rows[0].username)) {
             res.status(400).json("Este nome de usuário já está sendo utilizado!!");
-        }else if(userByEmail.rows.length > 0 && emailNotUnique){
+        } else if (userByEmail.rows.length > 0 && (userByEmail.rows[0].email != userById.rows[0].email)) {
             res.status(400).json("Este e-mail já está sendo utilizado!!");
-        }else{
+        } else {
             await userModel.updateUser(req.params.id, req);
             res.status(200).json("Usuário atualizado com sucesso!");
         }
@@ -118,9 +115,9 @@ const deleteUserByUserName = async (req, res, next) => {
     try {
         let user = await userModel.getUserByUserName(req.params.username);
 
-        if(user.rows.length == 0){
+        if (user.rows.length == 0) {
             res.status(400).json("Usuário não encontrado!!");
-        }else{
+        } else {
             await userModel.deleteUserByUserName(req.params.username);
             res.status(200).json(`Usuário: ${user.rows[0].username}, deletado com sucesso!!`);
         }
@@ -133,9 +130,9 @@ const deleteUserByUserId = async (req, res, next) => {
     try {
         let user = await userModel.getUserByUserId(req.params.id);
 
-        if(user.rows.length == 0){
+        if (user.rows.length == 0) {
             res.status(400).json("Usuário não encontrado!!");
-        }else{
+        } else {
             await userModel.deleteUserByUserId(req.params.id);
             res.status(200).json(`Usuário: ${user.rows[0].cod_usuario}, deletado com sucesso!!`);
         }
