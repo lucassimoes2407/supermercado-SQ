@@ -24,14 +24,6 @@ const getUserByUserName = async (userName) => {
     }
 };
 
-const getUserByEmail = async (email) => {
-    try {
-        return await databaseQuery(`SELECT username, email, ativo, acesso, cod_usuario FROM usuario WHERE email = '${email}'`);
-    } catch (error) {
-        throw error;
-    }
-};
-
 const getUsersActive = async () => {
     try {
         return await databaseQuery('SELECT username, email, ativo, acesso, cod_usuario FROM usuario WHERE ativo = true ORDER BY cod_usuario');
@@ -84,14 +76,6 @@ const updateUser = async (userId, req) => {
     }
 };
 
-const deleteUserByUserName = async (username) => {
-    try {
-        return await databaseQuery(`DELETE FROM usuario WHERE username = '${username}'`);
-    } catch (error) {
-        throw error;
-    }
-};
-
 const deleteUserByUserId = async (userId) => {
     try {
         return await databaseQuery(`DELETE FROM usuario WHERE cod_usuario = ${userId}`);
@@ -104,13 +88,11 @@ module.exports = {
     getAllUsers,
     getUserByUserName,
     getUserByUserId,
-    getUserByEmail,
     getUsersActive,
     getUsersInactive,
     createUser,
     setUserActive,
     setUserInactive,
     updateUser,
-    deleteUserByUserName,
     deleteUserByUserId
 };
