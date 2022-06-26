@@ -1,4 +1,4 @@
-const productModel = require('../models/ProductModel');
+const productModel = require('../repository/ProductModel');
 
 
 // GETS
