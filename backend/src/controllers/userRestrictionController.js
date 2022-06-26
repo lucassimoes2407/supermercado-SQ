@@ -1,4 +1,4 @@
-const userRestrictionModel = require('../repository/userRestrictionModel');
+const userRestrictionModel = require('../repository/userRestrictionRepository');
 
 function verifyCodUser(cod_usuario){
     if(!cod_usuario) throw {
