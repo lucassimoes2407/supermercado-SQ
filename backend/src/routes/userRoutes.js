@@ -11,6 +11,8 @@ router.get('/findUsersInactive', userController.getUsersInactive);
 
 //userPost
 router.post('/', userController.createUser);
+router.post('/login', userController.login);
+router.post('/logout', userController.logout);
 
 //userUpdates
 router.put('/setUserActiveAttribute/:id', userController.setUserActiveAttribute);

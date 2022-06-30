@@ -1,4 +1,5 @@
 const userModel = require('../models/userModel');
+const jwt = require('jsonwebtoken');
 
 const getAllUsers = async (req, res, next) => {
     try {
@@ -144,6 +145,33 @@ const deleteUserByUserId = async (req, res, next) => {
     }
 }
 
+const login = async ( req, res, next ) => {
+    try {
+        let user = await userModel.getUserByUserName(req.body.username);
+
+        if ( user.rows.length <= 0 )
+            return res.status(500).json({message: 'Usuário não encontrado.'});
+
+        if (req.body.senha == user.rows[0].senha) {
+            let id = user.rows[0].cod_usuario;
+
+            const token = jwt.sign({ id }, process.env.SECRET, {
+                expiresIn: 3600 // expires in 1h
+            });
+
+            return res.status(200).json({ auth: true, token: token });
+        }
+        
+        res.status(500).json({message: 'Login inválido!'});
+    } catch (error) {
+        res.status(400).json(error.message);
+    }
+}
+
+const logout = async ( req, res, next ) => {
+    res.status(200).json({ auth: false, token: null });
+}
+
 module.exports = {
     getAllUsers,
     getUserByUserName,
@@ -154,5 +182,7 @@ module.exports = {
     setUserActiveAttribute,
     updateUser,
     deleteUserByUserName,
-    deleteUserByUserId
+    deleteUserByUserId,
+    login,
+    logout
 };
