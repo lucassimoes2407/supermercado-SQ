@@ -8,7 +8,7 @@ const getAllProducts = async (req, res, next) => {
         res.status(200).json( product.rows );
     } catch (error) {
         console.error(error.message);
-        res.send(400).json(error.message);
+        res.status(400).json(error.message);
     }
 };
 
@@ -19,7 +19,7 @@ const getProductByProductCode = async (req, res, next) => {
         res.status(200).json( product.rows )
     } catch (error) {
         console.error(error.message);
-        res.send(400).json(error.message);
+        res.status(400).json(error.message);
     }
 };
 
@@ -47,7 +47,7 @@ const postProduct = async (req, res, next) => {
         return res.status(200).send("Produto criado com sucesso!");
     } catch (error) {
         console.error(error.message);
-        res.send(400).json(error.message);        
+        res.status(400).json(error.message);        
     }
 };
 
@@ -63,7 +63,7 @@ const putProduct = async ( req, res, next ) => {
         return res.status(200).send("Produto atualizado com sucesso!");
     } catch (error) {
         console.error(error.message);
-        res.send(400).json(error.message);
+        res.status(400).json(error.message);
     }
 };
 

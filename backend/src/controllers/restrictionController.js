@@ -9,7 +9,7 @@ const postRestriction = async (req, res, next) => {
         }
 
         const restrictionExists = await restrictionModel.getCodRestrictionByName(nome_restricao);
-        if(restrictionExists.restrictions.length < 1) throw {
+        if(restrictionExists.restrictions.length > 0) throw {
             message: "Restrição já existe"
         }
         

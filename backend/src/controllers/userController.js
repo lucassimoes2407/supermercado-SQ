@@ -97,14 +97,11 @@ const updateUser = async (req, res, next) => {
         let userByUsername = await userModel.getUserByUserName(req.body.username);
         let userByEmail = await userModel.getUserByEmail(req.body.email);
 
-        let usernameNotUnique = (userByUsername.rows[0].username != userById.rows[0].username);
-        let emailNotUnique = (userByEmail.rows[0].email != userById.rows[0].email);
-
         if(userById.rows.length == 0){
             res.status(400).json("Usuário não encontrado!!");
-        }else if(userByUsername.rows.length > 0 && usernameNotUnique){
+        }else if(userByUsername.rows.length > 0 && (userByUsername.rows[0].username != userById.rows[0].username)){
             res.status(400).json("Este nome de usuário já está sendo utilizado!!");
-        }else if(userByEmail.rows.length > 0 && emailNotUnique){
+        }else if(userByEmail.rows.length > 0 && (userByEmail.rows[0].email != userById.rows[0].email)){
             res.status(400).json("Este e-mail já está sendo utilizado!!");
         }else{
             await userModel.updateUser(req.params.id, req);
