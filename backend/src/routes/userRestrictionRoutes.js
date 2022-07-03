@@ -1,10 +1,15 @@
 const express = require('express');
 const userRestrictionController = require('../controllers/userRestrictionController');
-
+const authMiddlewares = require('../middlewares/authorization');
 const userRestrictionRouter = express.Router();
 
-userRestrictionRouter.get('/:cod_usuario', userRestrictionController.getUserRestriction);
-userRestrictionRouter.post('/:cod_usuario', userRestrictionController.postUserRestriction);
-userRestrictionRouter.delete('/:cod_usuario', userRestrictionController.deleteUserRestriction);
+// GETs
+userRestrictionRouter.get('/:cod_usuario', authMiddlewares.verifyJWT, userRestrictionController.getUserRestriction);
+
+// POSTs
+userRestrictionRouter.post('/:cod_usuario', authMiddlewares.verifyJWT, userRestrictionController.postUserRestriction);
+
+// DELETEs
+userRestrictionRouter.delete('/:cod_usuario', authMiddlewares.verifyJWT, userRestrictionController.deleteUserRestriction);
 
 module.exports = userRestrictionRouter;
