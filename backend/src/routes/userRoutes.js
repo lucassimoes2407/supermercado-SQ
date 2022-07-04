@@ -11,9 +11,9 @@ router.get('/findUsersActive', authMiddlewares.verifyJWT, userController.getUser
 router.get('/findUsersInactive', authMiddlewares.verifyJWT, userController.getUsersInactive);
 
 //userPost
-router.post('/', authMiddlewares.verifyJWT, userController.createUser);
+router.post('/', userController.createUser);
 router.post('/login', userController.login);
-router.post('/logout', userController.logout);
+router.post('/logout', authMiddlewares.verifyJWT, userController.logout);
 
 //userUpdates
 router.put('/setUserActiveAttribute/:id', authMiddlewares.verifyJWT, userController.setUserActiveAttribute);
