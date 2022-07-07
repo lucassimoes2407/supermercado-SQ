@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const userModel = require('../repository/userRepository');
 
 const getAllUsers = async (req, res, next) => {
@@ -96,6 +97,7 @@ const updateUser = async (req, res, next) => {
         let userByUsername = await userModel.getUserByUserName(req.body.username);
         let userByEmail = await userModel.getUserByEmail(req.body.email);
 
+
         if (userById.rows.length == 0) {
             res.status(400).json("Usuário não encontrado!!");
         } else if (userByUsername.rows.length > 0 && (userByUsername.rows[0].username != userById.rows[0].username)) {
@@ -141,6 +143,33 @@ const deleteUserByUserId = async (req, res, next) => {
     }
 }
 
+const login = async ( req, res, next ) => {
+    try {
+        var user = await userModel.getUserByUserName(req.body.username);
+
+        if ( user.rows.length <= 0 )
+            return res.status(500).json({message: 'Usuário não encontrado.'});
+
+        if (req.body.senha == user.rows[0].senha) {
+            let id = user.rows[0].cod_usuario;
+
+            const token = jwt.sign({ id }, process.env.SECRET, {
+                expiresIn: 3600 // expires in 1h
+            });
+
+            return res.status(200).json({ auth: true, token: token });
+        }
+        
+        res.status(500).json({message: 'Login inválido!'});
+    } catch (error) {
+        res.status(400).json(error.message);
+    }
+}
+
+const logout = async ( req, res, next ) => {
+    res.status(200).json({ auth: false, token: null });
+}
+
 module.exports = {
     getAllUsers,
     getUserByUserName,
@@ -151,5 +180,7 @@ module.exports = {
     setUserActiveAttribute,
     updateUser,
     deleteUserByUserName,
-    deleteUserByUserId
+    deleteUserByUserId,
+    login,
+    logout
 };

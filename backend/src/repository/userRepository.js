@@ -18,7 +18,7 @@ const getUserByUserId = async (userId) => {
 
 const getUserByUserName = async (userName) => {
     try {
-        return await databaseQuery(`SELECT username, email, ativo, acesso, cod_usuario FROM usuario WHERE username = '${userName}'`);
+        return await databaseQuery(`SELECT username, senha, email, ativo, acesso, cod_usuario FROM usuario WHERE username = '${userName}'`);
     } catch (error) {
         throw error;
     }
