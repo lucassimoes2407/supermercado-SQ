@@ -1,4 +1,4 @@
-const productRestrictionModel = require('../models/productRestrictionModel');
+const productRestrictionModel = require('../repository/productRestrictionRepository');
 
 function verifyCodProduct(cod_produto){
     if(!cod_produto) throw {
