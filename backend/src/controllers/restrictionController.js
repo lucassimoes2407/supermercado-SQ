@@ -1,4 +1,4 @@
-const restrictionModel = require("../models/restrictionModel");
+const restrictionModel = require("../repository/restrictionRepository");
 
 const postRestriction = async (req, res, next) => {
     try{

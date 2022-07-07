@@ -1,5 +1,5 @@
 const { databaseQuery } = require('../config/db');
-const { getRestrictionByCod } = require('./restrictionModel')
+const { getRestrictionByCod } = require('./restrictionRepository')
 
 const getProductRestriction = async (cod_produto = null)=>{
     try{ 

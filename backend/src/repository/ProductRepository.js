@@ -10,7 +10,7 @@ let getAllProducts = async () => {
     }
 };
 
-let getByProductCode = async ( productCode ) => {
+let getByProductCode = async (productCode) => {
     try {
         return await databaseQuery(`
             SELECT * FROM produto 
@@ -20,20 +20,60 @@ let getByProductCode = async ( productCode ) => {
     }
 };
 
+let getByProductName = async (productName) => {
+    try {
+        return await databaseQuery(`
+            SELECT * FROM produto
+            WHERE nome LIKE '%${productName}%'`);
+    } catch (error) {
+        throw error;
+    }
+}
+
+let getByIngredient = async (productIngredient) => {
+    try {
+        return await databaseQuery(`
+            SELECT * FROM produto
+            WHERE ingredientes LIKE '%${productIngredient}%'`);
+    } catch (error) {
+        throw error;
+    }
+};
+
+let getByBrand = async (productBrand) => {
+    try {
+        return await databaseQuery(`
+            SELECT * FROM produto
+            WHERE marca LIKE '%${productBrand}%'`);
+    } catch (error) {
+        throw error;
+    }
+};
+
+let getByUser = async (productUser) => {
+    try {
+        return await databaseQuery(`
+            SELECT * FROM produto
+            WHERE cod_usuario = ${productUser}`);
+    } catch (error) {
+        throw error;
+    }
+};
+
 
 // CREATES
-let createProduct = async ( { nome, marca = null, ingredientes, img_produto = null, cod_usuario } ) => {
+let createProduct = async ({ nome, marca = null, ingredientes, img_produto = null, cod_usuario }) => {
     try {
         return await databaseQuery(
-           `INSERT INTO produto 
+            `INSERT INTO produto 
             VALUES(
                '${nome}', 
                '${marca}', 
                '${ingredientes}', 
                '${img_produto}',
                ${cod_usuario} )`
-            );
-    } 
+        );
+    }
     catch (error) {
         throw error;
     }
@@ -41,7 +81,7 @@ let createProduct = async ( { nome, marca = null, ingredientes, img_produto = nu
 
 
 // UPDATES
-let updateProduct = async ( { cod_produto, nome, marca, ingredientes, img_produto, cod_usuario } ) => {
+let updateProduct = async ({ cod_produto, nome, marca, ingredientes, img_produto, cod_usuario }) => {
     try {
         return await databaseQuery(`
             UPDATE produto 
@@ -60,11 +100,11 @@ let updateProduct = async ( { cod_produto, nome, marca, ingredientes, img_produt
 
 // DELETES
 const deleteProductByCodProduct = async (codProduct) => {
-    try{
+    try {
         return await databaseQuery(`
             DELETE FROM produto 
             WHERE cod_produto = '${codProduct}'`);
-    }catch(error){
+    } catch (error) {
         throw error;
     }
 }
@@ -74,6 +114,10 @@ const deleteProductByCodProduct = async (codProduct) => {
 module.exports = {
     getAllProducts,
     getByProductCode,
+    getByProductName,
+    getByIngredient,
+    getByBrand,
+    getByUser,
     createProduct,
     updateProduct,
     deleteProductByCodProduct

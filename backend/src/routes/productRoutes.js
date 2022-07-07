@@ -7,7 +7,11 @@ const authMiddlewares = require('../middlewares/authorization');
 
 // Gets
 router.get('/', productController.getAllProducts);
-router.get('/:productCode',productController.getProductByProductCode);
+router.get('/:productCode', productController.getProductByProductCode);
+router.get('/name/:productName', productController.getProductByProductName);
+router.get('/ingredient/:productIngredient', productController.getProductByIngredient);
+router.get('/brand/:productBrand', productController.getProductByBrand);
+router.get('/user/:productUser', productController.getProductByUser);
 
 // Posts
 router.post('/', upload.array('product-images', 6), authMiddlewares.verifyJWT, productController.postProduct);

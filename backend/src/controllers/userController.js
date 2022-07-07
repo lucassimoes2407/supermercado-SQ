@@ -1,5 +1,5 @@
-const userModel = require('../models/userModel');
 const jwt = require('jsonwebtoken');
+const userModel = require('../repository/userRepository');
 
 const getAllUsers = async (req, res, next) => {
     try {
@@ -145,7 +145,7 @@ const deleteUserByUserId = async (req, res, next) => {
 
 const login = async ( req, res, next ) => {
     try {
-        let user = await userModel.getUserByUserName(req.body.username);
+        var user = await userModel.getUserByUserName(req.body.username);
 
         if ( user.rows.length <= 0 )
             return res.status(500).json({message: 'Usuário não encontrado.'});
