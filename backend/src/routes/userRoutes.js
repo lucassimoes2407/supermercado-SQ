@@ -20,7 +20,6 @@ router.put('/setUserActiveAttribute/:id', authMiddlewares.verifyJWT, userControl
 router.put('/:id', authMiddlewares.verifyJWT, userController.updateUser);
 
 //userDeletes
-router.delete('/:username', authMiddlewares.verifyJWT, userController.deleteUserByUserName);
 router.delete('/id/:id', authMiddlewares.verifyJWT, userController.deleteUserByUserId);
 
 module.exports = router;

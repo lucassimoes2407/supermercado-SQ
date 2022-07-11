@@ -24,6 +24,14 @@ const getUserByUserName = async (userName) => {
     }
 };
 
+const getUserByEmail = async (email) => {
+    try {
+        return await databaseQuery(`SELECT username, senha, email, ativo, acesso, cod_usuario FROM usuario WHERE email = '${email}'`);
+    } catch (error) {
+      throw error;  
+    }
+}
+
 const getUsersActive = async () => {
     try {
         return await databaseQuery('SELECT username, email, ativo, acesso, cod_usuario FROM usuario WHERE ativo = true ORDER BY cod_usuario');
@@ -40,11 +48,10 @@ const getUsersInactive = async () => {
     }
 }
 
-const createUser = async (req) => {
-    const {username, email, pass, typeUser} = req.body;
-
+const createUser = async (username, email, password, typeUser) => {
+    
     try{
-        return await databaseQuery(`INSERT INTO usuario (username, email, senha, ativo, acesso) VALUES ('${username}', '${email}', '${pass}', true, '${typeUser}')`);
+        return await databaseQuery(`INSERT INTO usuario (username, email, senha, ativo, acesso) VALUES ('${username}', '${email}', '${password}', true, '${typeUser}')`);
     }catch(error){
         throw error;
     }
@@ -88,6 +95,7 @@ module.exports = {
     getAllUsers,
     getUserByUserName,
     getUserByUserId,
+    getUserByEmail,
     getUsersActive,
     getUsersInactive,
     createUser,
