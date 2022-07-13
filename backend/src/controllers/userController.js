@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const userModel = require('../repository/userRepository');
+const bcrypt = require('bcrypt');
 
 const getAllUsers = async (req, res, next) => {
     try {
@@ -65,7 +66,10 @@ const createUser = async (req, res, next) => {
         } else if (userEmail.rows.length > 0) {
             res.status(400).json("Este e-mail já está sendo utilizado!!");
         } else {
-            await userModel.createUser(req);
+            var salt = await bcrypt.genSalt(10);
+            var password = await bcrypt.hash(req.body.pass, salt);
+            await userModel.createUser(req.body.username, req.body.email, password, req.body.typeUser);
+            
             res.status(200).json("Usuário inserido com sucesso!!");
         }
     } catch (error) {
@@ -113,20 +117,6 @@ const updateUser = async (req, res, next) => {
     }
 }
 
-const deleteUserByUserName = async (req, res, next) => {
-    try {
-        let user = await userModel.getUserByUserName(req.params.username);
-
-        if (user.rows.length == 0) {
-            res.status(400).json("Usuário não encontrado!!");
-        } else {
-            await userModel.deleteUserByUserName(req.params.username);
-            res.status(200).json(`Usuário: ${user.rows[0].username}, deletado com sucesso!!`);
-        }
-    } catch (error) {
-        res.status(400).json(error.message);
-    }
-}
 
 const deleteUserByUserId = async (req, res, next) => {
     try {
@@ -150,7 +140,7 @@ const login = async ( req, res, next ) => {
         if ( user.rows.length <= 0 )
             return res.status(500).json({message: 'Usuário não encontrado.'});
 
-        if (req.body.senha == user.rows[0].senha) {
+        if ( await bcrypt.compare(req.body.pass, user.rows[0].senha) ) {
             let id = user.rows[0].cod_usuario;
 
             const token = jwt.sign({ id }, process.env.SECRET, {
@@ -179,7 +169,6 @@ module.exports = {
     createUser,
     setUserActiveAttribute,
     updateUser,
-    deleteUserByUserName,
     deleteUserByUserId,
     login,
     logout

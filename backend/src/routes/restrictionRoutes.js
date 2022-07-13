@@ -9,12 +9,12 @@ restrictionRouter.get('/cod/:cod_restricao', restrictionController.getRestrictio
 restrictionRouter.get('/name/', restrictionController.getCodRestrictionByName);
 
 // POSTs
-restrictionRouter.post('/', authMiddlewares.verifyJWT, restrictionController.postRestriction);
+restrictionRouter.post('/', restrictionController.postRestriction);
 
 // PUTs
-restrictionRouter.put('/:cod_restricao', authMiddlewares.verifyJWT, restrictionController.putRestriction);
+restrictionRouter.put('/:cod_restricao', restrictionController.putRestriction);
 
 // DELETEs
-restrictionRouter.delete('/:cod_restricao', authMiddlewares.verifyJWT, restrictionController.deleteRestriction);
+restrictionRouter.delete('/:cod_restricao', restrictionController.deleteRestriction);
 
 module.exports = restrictionRouter;

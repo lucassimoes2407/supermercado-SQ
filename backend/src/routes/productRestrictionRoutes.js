@@ -7,9 +7,9 @@ const productRestrictionRouter = express.Router();
 productRestrictionRouter.get('/:cod_produto', productRestrictionController.getProductRestriction);
 
 // POSTs
-productRestrictionRouter.post('/:cod_produto', authMiddlewares.verifyJWT, productRestrictionController.postProductRestriction);
+productRestrictionRouter.post('/:cod_produto', productRestrictionController.postProductRestriction);
 
 // DELETEs
-productRestrictionRouter.delete('/:cod_produto', authMiddlewares.verifyJWT, productRestrictionController.deleteProductRestriction);
+productRestrictionRouter.delete('/:cod_produto', productRestrictionController.deleteProductRestriction);
 
 module.exports = productRestrictionRouter;

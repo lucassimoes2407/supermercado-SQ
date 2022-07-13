@@ -14,12 +14,12 @@ router.get('/brand/:productBrand', productController.getProductByBrand);
 router.get('/user/:productUser', productController.getProductByUser);
 
 // Posts
-router.post('/', upload.array('product-images', 6), authMiddlewares.verifyJWT, productController.postProduct);
+router.post('/', upload.array('product-images', 6), productController.postProduct);
 
 // Puts
-router.put('/', authMiddlewares.verifyJWT, productController.putProduct);
+router.put('/', productController.putProduct);
 
 // Deletes
-router.delete('/:productCode', authMiddlewares.verifyJWT, productController.deleteProductByProductCode);
+router.delete('/:productCode', productController.deleteProductByProductCode);
 
 module.exports = router;
