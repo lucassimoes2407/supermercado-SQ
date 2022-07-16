@@ -7,7 +7,7 @@ const authMiddlewares = require('../middlewares/authorization');
 
 // Gets
 router.get('/', productController.getAllProducts);
-router.get('/filtered/', productController.getFilteredProducts);
+router.post('/filtered/', productController.getFilteredProducts); // Esse método está como post pois o axios no front não permite o envio de um body em HttpGet, para poupar tempo optamos por post
 router.get('/:productCode', productController.getProductByProductCode);
 router.get('/name/:productName', productController.getProductByProductName);
 router.get('/ingredient/:productIngredient', productController.getProductByIngredient);
