@@ -15,11 +15,7 @@ const getUserByUserName = async (req, res, next) => {
     try {
         let user = await userModel.getUserByUserName(req.params.username);
 
-        if (user.rows.length == 0) {
-            res.status(400).json(`Não existe um usuário com o username ${req.params.username}!!`);
-        } else {
-            res.status(200).json(user.rows);
-        }
+        res.status(200).json(user);
     } catch (error) {
         res.status(400).json(error.message);
     }
@@ -28,11 +24,8 @@ const getUserByUserName = async (req, res, next) => {
 const getUserByUserId = async (req, res, next) => {
     try {
         let user = await userModel.getUserByUserId(req.params.id);
-        if (user.rows.length == 0) {
-            res.status(400).json(`Não existe um usuário com o id ${req.params.id}!!`);
-        } else {
-            res.status(200).json(user.rows);
-        }
+        console.log(user);
+        res.status(200).json(user);
     } catch (error) {
         res.status(400).json(error.message);
     }

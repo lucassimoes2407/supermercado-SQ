@@ -4,8 +4,8 @@ const productModel = require('../repository/ProductRepository');
 // GETS
 const getAllProducts = async (req, res, next) => {
     try {
-        let product = await productModel.getAllProducts();
-        res.status(200).json(product.rows);
+        let response = await productModel.getAllProducts();
+        res.status(200).json(response);
     } catch (error) {
         console.error(error.message);
         res.status(400).json(error.message);
@@ -16,7 +16,7 @@ const getProductByProductCode = async (req, res, next) => {
     try {
         let product = await productModel
             .getByProductCode(req.params.productCode);
-        res.status(200).json(product.rows)
+        res.status(200).json(product)
     } catch (error) {
         console.error(error.message);
         res.status(400).json(error.message);
@@ -25,20 +25,21 @@ const getProductByProductCode = async (req, res, next) => {
 
 const getProductByProductName = async (req, res, next) => {
     try {
-        let product = await productModel
+        console.log("ok1")
+        let productList = await productModel
             .getByProductName(req.params.productName);
-        res.status(200).json(product.rows);
+        res.status(200).json(productList);
     } catch (error) {
         console.error(error.message);
-        res.send(400).json(error.message);
+        res.status(400).json(error.message);
     }
 };
 
 const getProductByIngredient = async (req, res, next) => {
     try {
-        let product = await productModel
+        let productList = await productModel
             .getByIngredient(req.params.productIngredient);
-        res.status(200).json(product.rows);
+        res.status(200).json(productList);
     } catch (error) {
         res.send(400).json(error.message);
     }
@@ -46,9 +47,9 @@ const getProductByIngredient = async (req, res, next) => {
 
 const getProductByBrand = async (req, res, next) => {
     try {
-        let product = await productModel
+        let productList = await productModel
             .getByBrand(req.params.productBrand);
-        res.status(200).json(product.rows);
+        res.status(200).json(productList);
     } catch (error) {
         res.send(400).json(error.message);
     }
@@ -56,9 +57,9 @@ const getProductByBrand = async (req, res, next) => {
 
 const getProductByUser = async (req, res, next) => {
     try {
-        let product = await productModel
+        let productList = await productModel
             .getByUser(req.params.productUser);
-        res.status(200).json(product.rows);
+        res.status(200).json(productList);
     } catch (error) {
         res.send(400).json(error.message);
     }
