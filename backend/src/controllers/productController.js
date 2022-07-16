@@ -25,7 +25,6 @@ const getProductByProductCode = async (req, res, next) => {
 
 const getProductByProductName = async (req, res, next) => {
     try {
-        console.log("ok1")
         let productList = await productModel
             .getByProductName(req.params.productName);
         res.status(200).json(productList);
@@ -96,7 +95,7 @@ const postProduct = async (req, res, next) => {
 const putProduct = async (req, res, next) => {
     try {
         const product = await productModel.getByProductCode(req.body.cod_produto);
-        if (product.rowCount <= 0)
+        if (product.productInfo == undefined)
             return res.status(400).json("Produto não existe!");
 
         await productModel.updateProduct(req.body);
@@ -112,7 +111,7 @@ const putProduct = async (req, res, next) => {
 const deleteProductByProductCode = async (req, res, next) => {
     try {
         const product = await productModel.getByProductCode(req.params.productCode);
-        if (product.rowCount <= 0)
+        if (product.productInfo == undefined)
             return res.status(400).json("Produto não existe!");
 
         await productModel.deleteProductByCodProduct(req.params.productCode);

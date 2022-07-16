@@ -56,7 +56,6 @@ const getUserByUserId = async (userId) => {
             FROM usuario WHERE cod_usuario = ${userId}`);
         
         var userRestrictions = await getUserRestrictions(userId);
-
         return {user: user.rows[0], userRestrictions: userRestrictions}
     } catch (error) {
         throw error;
