@@ -7,6 +7,7 @@ const authMiddlewares = require('../middlewares/authorization');
 
 // Gets
 router.get('/', productController.getAllProducts);
+router.get('/filtered/', productController.getFilteredProducts);
 router.get('/:productCode', productController.getProductByProductCode);
 router.get('/name/:productName', productController.getProductByProductName);
 router.get('/ingredient/:productIngredient', productController.getProductByIngredient);

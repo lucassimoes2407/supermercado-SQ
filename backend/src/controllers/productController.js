@@ -12,6 +12,28 @@ const getAllProducts = async (req, res, next) => {
     }
 };
 
+const getFilteredProducts = async (req, res, next) => {
+    try {
+        var name = req.body.search;
+        var includedIngredients = req.body.include_ingredients;
+        var excludedIngredients = req.body.exclude_ingredients;
+        
+        if (name == undefined || name.length <= 0)
+            name = null;
+        
+        else if (includedIngredients == undefined || includedIngredients.length <= 0)
+            includedIngredients = null;
+        
+        else if (excludedIngredients == undefined || excludedIngredients.length <= 0)
+            excludedIngredients = null;
+
+        var response = await productModel.getFilteredProduct(name, includedIngredients, excludedIngredients);
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(400).json(error.message);
+    }
+};
+
 const getProductByProductCode = async (req, res, next) => {
     try {
         let product = await productModel
@@ -126,6 +148,7 @@ const deleteProductByProductCode = async (req, res, next) => {
 
 module.exports = {
     getAllProducts,
+    getFilteredProducts,
     getProductByProductCode,
     getProductByProductName,
     getProductByIngredient,
