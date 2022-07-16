@@ -54,6 +54,9 @@ const getUserByUserId = async (userId) => {
                 acesso, 
                 cod_usuario 
             FROM usuario WHERE cod_usuario = ${userId}`);
+
+        if(user.rows.length <= 0)
+            return null
         
         var userRestrictions = await getUserRestrictions(userId);
         return {user: user.rows[0], userRestrictions: userRestrictions}
@@ -73,7 +76,10 @@ const getUserByUserName = async (userName) => {
                 acesso, 
                 cod_usuario 
             FROM usuario WHERE username = '${userName}'`);
-
+        console.log(user);
+        if(user.rows.length <= 0)
+            return null
+            
         var userRestrictions = await getUserRestrictions(user.rows[0].cod_usuario);
 
         return {user: user.rows[0], userRestrictions: userRestrictions}    

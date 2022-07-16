@@ -54,7 +54,7 @@ const createUser = async (req, res, next) => {
         let userUsername = await userModel.getUserByUserName(req.body.username);
         let userEmail = await userModel.getUserByEmail(req.body.email);
 
-        if (userUsername.user != undefined) {
+        if (userUsername != null) {
             res.status(400).json("Este nome de usuário já está sendo utilizado!!");
         } else if (userEmail.rows.length > 0) {
             res.status(400).json("Este e-mail já está sendo utilizado!!");
@@ -74,7 +74,7 @@ const setUserActiveAttribute = async (req, res, next) => {
     try {
         let user = await userModel.getUserByUserId(req.params.id);
 
-        if (user.user == undefined) {
+        if (user == null) {
             res.status(400).json("Usuário não encontrado!!");
         } else if (user.user.ativo == true) {
             await userModel.setUserInactive(req.params.id);
@@ -95,16 +95,20 @@ const updateUser = async (req, res, next) => {
         let userByEmail = await userModel.getUserByEmail(req.body.email);
 
 
-        if (userById.user == undefined) {
+        if (userById == null) {
             res.status(400).json("Usuário não encontrado!!");
-        } else if (userByUsername.user != undefined && (userByUsername.user.username != userById.user.username)) {
+        } 
+        else if (userByUsername != null && (userByUsername.user.username != userById.user.username)) {
             res.status(400).json("Este nome de usuário já está sendo utilizado!!");
-        } else if (userByEmail.rows.length > 0 && (userByEmail.rows[0].email != userById.user.email)) {
+        } 
+        else if (userByEmail.rows.length > 0 && (userByEmail.rows[0].email != userById.user.email)) {
             res.status(400).json("Este e-mail já está sendo utilizado!!");
-        } else {
-            await userModel.updateUser(req.params.id, req);
-            res.status(200).json("Usuário atualizado com sucesso!");
-        }
+        } 
+
+        req.body.pass = await bcrypt.hash(req.body.pass, 10);
+        await userModel.updateUser(req.params.id, req);
+        res.status(200).json("Usuário atualizado com sucesso!");
+
     } catch (error) {
         res.status(400).json(error.message);
     }
@@ -115,7 +119,7 @@ const deleteUserByUserId = async (req, res, next) => {
     try {
         let user = await userModel.getUserByUserId(req.params.id);
 
-        if (user.user == undefined ) {
+        if (user == null ) {
             res.status(400).json("Usuário não encontrado!!");
         } else {
             await userModel.deleteUserByUserId(req.params.id);
@@ -130,7 +134,7 @@ const login = async ( req, res, next ) => {
     try {
         var user = await userModel.getUserByUserName(req.body.username);
 
-        if ( user.rows.length <= 0 )
+        if ( user == null )
             return res.status(500).json({message: 'Usuário não encontrado.'});
 
         if ( await bcrypt.compare(req.body.pass, user.rows[0].senha) ) {
