@@ -71,12 +71,9 @@ let getByProductCode = async (productCode) => {
             WHERE cod_produto = ${productCode}`);
 
         return {
-            product : 
-            { 
-                productInfo: product.rows[0], 
-                user: await getProductUser(productCode), 
-                restrictions: await getProductRestrictions(productCode)  
-            }
+            productInfo: product.rows[0], 
+            user: await getProductUser(productCode), 
+            restrictions: await getProductRestrictions(productCode)  
         }
     } catch (error) {
         throw error;

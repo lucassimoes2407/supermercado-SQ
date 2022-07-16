@@ -95,6 +95,7 @@ const postProduct = async (req, res, next) => {
 const putProduct = async (req, res, next) => {
     try {
         const product = await productModel.getByProductCode(req.body.cod_produto);
+        
         if (product.productInfo == undefined)
             return res.status(400).json("Produto não existe!");
 
