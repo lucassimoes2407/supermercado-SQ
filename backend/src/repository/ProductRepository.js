@@ -65,7 +65,10 @@ const getFilteredProduct = async (name, includedIngredients, excludedIngredients
         var query = `SELECT * FROM produto `;
 
         if (name == null && includedIngredients == null && excludedIngredients == null)
-            return await databaseQuery(query);
+        {
+            let allProducts = await databaseQuery(query); 
+            return await getProductListWithUserAndRestrictions(allProducts);
+        }
 
         query += `WHERE `
 
@@ -84,7 +87,7 @@ const getFilteredProduct = async (name, includedIngredients, excludedIngredients
 
         query = query.slice(0, query.lastIndexOf('A'));
 
-        var products = await databaseQuery(query);
+        let products = await databaseQuery(query);
 
         return await getProductListWithUserAndRestrictions(products);
 
