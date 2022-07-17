@@ -66,7 +66,7 @@ const getFilteredProduct = async (name, includedIngredients, excludedIngredients
 
         if (name == null && includedIngredients == null && excludedIngredients == null)
         {
-            let allProducts = await databaseQuery(query); 
+            let allProducts = await databaseQuery(query + " ORDER BY nome"); 
             return await getProductListWithUserAndRestrictions(allProducts);
         }
 
@@ -88,6 +88,9 @@ const getFilteredProduct = async (name, includedIngredients, excludedIngredients
             });
 
         query = query.slice(0, query.lastIndexOf('A'));
+
+        query += " ORDER BY nome";
+        console.log(query);
 
         let products = await databaseQuery(query);
 

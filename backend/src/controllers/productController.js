@@ -18,13 +18,13 @@ const getFilteredProducts = async (req, res, next) => {
         var includedIngredients = req.body.include_ingredients;
         var excludedIngredients = req.body.exclude_ingredients;
         
-        if (typeof name != String || name.length <= 0)
+        if (typeof name != "string" || name.length <= 0)
             name = null;
 
-        if (typeof includedIngredients != Array || includedIngredients.length <= 0)
+        if (!Array.isArray(includedIngredients) || includedIngredients.length <= 0)
             includedIngredients = null;
         
-        if (typeof excludedIngredients != Array || excludedIngredients.length <= 0)
+        if (!Array.isArray(excludedIngredients) || excludedIngredients.length <= 0)
             excludedIngredients = null;
 
         var response = await productModel.getFilteredProduct(name, includedIngredients, excludedIngredients);
