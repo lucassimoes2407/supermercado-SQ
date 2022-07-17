@@ -77,12 +77,14 @@ const getFilteredProduct = async (name, includedIngredients, excludedIngredients
 
         if (includedIngredients != null)
             includedIngredients.map(ingredient => {
-                query += `UPPER(ingredientes) LIKE UPPER('%${ingredient}%') AND `
+                if(ingredient.length > 0)
+                    query += `UPPER(ingredientes) LIKE UPPER('%${ingredient}%') AND `
             });
         
         if (excludedIngredients != null)
             excludedIngredients.map(ingredient => {
-                query += `NOT UPPER(ingredientes) LIKE UPPER('%${ingredient}%') AND `
+                if(ingredient.length > 0)
+                    query += `NOT UPPER(ingredientes) LIKE UPPER('%${ingredient}%') AND `
             });
 
         query = query.slice(0, query.lastIndexOf('A'));
