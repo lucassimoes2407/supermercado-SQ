@@ -59,6 +59,47 @@ let getAllProducts = async () => {
     }
 };
 
+
+const getFilteredProduct = async (name, includedIngredients, excludedIngredients) => {
+    try {
+        var query = `SELECT * FROM produto `;
+
+        if (name == null && includedIngredients == null && excludedIngredients == null)
+        {
+            let allProducts = await databaseQuery(query + " ORDER BY nome"); 
+            return await getProductListWithUserAndRestrictions(allProducts);
+        }
+
+        query += `WHERE `
+
+        if (name != null)
+            query += `UPPER(nome) LIKE UPPER('%${name}%') AND `;
+
+        if (includedIngredients != null)
+            includedIngredients.map(ingredient => {
+                if(ingredient.length > 0)
+                    query += `UPPER(ingredientes) LIKE UPPER('%${ingredient}%') AND `
+            });
+        
+        if (excludedIngredients != null)
+            excludedIngredients.map(ingredient => {
+                if(ingredient.length > 0)
+                    query += `NOT UPPER(ingredientes) LIKE UPPER('%${ingredient}%') AND `
+            });
+
+        query = query.slice(0, query.lastIndexOf('A'));
+
+        query += " ORDER BY nome";
+
+        let products = await databaseQuery(query);
+
+        return await getProductListWithUserAndRestrictions(products);
+
+    } catch (error) {
+        throw error;
+    }
+}
+
 let getByProductCode = async (productCode) => {
     try {
         var product = await databaseQuery(`
@@ -187,6 +228,7 @@ const deleteProductByCodProduct = async (codProduct) => {
 
 module.exports = {
     getAllProducts,
+    getFilteredProduct,
     getByProductCode,
     getByProductName,
     getByIngredient,

@@ -1,32 +1,18 @@
 # Como começar a usar
 Primeiro de tudo, certifique-se que na sua máquina você tem instalado as seguintes ferramentas:
 
-- Git: [Guia de Instalação do Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-- Node: [Link para Download](https://nodejs.org/en/download/)
 - Insomnia: [Link para Download](https://insomnia.rest/download)
 
-No terminal, clone o repositório do GitHub utilizando o seguinte comando:
-```
-git clone https://github.com/lucassimoes2407/supermercado-SQ.git
-```
-Depois rode os seguintes comandos:
-```
-cd supermercado-SQ
-cd backend
-```
-A partir daí, crie um arquivo chamado .env, e popule ele seguindo o modelo existente no arquivo já existente chamado .env-sample.
+A aplicação está hospedada no seguinte link: https://supermercado-sq-backend.herokuapp.com/
 
-Então, execute o comando a seguir para instalar as dependências necessárias do NPM:
-```
-npm i 
-```
-Enfim para iniciar o servidor e começar a usar execute :
-```
-nodemon start 
-```
-Caso precise reiniciar ou parar o serviço pressione `Ctrl + C` no Terminal.
+Para realizar requisições, você pode tanto realizar direto pelo link, chamando, por exemplo: 
+https://supermercado-sq-backend.herokuapp.com/products
+Para trazer todos os produtos cadastrados.
 
-Para testar as requisições abra o Insomnia e clique no menu `Application > Preferences`, vá até a guia `Data` e clique em `Import Data`, depois em `From File` e escolha o arquivo [Testes HTTP - Insomnia.json](./Testes%20HTTP%20-%20Insomnia.json) localizado dentro da pasta `/supermercado-SQ/backend`, na dashboard do Insomnia escolha o projeto que foi importado e vá até a guia `DEBUG`, as requisições estão nomeadas e organizadas em pastas ao lado esquerdo com os Nomes das tabelas que as Respondem.
+Entretanto a melhor forma de realizar requisições no backend são através do Insomnia.
+
+### Testando através do Insomnia 
+Para testar as requisições abra o Insomnia e clique no menu `Application > Preferences`, vá até a guia `Data` e clique em `Import Data`, depois em `From File` e escolha o arquivo [Testes HTTP - Insomnia.json](./Testes%20HTTP%20-%20Insomnia.json) localizado dentro da pasta `/supermercado-SQ/backend`, na dashboard do Insomnia escolha o projeto que foi importado e vá até a guia `DEBUG`, as requisições estão nomeadas e organizadas em pastas ao lado esquerdo com os nomes das tabelas que correspondem.
 
 
 ***
@@ -63,9 +49,10 @@ RNeg-03| O sistema deve garantir que ao atualizar os dados de um usuário as reg
 | /users/findUsersActive            | GET    | Lista todos os usuários definidos como ativos                |
 | /users/findUsersInactive          | GET    | Lista todos os usuários definidos como inativos              |
 | /users/                           | POST   | Cria um usuário                                              |
+| /users/login                      | POST   | Rota para login                                              |
+| /users/logout                     | POST   | Rota para logout                                             |
 | /users/setUserActiveAttribute/:id | PUT    | Muda um usuário para ativo ou inativo a partir de um id      |
 | /users/:id                        | PUT    | Atualiza um usuário a partir do id   
-A seguir uma breve explicação sobre o sistema.                        |
 | /users/:username                  | DELETE | Deleta um usuário a partir do username                       |
 | /users/id/:id                     | DELETE | Deleta um usuário a partir do id   
 
@@ -86,7 +73,11 @@ A seguir uma breve explicação sobre o sistema.                        |
 |-----------------------------------|--------|--------------------------------------------------------------|
 | /products/                        | GET    | Lista todos os produtos                                      |
 | /products/:productCode            | GET    | Lista um produto a partir do id                              |
+| /products/name/:productName       | GET    | Lista produtos com determinado nome                          |
+| /products/ingredient/:productIngredient       | GET    | Lista produtos com determinado ingrediente       |
+| /products/brand/:productBrand     | GET    | Lista produtos de determinada marca                          |
 | /products/                        | POST   | Cria um produto                                              |
+| /products/filtered/               | POST   | Filtra produtos com base em nome, e com/sem ingredientes especificos|
 | /products/                        | PUT    | Atualiza os dados de um produto                              |
 | /products/:productCode            | DELETE | Deleta um produto a partir do id  
 
