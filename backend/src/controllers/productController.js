@@ -20,11 +20,11 @@ const getFilteredProducts = async (req, res, next) => {
         
         if (name == undefined || name.length <= 0)
             name = null;
-        
-        else if (includedIngredients == undefined || includedIngredients.length <= 0)
+
+        if (includedIngredients == undefined || includedIngredients.length <= 0)
             includedIngredients = null;
         
-        else if (excludedIngredients == undefined || excludedIngredients.length <= 0)
+        if (excludedIngredients == undefined || excludedIngredients.length <= 0)
             excludedIngredients = null;
 
         var response = await productModel.getFilteredProduct(name, includedIngredients, excludedIngredients);
