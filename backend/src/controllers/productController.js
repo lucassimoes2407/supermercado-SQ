@@ -17,14 +17,14 @@ const getFilteredProducts = async (req, res, next) => {
         var name = req.body.search;
         var includedIngredients = req.body.include_ingredients;
         var excludedIngredients = req.body.exclude_ingredients;
-        
+
         if (typeof name != "string" || name.length <= 0)
             name = null;
 
-        if (!Array.isArray(includedIngredients) || includedIngredients.length <= 0)
+        if (!Array.isArray(includedIngredients) || includedIngredients.length <= 0 || includedIngredients[0] == "")
             includedIngredients = null;
         
-        if (!Array.isArray(excludedIngredients) || excludedIngredients.length <= 0)
+        if (!Array.isArray(excludedIngredients) || excludedIngredients.length <= 0 || excludedIngredients[0] == "")
             excludedIngredients = null;
 
         var response = await productModel.getFilteredProduct(name, includedIngredients, excludedIngredients);
