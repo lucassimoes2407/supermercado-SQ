@@ -14,6 +14,7 @@ router.get('/brand/:productBrand', productController.getProductByBrand);
 router.get('/user/:productUser', productController.getProductByUser);
 
 // Posts
+router.post('/filtered/', productController.getFilteredProducts); // Esse método está como post pois o axios no front não permite o envio de um body em HttpGet, para poupar tempo optamos por post
 router.post('/', upload.array('product-images', 6), productController.postProduct);
 
 // Puts

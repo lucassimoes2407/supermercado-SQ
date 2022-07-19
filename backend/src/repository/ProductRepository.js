@@ -1,30 +1,135 @@
 const { databaseQuery } = require("../config/db");
 
+// Useful queries
+let getProductUser = async (productCode) => {
+    try {
+        var user = await databaseQuery(`
+            SELECT usuario.cod_usuario, username, email, ativo  FROM usuario
+            JOIN produto ON produto.cod_usuario = usuario.cod_usuario
+            WHERE cod_produto = ${productCode}
+        `);
+        return user.rows[0];
+    } catch (error) {
+        throw error;
+    }
+}
+
+let getProductRestrictions = async (productCode) => {
+    try {
+        var productRestrictions = await databaseQuery(`
+            SELECT nome_restricao FROM restricao 
+            JOIN produto_restricao AS pr ON pr.cod_restricao = restricao.cod_restricao
+            WHERE pr.cod_produto = ${productCode}
+        `);
+        return productRestrictions.rows
+    } catch (error) {
+        throw error;
+    }
+}
+
+let getProductListWithUserAndRestrictions = async (products) => {
+    var productsWithUserAndRestrictions = [];
+    var product_user_restrictions;
+
+    await Promise.all(
+        products.rows.map(async (product) => {
+            product_user_restrictions = {
+                productInfo:product,
+                user: await getProductUser(product.cod_produto),
+                restrictions: await getProductRestrictions(product.cod_produto)
+            },
+            productsWithUserAndRestrictions.push(product_user_restrictions)
+        })
+    );
+
+    return {productList: productsWithUserAndRestrictions};
+}
+
+
 // GETS
 let getAllProducts = async () => {
     try {
-        return await databaseQuery(`
-            SELECT * FROM produto`);
+        var products = await databaseQuery(`
+            SELECT * FROM produto
+        `);
+
+        return await getProductListWithUserAndRestrictions(products);
     } catch (error) {
         throw error;
     }
 };
+
+
+const getFilteredProduct = async (name, includedIngredients, excludedIngredients) => {
+    try {
+        var query = `SELECT * FROM produto `;
+
+        if (name == null && includedIngredients == null && excludedIngredients == null)
+        {
+            let allProducts = await databaseQuery(query + " ORDER BY nome"); 
+            return await getProductListWithUserAndRestrictions(allProducts);
+        }
+
+        query += `WHERE `
+
+        if (name != null)
+            query += `UPPER(nome) LIKE UPPER('%${name}%') AND `;
+
+        if (includedIngredients != null)
+            includedIngredients.map(ingredient => {
+                if(ingredient.length > 0)
+                    query += `UPPER(ingredientes) LIKE UPPER('%${ingredient}%') AND `
+            });
+        
+        if (excludedIngredients != null)
+            excludedIngredients.map(ingredient => {
+                if(ingredient.length > 0)
+                    query += `NOT UPPER(ingredientes) LIKE UPPER('%${ingredient}%') AND `
+            });
+
+        query = query.slice(0, query.lastIndexOf('A'));
+
+        query += " ORDER BY nome";
+
+        let products = await databaseQuery(query);
+
+        return await getProductListWithUserAndRestrictions(products);
+
+    } catch (error) {
+        throw error;
+    }
+}
 
 let getByProductCode = async (productCode) => {
     try {
-        return await databaseQuery(`
-            SELECT * FROM produto 
+        var product = await databaseQuery(`
+            SELECT 
+                cod_produto, 
+                nome, 
+                marca, 
+                ingredientes
+            FROM produto 
             WHERE cod_produto = ${productCode}`);
+
+        return {
+            productInfo: product.rows[0], 
+            user: await getProductUser(productCode), 
+            restrictions: await getProductRestrictions(productCode)  
+        }
     } catch (error) {
         throw error;
     }
 };
 
+
 let getByProductName = async (productName) => {
     try {
-        return await databaseQuery(`
+        var products = await databaseQuery(`
             SELECT * FROM produto
-            WHERE nome LIKE '%${productName}%'`);
+            WHERE UPPER(nome) LIKE UPPER('%${productName}%')
+        `);
+
+        return await getProductListWithUserAndRestrictions(products);
     } catch (error) {
         throw error;
     }
@@ -32,30 +137,40 @@ let getByProductName = async (productName) => {
 
 let getByIngredient = async (productIngredient) => {
     try {
-        return await databaseQuery(`
+        var products = await databaseQuery(`
             SELECT * FROM produto
-            WHERE ingredientes LIKE '%${productIngredient}%'`);
-    } catch (error) {
+            WHERE UPPER(ingredientes) LIKE UPPER('%${productIngredient}%')
+        `);
+
+        return await getProductListWithUserAndRestrictions(products);
+        } catch (error) {
         throw error;
     }
 };
 
+
 let getByBrand = async (productBrand) => {
     try {
-        return await databaseQuery(`
+        var products = await databaseQuery(`
             SELECT * FROM produto
-            WHERE marca LIKE '%${productBrand}%'`);
-    } catch (error) {
+            WHERE UPPER(marca) LIKE UPPER('%${productBrand}%')
+        `);
+
+        return await getProductListWithUserAndRestrictions(products);
+        } catch (error) {
         throw error;
     }
 };
 
 let getByUser = async (productUser) => {
     try {
-        return await databaseQuery(`
+        var products = await databaseQuery(`
             SELECT * FROM produto
-            WHERE cod_usuario = ${productUser}`);
-    } catch (error) {
+            WHERE cod_usuario = ${productUser}
+        `);
+
+        return await getProductListWithUserAndRestrictions(products);
+        } catch (error) {
         throw error;
     }
 };
@@ -114,6 +229,7 @@ const deleteProductByCodProduct = async (codProduct) => {
 
 module.exports = {
     getAllProducts,
+    getFilteredProduct,
     getByProductCode,
     getByProductName,
     getByIngredient,
