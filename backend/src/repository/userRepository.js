@@ -51,7 +51,17 @@ const getUsersInactive = async () => {
 const createUser = async (username, email, password, typeUser) => {
     
     try{
-        return await databaseQuery(`INSERT INTO usuario (username, email, senha, ativo, acesso) VALUES ('${username}', '${email}', '${password}', true, '${typeUser}')`);
+        return await databaseQuery(`
+            INSERT INTO usuario 
+            (username, email, senha, ativo, acesso) 
+            VALUES (
+                '${username}', 
+                '${email}', 
+                '${password}', 
+                 true, 
+                '${typeUser}')
+            returning cod_usuario        
+        `);
     }catch(error){
         throw error;
     }

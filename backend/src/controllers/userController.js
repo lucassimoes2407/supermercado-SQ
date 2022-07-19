@@ -68,9 +68,9 @@ const createUser = async (req, res, next) => {
         } else {
             var salt = await bcrypt.genSalt(10);
             var password = await bcrypt.hash(req.body.pass, salt);
-            await userModel.createUser(req.body.username, req.body.email, password, req.body.typeUser);
+            var cod_usuario = await userModel.createUser(req.body.username, req.body.email, password, req.body.typeUser);
             
-            res.status(200).json("Usuário inserido com sucesso!!");
+            res.status(200).json(cod_usuario.rows[0]);
         }
     } catch (error) {
         res.status(400).json(error.message);

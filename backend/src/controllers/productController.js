@@ -81,9 +81,9 @@ const postProduct = async (req, res, next) => {
             req.body.img_produto = req.body.img_produto.slice(0, -1);
         }
 
-        await productModel.createProduct(req.body);
+        var cod_produto = await productModel.createProduct(req.body);
 
-        return res.status(200).send("Produto criado com sucesso!");
+        return res.status(200).json(cod_produto.rows[0]);
     } catch (error) {
         console.error(error.message);
         res.status(400).json(error.message);        
