@@ -101,8 +101,7 @@ const deleteProductRestriction = async (req, res, next)=>{
         }
     */
     try{
-        const { cod_produto } = req.params;
-        const { cod_restricao } = req.body;
+        const { cod_produto, cod_restricao } = req.params;
         
         if(isNaN(+cod_produto) && isNaN(+cod_restricao)) throw {
             message: 'Códigos de restrição e produto recebidos não são números'

@@ -10,6 +10,6 @@ productRestrictionRouter.get('/:cod_produto', productRestrictionController.getPr
 productRestrictionRouter.post('/:cod_produto', productRestrictionController.postProductRestriction);
 
 // DELETEs
-productRestrictionRouter.delete('/:cod_produto', productRestrictionController.deleteProductRestriction);
+productRestrictionRouter.delete('/:cod_produto/:cod_restricao', productRestrictionController.deleteProductRestriction);
 
 module.exports = productRestrictionRouter;
