@@ -11,6 +11,16 @@ const getAllUsers = async (req, res, next) => {
     }
 }
 
+const getLogged = async (req, res, next) => {
+    try {
+        let user = await userModel.getUserByUserId(req.userId);
+
+        res.status(200).json(user);
+    } catch (error) {
+        
+    }
+}
+
 const getUserByUserName = async (req, res, next) => {
     try {
         let user = await userModel.getUserByUserName(req.params.username);
@@ -158,6 +168,7 @@ const logout = async ( req, res, next ) => {
 
 module.exports = {
     getAllUsers,
+    getLogged,
     getUserByUserName,
     getUserByUserId,
     getUsersActive,
