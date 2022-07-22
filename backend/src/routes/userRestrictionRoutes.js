@@ -7,9 +7,9 @@ const userRestrictionRouter = express.Router();
 userRestrictionRouter.get('/:cod_usuario', userRestrictionController.getUserRestriction);
 
 // POSTs
-userRestrictionRouter.post('/:cod_usuario', userRestrictionController.postUserRestriction);
+userRestrictionRouter.post('/:cod_usuario/', userRestrictionController.postUserRestriction);
 
 // DELETEs
-userRestrictionRouter.delete('/:cod_usuario', userRestrictionController.deleteUserRestriction);
+userRestrictionRouter.delete('/:cod_usuario/:cod_restricao', userRestrictionController.deleteUserRestriction);
 
 module.exports = userRestrictionRouter;

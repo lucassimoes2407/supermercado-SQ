@@ -102,8 +102,7 @@ const deleteUserRestriction = async (req, res, next)=>{
         }
     */
     try{
-        const { cod_usuario } = req.params;
-        const { cod_restricao } = req.body;
+        const { cod_usuario, cod_restricao } = req.params;
         
         if(isNaN(+cod_usuario) && isNaN(+cod_restricao)) throw {
             message: 'Códigos de restrição e usuário recebidos não são números'
