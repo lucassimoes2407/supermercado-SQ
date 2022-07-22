@@ -136,17 +136,14 @@ const login = async ( req, res, next ) => {
 
         if ( user == null )
             return res.status(500).json({message: 'Usuário não encontrado.'});
-
-        if ( await bcrypt.compare(req.body.pass, user.rows[0].senha) ) {
-            let id = user.rows[0].cod_usuario;
-
+        if ( await bcrypt.compare(req.body.pass, user.user.senha) ) {
+            let id = user.user.cod_usuario;
             const token = jwt.sign({ id }, process.env.SECRET, {
                 expiresIn: 3600 // expires in 1h
             });
 
             return res.status(200).json({ auth: true, token: token });
         }
-        
         res.status(500).json({message: 'Login inválido!'});
     } catch (error) {
         res.status(400).json(error.message);
