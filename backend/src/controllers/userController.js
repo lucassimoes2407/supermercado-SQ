@@ -104,9 +104,11 @@ const updateUser = async (req, res, next) => {
         else if (userByEmail.rows.length > 0 && (userByEmail.rows[0].email != userById.user.email)) {
             res.status(400).json("Este e-mail já está sendo utilizado!!");
         } 
-
-        req.body.pass = await bcrypt.hash(req.body.pass, 10);
-        await userModel.updateUser(req.params.id, req);
+        
+        if(req.body.pass.substring(0, 7) != "$2a$10$") // Verify if password is already hashed
+            req.body.pass = await bcrypt.hash(req.body.pass, 10);
+        
+            await userModel.updateUser(req.params.id, req);
         res.status(200).json("Usuário atualizado com sucesso!");
 
     } catch (error) {

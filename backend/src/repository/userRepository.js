@@ -49,6 +49,7 @@ const getUserByUserId = async (userId) => {
         var user = await databaseQuery(`
             SELECT 
                 username, 
+                senha,
                 email, 
                 ativo, 
                 acesso, 
