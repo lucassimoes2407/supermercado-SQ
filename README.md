@@ -15,8 +15,6 @@
 * [Requisitos desenvolvidos](#requisitos-desenvolvidos)
 * [Habilidades Desenvolvidas](#habilidades-desenvolvidas)
 * [Equipe DevHub](#equipe-devhub)
-
-
 ## <a id="problematica"></a> 🤔 Problemática do Projeto
 O *Supermercado SQ* necessita de um sistema de gerenciamento de alimentos e composições alimentares que auxilie seus clientes a saber quais compostos alergênicos estão contidos nos alimentos que serão comprados.
 
@@ -51,142 +49,8 @@ ID|Descrição|
 RF-01| A interface do sistema deve se adaptar aos diferentes dispositivos que possam acessá-lo
 RF-02| O sistema deve garantir a integridade dos dados de todos os usuários
 
-
 ## <a id="visao-aplicacao"></a> 👀 Visão Geral da Aplicação
 ![Diagrama de Caso de Uso](./planejamento/diagrama-caso-uso.png)
-
-<!---
-## 💻 Telas identificadas até o Momento
-
-### Home
-
-* Slide com Noticias relacionadas
-* Mini tutorial de uso do sistema
-* Login
-* Rodapé
-
-### Consulta de Produto *(sem Cadastro)*
-
-* Consulta de Produtos
-    * Detalhes *=> Direciona Detalhes Produto*
-* Filtrar Alergênicos para ocultar
-* Filtrar Alergênico para mostrar
-* Cadastrar Produto *=> Direciona para Login*
-
-### Login
-
-* Usuário
-* Senha
-* Esqueci a senha
-* Criar conta
-
-### Cadastro de Usuário
-
-* Nome
-* CPF
-* Telefone
-* Solicitar cadastro Administrativo ou de Fornecedor
-    * Nome Representante
-    * CNPJ da empresa representada
-    * Telefone
-
-### Home Cliente Logado
-
-* Consulta de Produtos
-    * Detalhes *=> Direciona Detalhes Produto* 
-* Filtrar Alergênicos para ocultar
-* Filtrar Alergênico para mostrar
-* Cadastrar Novo Produto
-* Definições de Conta e Preferencias
-* Logout
-
-### Home Fornecedor 
-
-* Consulta de Produtos
-    * Detalhes *=> Direciona Detalhes Produto*
-* Filtrar Alergênicos para ocultar
-* Filtrar Alergênico para mostrar
-* Cadastrar Novo Produto
-* Definições de Conta e Preferencias
-* Logout
-
-### Home Administrador 
-
-* Painel Estatisticas
-* Consulta de Produtos
-    * Detalhes *=> Direciona Detalhes Produto*
-* Gerenciar Usuarios *=> Gerencia de Usuários*
-* Definições de Conta e Preferencias
-* Logout
-
-
-### Cadastro de Produto *(Cliente Logado)*
-
-* Nome produto
-* Marca
-* Lista igredientes
-* Possíveis Alergênicos
-* Imagem
-* Salvar
-
-### Detalhes de Produto *(Cliente Logado)*
-
-* Nome produto
-* Marca
-* Lista igredientes
-    * Pesquisar na Lista
-* Possíveis Alergênicos
-    * Pesquisar na lista
-* Imagem
-* Salvar
-
-### Tela Alteração Perfil
-* Nome
-* CPF/CNPJ
-* Telefone
-* Solicitar Deleção de Conta e Dados
-
-### Detalhes de Produto *(Adm ou Fornecedor Logado)*
-
-* Cod Produto
-* Nome produto
-* Marca
-* Lista igredientes
-    * Pesquisar na Lista
-* Possíveis Alergênicos
-    * Pesquisar na lista
-* Imagem
-* Salvar
-* Imagem Produto
-    * Cod Usuário que cadastrou
-    * Nome Usuário que cadastrou
-* Botão para Editar *=> Direciona edição produto
-* Remover Produto da Base de Dados
-
-### Cadastro/Edição de Produto *(Adm ou Fornecedor Logado)*
-
-* Cod Produto
-* Nome Produto
-* Marca
-* Lista Ingredientes
-* Possiveis Alergênicos
-* Imagem Produto
-    * Cod Usuário que cadastrou
-    * Nome Usuário que cadastrou
-* Salvar Alterações
-* Remover Produto da Base de Dados
-
-### Gerencia Usuários *(Adm Logado)*
-
-* Solicitações de Cadastros como Fornecedores
-  * Modal Detalhes Usuário
-  * Aprovar/Rejeitar
-* Campo Pesquisa Usuario
-  * Modal Detalhes Usuário
-  * Deletar Cadastro
-
--->
-
 ## <a id="modelagem-conceitual"></a> 🎲 Modelagem Conceitual - ER
 ![Modelo Conceitual - ER](./planejamento/modelo-conceitual.png)
 ## <a id="modelagem-logica"></a> 🎲 Modelagem Lógica
@@ -198,12 +62,12 @@ RF-02| O sistema deve garantir a integridade dos dados de todos os usuários
 Armazenará informações de Usuários (Clientes, Fornecedores e Administradores) onde as colunas:
 |Coluna|Função|
 |:---:|:---|
-**USERNAME** | será um um apelido definido pelo usuário durante o cadastro e será exibido nas interações do dele com o sistema;
-**EMAIL** | será inserido pelo usuário durante o cadastro e será usado para fazer login no sistema;
-**SENHA** | guardará a senha definida pelo usuário durante o cadastro;
-**ATIVO** | armazenará um boleano que por padrão será `true` para novos clientes e poderá ser mudado pelo *Administrador* para `false` inativando a conta(moderação) e `false` para novos Fornecedores, que dependerão da aprovação do *Administrador* para serem ativados;
-**ACESSO** | número que será usado para definir tipos de contas e suas permissões *(`1` para Cliente, `2` para Administrador e `3` para Fornecedor)*;
-**COD_USUARIO** | número auto incrementado usado para identificar os usuários;  
+**USERNAME** | Será um apelido definido pelo usuário durante o cadastro e será exibido nas interações do dele com o sistema;
+**EMAIL** | Será inserido pelo usuário durante o cadastro e será usado para fazer login no sistema;
+**SENHA** | Guardará a senha definida pelo usuário durante o cadastro;
+**ATIVO** | Armazenará um booleano que por padrão será `true` para novos clientes e poderá ser mudado pelo *Administrador* para `false` inativando a conta(moderação) e `false` para novos Fornecedores, que dependerão da aprovação do *Administrador* para serem ativados;
+**ACESSO** | Número que será usado para definir tipos de contas e suas permissões *(`1` para Cliente, `2` para Administrador e `3` para Fornecedor)*;
+**COD_USUARIO** | Número auto incrementado usado para identificar os usuários;  
 
 ### PRODUTO
 Armazenará a lista de produtos cadastrados e associará com as restrições da tabela `RESTRICAO`, tem as seguintes colunas:
@@ -239,27 +103,40 @@ Armazenará a lista de restrições alimentares cadastradas no sistema com segui
 **COD_RESTRICAO** | foreign key de `RESTRICAO`;
 
 ## <a id="requisitos-desenvolvidos"></a> ✅ Requisitos desenvolvidos
-
-### 🚧 Em desenvolvimento 🚧
-
+Todos os requisitos [Requisitos Funcionais](#requisitos-funcionais) e [Requisitos Não-Funcionais](#requisitos-nao-funcionais) foram desenvolvidos no projeto.
 
 ## <a id="habilidades-desenvolvidas"></a> 🧠 Habilidades Desenvolvidas
 
 ### **Hard Skills**:
-**Camada de Dados:** Documentação básica,
-modelagem de dados do início ao fim com brModelo,
-DDL, DML e PostgreSQL.
 
-**Backend:** 🚧 Em desenvolvimento 🚧
+**Camada de Dados:**
+ - Documentação básica;
+ - Modelagem de banco de dados;
+ - DDL, DML;
+ - PostgreSQL.
 
-**Frontend:** 🚧 Em desenvolvimento 🚧
+**Backend:** 
+ - Princípios de NodeJs;
+ - Exemplos de uso de MVC;
+ - Requisições e respostas HTTP;
+ - ExpressJs;
+ - JWT.
+
+**Frontend:**
+ - Responsividade com ReactJS;
+ - Axios;
+ - Integração com backend;
+ - Autenticação;
 
 ### **Soft Skills**:
-Comunicação,
-bastante paciência com o computador,
-organização assíncrona via Discord.
-
-
+ - Comunicação;
+ - Noção de desempenho necessário para a execução das tecnologias;
+ - Comunicação eficaz;
+ - Organização;
+ - Empatia;
+ - Tomadas de Decisões;
+ - Autoconfiança;
+ - Pensamento inovador.
 
 ---
 <!-- Tabela com Integrantes do Grupo -->
@@ -273,7 +150,7 @@ organização assíncrona via Discord.
 | <img  src="https://avatars.githubusercontent.com/u/86008336?v=4" width=50px/> | <a href="https://github.com/ismaelzaccah">Ismael Zaccah | <img  src="https://avatars.githubusercontent.com/u/42359787?v=4" width=50px/> | <a href="https://github.com/javelfreitas">Javel Freitas |
 | <img  src="https://avatars.githubusercontent.com/u/59093848?v=4" width=50px/> | <a href="https://github.com/wiwiaR">Vitória Ribeiro | <img  src="https://avatars.githubusercontent.com/u/56098754?v=4" width=50px/> | <a href="https://github.com/AglailsonSantiago">Aglailson Santiago |
 | <img  src="https://avatars.githubusercontent.com/u/47800237?v=4" width=50px/> | <a href="https://github.com/andreinamendes">Andreina Mendes | <img  src="https://avatars.githubusercontent.com/u/96750112?v=4" width=50px/> | <a href="https://github.com/lucassimoes2407">Lucas Simoes |
-| <img  src="https://avatars.githubusercontent.com/u/78513841?v=4" width=50px/> | <a href="https://github.com/BrunoSTB">Bruno Braga |
+| <img  src="https://avatars.githubusercontent.com/u/78513841?v=4" width=50px/> | <a href="https://github.com/BrunoSTB">Bruno Braga | <img  src="https://avatars.githubusercontent.com/u/78852666?v=4" width=50px/> | <a href="https://github.com/Elaine-G-L">Elaine Guedes
 
  **DevHub ©** Atlântico Academy Bootcamp
  </div>
