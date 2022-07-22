@@ -41,12 +41,14 @@ RF-06| O sistema deve permitir a pesquisa de produtos e seus ingredientes
 RF-07| O sistema deve permitir a pesquisa de um ingrediente que possa conter o produto em questão
 RF-08| O sistema deve permitir a busca por alimentos que não contenham certos ingredientes
 RF-09| O sistema deve permitir a busca por alimentos que contenham certos ingredientes
+
 ### <a id="requisitos-nao-funcionais"></a> 📑 Requisitos Não-Funcionais
 
 ID|Descrição|
 :---:|:---|
 RF-01| A interface do sistema deve se adaptar aos diferentes dispositivos que possam acessá-lo
 RF-02| O sistema deve garantir a integridade dos dados de todos os usuários
+
 ## <a id="visao-aplicacao"></a> 👀 Visão Geral da Aplicação
 ![Diagrama de Caso de Uso](./planejamento/diagrama-caso-uso.png)
 ## <a id="modelagem-conceitual"></a> 🎲 Modelagem Conceitual - ER
@@ -101,24 +103,8 @@ Armazenará a lista de restrições alimentares cadastradas no sistema com segui
 **COD_RESTRICAO** | foreign key de `RESTRICAO`;
 
 ## <a id="requisitos-desenvolvidos"></a> ✅ Requisitos desenvolvidos
+Todos os requisitos [Requisitos Funcionais](#requisitos-funcionais) e [Requisitos Não-Funcionais](#requisitos-nao-funcionais) foram desenvolvidos no projeto.
 
-ID|Descrição|
-:---:|:---|
-RF-01| O sistema deve permitir o cadastro de dados pelos usuários.
-RF-02| O sistema deve permitir a visualização dos dados cadastrados
-RF-03| O sistema deve permitir a edição dos dados cadastrados
-RF-04| O sistema deve permitir a remoção dos dados cadastrados
-RF-05| O sistema deve conter dados sobre o produto, como o seu nome e ingredientes
-RF-06| O sistema deve permitir a pesquisa de produtos e seus ingredientes
-RF-07| O sistema deve permitir a pesquisa de um ingrediente que possa conter o produto em questão
-RF-08| O sistema deve permitir a busca por alimentos que não contenham certos ingredientes
-RF-09| O sistema deve permitir a busca por alimentos que contenham certos ingredientes
-### <a id="requisitos-nao-funcionais"></a> 📑 Requisitos Não-Funcionais
-
-ID|Descrição|
-:---:|:---|
-RF-01| A interface do sistema deve se adaptar aos diferentes dispositivos que possam acessá-lo
-RF-02| O sistema deve garantir a integridade dos dados de todos os usuários
 ## <a id="habilidades-desenvolvidas"></a> 🧠 Habilidades Desenvolvidas
 
 ### **Hard Skills**:
