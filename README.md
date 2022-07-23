@@ -8,7 +8,6 @@
 * [Elicitação de Requisitos](#elicitacao)
 * [Requisitos Funcionais](#requisitos-funcionais)
 * [Requisitos Não-Funcionais](#requisitos-nao-funcionais)
-* [Regras de Negócio](#regras-negocio)
 * [Visão Geral da Aplicação](#visao-aplicacao)
 * [Modelagem Conceitual - ER](#modelagem-conceitual)
 * [Modelagem Lógica](#modelagem-logica)
@@ -76,8 +75,6 @@ Armazenará a lista de produtos cadastrados e associará com as restrições da 
 **NOME** | nome do produto para consulta/exibição;
 **MARCA** | marca do produto;
 **INGREDIENTES** | armazenará a lista de ingredientes descrita no rótulo do produto;
-**IMG_PRODUTO** | armazenará uma foto do produto (ainda estamos estudando como fazer isso);
-**IMG_TABELA_NUTRICIONAL** | armazenará uma foto da tabela nutricional do rótulo do produto(ainda estamos estudando como fazer isso);
 **COD_USUARIO** | relacionado a tabela `USUARIO` para identificar o usuário que cadastrou o produto;
 **COD_PRODUTO** | número auto incrementado que será usado no controle/associação com tabela `RESTRICAO`;
 
